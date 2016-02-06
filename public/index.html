@@ -1,62 +1,36 @@
 <!DOCTYPE html>
-<html>
-     <head>
-          <title> Intro to HTML </title>
-     </head>
-     <body>
-     <header>
-          <h1> Introduction to HTML</h1>
-     </header>
-          <h2> Intro to HTML tags</h2>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
 
-          <p> HTML tags have an opening and closing tag. Tags are
-          also referred as elements
-          </p>
+<div class="container-fluid bg-1 text-center">
+    <h3>Neethu Prasad</h3>
+    <img src="neethu.PNG" class="img-responsive img-circle" style="display:inline" alt="Neethu">
+    <h3>I'm an adventurer</h3>
+</div>
 
-          <h2> List elements </h2>
+<div class="container-fluid bg-2 text-center">
+    <h3> My Links </h3>
+    <div class="row">
+        <div class="col-sm-6">
 
-          <h3> Ordered list </h3>
+            <img src="github.jpg" style="width:70%" class="img-responsive img-circle" alt="Image">
 
-          <ol>
-              <li> Course 1</li>
-              <li> Course 2</li>
-              <li> Course 3</li>
-          </ol>
+            <a href="https://github.com/neethumichael/WebDevSpring2016" class="btn btn-default btn-lg">GitHub</a>
+        </div>
+        <div class="col-sm-6">
 
-          <h2> Unordered list </h2>
-
-          <ul>
-              <li> Java </li>
-              <li> C# </li>
-              <li> HTML </li>
-          </ul>
-
-          <h2> Tabular data </h2>
-          <table>
-             <thead>
-                  <tr>
-                      <th> First Name </th>
-                      <th> Last Name </th>
-                  </tr>
-
-             </thead>
-
-             <tbody>
-                   <tr>
-                       <td> Alice</td>
-                       <td> Wonderland</td>
-                   </tr>
-
-                   <tr>
-                       <td> Neethu </td>
-                       <td> Prasad </td>
-                   </tr>
-
-             </tbody>
-          </table>
-
-     <footer>
-         Copyright (c) 2016
-     </footer>
-     </body>
+            <img src="form.png" class="img-responsive img-rounded" alt="Image">
+            <br>
+            <a href="http://webdevspring2016-prasadneethu.rhcloud.com/assignment/home.html" class="btn btn-default btn-lg">Form Maker</a>
+        </div>
+    </div>
+</div>
 </html>
