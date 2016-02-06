@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="Assignment 1" content="Assignment 1">
+    <meta name="Neethu" content="Neethu">
+
+    <title>Welcome!</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/dashboard.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="home.html">Form Maker</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Username</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a href="home.html">Home<span class="sr-only">(current)</span></a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="admin.html">Admin</a></li>
+                <li class="active"><a href="forms.html">Forms</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main table-responsive">
+            <h1 class="header">Forms : Registration Form</h1>
+            <ul class="nav nav-tabs">
+                <li><a href="forms.html">Forms</a></li>
+                <li class="active"><a href="form-fields.html">Fields</a></li>
+            </ul>
+            <table class="table-collapse table-fixed">
+
+                <tbody>
+                <tr>
+                    <td>
+                        First Name:<br>
+                        <input type="text" placeholder="First Name"/>
+                    </td>
+
+                    <td>
+                        <br>
+                        <a><span class="glyphicon glyphicon-pencil" aria-hidden="true">  </span></a>
+                        <a><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+                        <a><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                        <a><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Last Name:<br>
+                        <input type="text" placeholder="Last Name"/>
+                    </td>
+
+                    <td>
+                        <br>
+                        <a><span class="glyphicon glyphicon-pencil" aria-hidden="true">  </span></a>
+                        <a><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+                        <a><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                        <a><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-row">
+                        Date Of Birth:<br>
+                        <input type="date" placeholder="Select Date"/>
+                    </td>
+
+                    <td class="table-row">
+                        <br>
+                        <a><span class="glyphicon glyphicon-pencil" aria-hidden="true">  </span></a>
+                        <a><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+                        <a><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                        <a><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="table-row">
+                        Gender:
+                        <br>
+                        <select>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </td>
+                    <td class="table-row">
+                        <br>
+                        <a><span class="glyphicon glyphicon-pencil" aria-hidden="true">  </span></a>
+                        <a><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+                        <a><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                        <a><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-row">
+                        Roles:
+                        <br>
+                        <input type="checkbox" name="roles" value="Admin" />Admin <br/>
+                        <input type="checkbox" name="roles" value="Student" />Student<br/>
+                        <input type="checkbox" name="roles" value="User" />User<br/>
+                    </td>
+                    <td class="table-row">
+                        <br>
+                        <a><span class="glyphicon glyphicon-pencil" aria-hidden="true">  </span></a>
+                        <a><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+                        <a><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                        <a><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
+                    </td>
+                </tr>
+                <tr class="table-row">
+                    <td class="table-row">
+                        License Agreement:
+                        <br>
+                        <input type="radio" name="agreement" value="Yes" checked> Yes<br>
+                        <input type="radio" name="agreement" value="No"> No<br>
+                    </td>
+
+
+                    <td class="table-row">
+                        <br>
+                        <a><span class="glyphicon glyphicon-pencil" aria-hidden="true">  </span></a>
+                        <a><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+                        <a><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                        <a><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-fixed">
+                <colgroup>
+                    <col style="width:71.7%">
+                </colgroup>
+                <tbody>
+                <tr class="table-row">
+                    <td>
+                        Add New Field:<br>
+                        <select>
+                            <option value="Single Line Text">Single Line Text</option>
+                            <option value="Date">Date</option>
+                            <option value="Dropdown">Dropdown</option>
+                            <option value="Checkboxes">Checkboxes</option>
+                            <option value="Radio buttons">Radio buttons</option>
+                            <option value="Paragraph Text Field">Paragraph Text Field</option>
+                        </select>
+                    </td>
+
+                    <td>
+                        <br>
+                        <a><span class="glyphicon glyphicon-plus" aria-hidden="true">  </span></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://code.jquery.com/jquery-1.12.0.min.js"><\/script>')</script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+</body>
+</html>

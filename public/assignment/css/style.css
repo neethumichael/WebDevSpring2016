@@ -12,22 +12,25 @@
     color: #555555;
 }
 
-.container-fluid {
-    padding-top: 70px;
-    padding-bottom: 70px;
-}
 
 
 
-.table-collapse
-{
-    border-collapse:collapse;
 
-}
 
 .table-row
 {
     width: 71.7%;
+}
+
+.myDiv
+{
+    padding:0 18px;
+
+}
+
+.button {
+    display: block;
+    width: 100%;
 }
 
 
