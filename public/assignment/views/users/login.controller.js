@@ -13,13 +13,21 @@
 
         function login(user_cred) {
 
-            var user = UserService.findUserByCredentials({username: user_cred.username, password: user_cred.password});
-            if (user) {
-                $rootScope.currentUser = user;
-                UserService.setCurrentUser(user);
-                $location.url("/profile");
-            } else {
-                $scope.message = "Invalid credentials";
+            if(typeof user_cred!== "undefined") {
+                var user = UserService.findUserByCredentials(user_cred.username, user_cred.password,
+                    function(user) {
+                        if(user) {
+                            $rootScope.currentUser = user;
+                            UserService.setCurrentUser(user);
+                            $location.url("/profile");
+                        }
+                        else {
+                            $scope.message = "Invalid credentials";
+                        }
+                    });
+            }
+            else {
+                $scope.message = "Username/password field is empty";
             }
         }
     }

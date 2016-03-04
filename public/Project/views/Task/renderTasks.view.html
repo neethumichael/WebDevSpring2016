@@ -1,0 +1,20 @@
+<div data-ng-controller="TaskController">
+    <h1>Tasks</h1>
+    <ul class="nav nav-tabs">
+        <li><a href="#/task">Add Project</a></li>
+        <li><a href="#/renderTasks">View All Tasks</a></li>
+    </ul>
+    <table class="table">
+        </thead>
+        <tbody>
+        <tr ng-repeat="task in tasks">
+            <td>{{task.title}}</td>
+            <td>{{task.description}}</td>
+            <td>
+                <button ng-click="removeTask(task)" class="btn btn-danger">Remove</button>
+                <button ng-click="selectTask($index)" class="btn btn-info">Select</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

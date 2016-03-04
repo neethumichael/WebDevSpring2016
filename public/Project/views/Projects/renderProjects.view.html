@@ -1,0 +1,21 @@
+<div data-ng-controller="ProjectController">
+    <h1>Projects</h1>
+    <ul class="nav nav-tabs">
+        <li><a href="#/project">Add Project</a></li>
+        <li><a href="#/renderProjects">View All Projects</a></li>
+    </ul>
+<table class="table">
+</thead>
+<tbody>
+<tr ng-repeat="project in projects">
+    <td>{{project.title}}</td>
+    <td>{{project.description}}</td>
+    <td ng-repeat="task in project.projectTasks">{{task.title}} </td>
+    <td>
+        <button ng-click="removeProject(project)" class="btn btn-danger">Remove</button>
+        <button ng-click="selectProject($index)" class="btn btn-info">Select</button>
+    </td>
+</tr>
+</tbody>
+</table>
+    </div>

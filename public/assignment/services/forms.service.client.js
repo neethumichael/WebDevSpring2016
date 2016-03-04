@@ -23,6 +23,7 @@
             updateFormById: updateFormById
 
         };
+        return form_model;
 
         function createFormForUser(userId, form, callback)
         {
@@ -32,7 +33,7 @@
                 title: form.title
             };
             form_model.forms.push(newForm);
-            return newForm;
+            callback(newForm);
         }
 
         function findAllFormsForUser(userId, callback)
@@ -46,7 +47,7 @@
                     listOfForms.push(form_model.forms[f]);
                 }
             }
-            return listOfForms;
+            callback(listOfForms);
          }
 
         function deleteFormById(formId, callback)
@@ -59,7 +60,7 @@
                     form_model.forms.splice(f, 1);
                 }
             }
-            return form_model.forms;
+            callback(form_model.forms);
          }
 
         function updateFormById(formId, newForm, callback)
@@ -71,10 +72,11 @@
                 {
                     form_model.forms[f].title = newForm.title;
                     form_model.forms[f].userId = newForm.userId;
+                    callback(form_model.forms[f]);
                 }
             }
-            return form_model.forms;
+            callback(null);
         }
-        return form_model;
+
     }
 }());

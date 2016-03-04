@@ -17,27 +17,27 @@
                 {
                     "_id": 123, "firstName": "Alice", "lastName": "Wonderland",
                     "username": "alice", "password": "alice", "roles": ["student"],
-                    "password2": "alice"
+                    "password2": "alice", "email": "alice@gmail.com"
                 },
                 {
                     "_id": 234, "firstName": "Bob", "lastName": "Hope",
                     "username": "bob", "password": "bob", "roles": ["admin"],
-                    "password2": "bob"
+                    "password2": "bob", "email": "bob@yahoo.com"
                 },
                 {
                     "_id": 345, "firstName": "Charlie", "lastName": "Brown",
                     "username": "charlie", "password": "charlie", "roles": ["faculty"],
-                    "password2": "charlie"
+                    "password2": "charlie", "email": "charlie_brown@yahoo.com"
                 },
                 {
                     "_id": 456, "firstName": "Dan", "lastName": "Craig",
                     "username": "dan", "password": "dan", "roles": ["faculty", "admin"],
-                    "password2": "dan"
+                    "password2": "dan", "email": "dan@yahoo.com"
                 },
                 {
                     "_id": 567, "firstName": "Edward", "lastName": "Norton",
                     "username": "ed", "password": "ed", "roles": ["student"],
-                    "password2": "ed"
+                    "password2": "ed", "email": "Edward.Norton@yahoo.com"
                 }
             ],
 
@@ -52,7 +52,6 @@
         };
         return model;
 
-
         function createUser(user, callback) {
             var newUser = {
                 _id: (new Date).getTime(),
@@ -61,26 +60,24 @@
                 username: user.username,
                 password: user.password,
                 password2: user.password2,
-                roles: null
+                roles: null,
+                email: user.email
             };
             model.current_users.push(newUser);
-            return newUser;
+            callback(newUser);
         }
 
-        function findAllUsers(callback)
-        {
-            return model.current_users;
+        function findAllUsers(callback) {
+            callback(model.current_users);
         }
 
         function deleteUserById(userId, callback) {
-
             for (var u in model.current_users) {
                 if (model.current_users[u]._id === userId) {
                     model.current_users.splice(u, 1);
                 }
-
             }
-            return model.current_users;
+            callback(model.current_users);
         }
 
         function setCurrentUser(user) {
@@ -91,38 +88,40 @@
             return $rootScope.currentUser;
         }
 
-        function findUserByUsername (username) {
+        function findUserByUsername (userId, callback) {
             for (var u in model.current_users) {
-                if (model.current_users[u].username === username) {
-                    return model.current_users[u];
+                if (model.current_users[u].username === userId) {
+                    callback(model.current_users[u]);
                 }
             }
-            return null;
+            callback(null);
         }
 
-        function updateUser(currentUser) {
-            var user = model.findUserByUsername(currentUser.username);
-
-            if (user != null) {
-                user.firstName = currentUser.firstName;
-                user.lastName = currentUser.lastName;
-                user.password = currentUser.password;
-                user.password2 = currentUser.password2;
-                return user;
-            } else {
-                return null;
-            }
+        function updateUser(userId, currentUser, callback) {
+            model.findUserByUsername(userId,
+            function(user) {
+                if (user != null) {
+                    user.firstName = currentUser.firstName;
+                    user.lastName = currentUser.lastName;
+                    user.password = currentUser.password;
+                    user.password2 = currentUser.password2;
+                    user.email = currentUser.email;
+                    callback(user);
+                } else {
+                    callback(null);
+                }
+            });
         }
 
-        function findUserByCredentials(credentials) {
+        function findUserByCredentials(username, password, callback) {
 
             for (var u in model.current_users) {
-                if (model.current_users[u].username === credentials.username &&
-                    model.current_users[u].password === credentials.password) {
-                    return model.current_users[u];
+                if (model.current_users[u].username === username &&
+                    model.current_users[u].password === password) {
+                    callback(model.current_users[u]);
                 }
             }
-            return null;
+            callback(null);
         }
     }
 })();

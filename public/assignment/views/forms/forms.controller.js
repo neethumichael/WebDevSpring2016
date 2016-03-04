@@ -26,14 +26,11 @@
                 FormService.createFormForUser(
                 UserService.getCurrentUser()._id,
                 form,
-                function(response) {
-                    console.log(response);
-                    $scope.data = response;
+                function(form) {
+                    $scope.selectedForm = null;
+                    $scope.currentForms = findAll();
+                    $location.url("/forms");
                 });
-
-                $scope.selectedForm = null;
-                $scope.currentForms = findAll();
-                $location.url("/forms");
             }
         }
 
@@ -41,13 +38,12 @@
 
             $scope.selectedForm =
                 $scope.currentForms[index];
-            FormService.deleteFormById($scope.selectedForm._id,function(response) {
-                console.log(response);
-                $scope.data = response;
+            FormService.deleteFormById($scope.selectedForm._id,function(form) {
+                    $scope.currentForms = findAll();
+                    $scope.selectedForm = null;
+                    $location.url("/forms");
             })
-            $scope.currentForms = findAll();
-            $scope.selectedForm = null;
-            $location.url("/forms");
+
         }
 
         function selectForm(index) {
@@ -61,16 +57,13 @@
 
         function updateForm(newform)
         {
-
             if(newform)
             {
-                FormService.updateFormById($scope.selectedForm._id,newform,function(response){
-                    console.log(response);
-                    $scope.data = response;
-                })
-                $scope.selectedForm = null;
-                $scope.currentForms = findAll();
-                $location.url("/forms");
+                FormService.updateFormById($scope.selectedForm._id,newform,function(form){
+                        $scope.selectedForm = null;
+                        $scope.currentForms = findAll();
+                        $location.url("/forms");
+                });
             }
             else {
                 $scope.message = "Select a form to update";
@@ -78,13 +71,13 @@
         }
         function findAll()
         {
-            var currentForms = FormService.findAllFormsForUser(
+            var cur_form =null;
+            FormService.findAllFormsForUser(
                 UserService.getCurrentUser()._id,
-                function(response){
-                    console.log(response);
-                    $scope.data = response;
+                function(currentForms){
+                    cur_form =  currentForms;
                 });
-            return currentForms;
+            return cur_form;
         }
     }
 }());

@@ -1,0 +1,65 @@
+<div ng-controller="ProjectController">
+<h1>Projects</h1>
+    <ul class="nav nav-tabs">
+        <li><a href="#/project">Add/Update Project</a></li>
+        <li><a href="#/renderProjects">View All Projects</a></li>
+    </ul>
+<form class="form-horizontal" role="form">
+    <div class="form-group">
+        <label for="inputProjectTitle" class="col-sm-3 control-label">
+            Project title</label>
+        <div class="col-sm-9">
+            <input ng-model="project.title" type="text" class="form-control" id="inputProjectTitle" placeholder="Project Title">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="projectDescription" class="col-sm-3 control-label">
+            Description</label>
+        <div class="col-sm-9">
+            <input ng-model="project.description" type="text-area" class="form-control" id="projectDescription" placeholder="Enter description here">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="projectStatus" class="col-sm-3 control-label">
+            Status</label>
+        <div class="col-sm-9">
+            <select ng-model="project.status" class="form-control" id="projectStatus">
+                <option class="form-control" value="Open">Open</option>
+                <option class="form-control" value="Closed">Closed</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+    <label for="assignedTasks" class="col-sm-3 control-label">
+        Assigned Task</label>
+        <div class="col-sm-9">
+    <select multiple ng-model="project.projectTasks" class="form-control" id="assignedTasks" ng-options="task as task.title for task in tasks">
+    </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="projectDate" class="col-sm-3 control-label">
+            Start Date</label>
+        <div class="col-sm-9">
+        <input id="projectDate" ng-model="project.startDate" type="date" class="form-control"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="projectEndDate" class="col-sm-3 control-label">
+            End Date</label>
+        <div class="col-sm-9">
+            <input id="projectEndDate" ng-model="project.endDate" type="date" class="form-control"/>
+        </div>
+    </div>
+    <div class="form-group last">
+        <div class="col-sm-offset-2 col-sm-9">
+            <button  data-ng-click="addProject(project)" type="submit" class ="btn btn-success btn-sm">
+                Add Project</button>
+            <button  data-ng-click="updateProject(project)" type="submit" class ="btn btn-success btn-sm">
+                Update Project</button>
+            <button  data-ng-click="cancel()" type="submit" class ="btn btn-success btn-sm">
+                Cancel</button>
+        </div>
+    </div>
+</form>
+</div>

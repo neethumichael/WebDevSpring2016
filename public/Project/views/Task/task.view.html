@@ -1,0 +1,61 @@
+<div ng-controller="TaskController">
+    <h1>Tasks</h1>
+    <ul class="nav nav-tabs">
+        <li><a href="#/task">Add/Update Task</a></li>
+        <li><a href="#/renderTasks">View All Tasks</a></li>
+    </ul>
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label for="inputTaskTitle" class="col-sm-3 control-label">
+                Task title</label>
+            <div class="col-sm-9">
+                <input ng-model="task.title" type="text" class="form-control" id="inputTaskTitle" placeholder="Task Title">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="taskDescription" class="col-sm-3 control-label">
+                Description</label>
+            <div class="col-sm-9">
+                <input ng-model="task.description" type="text-area" class="form-control" id="taskDescription" placeholder="Enter description here">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="taskStatus" class="col-sm-3 control-label">
+                Status</label>
+            <div class="col-sm-9">
+                <select ng-model="task.status" class="form-control" id="taskStatus">
+                    <option class="form-control" value="Open">Open</option>
+                    <option class="form-control" value="Closed">Closed</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="assignedUser" class="col-sm-3 control-label">
+                Assigned User</label>
+            <div class="col-sm-9">
+                <select ng-model="task.assigned_to" class="form-control" id="assignedUser" ng-options="user as user.username for user in users">
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="assignedProject" class="col-sm-3 control-label">
+                Assigned Project</label>
+            <div class="col-sm-9">
+                <select ng-model="task.projects" class="form-control" id="assignedProject" ng-options="project as project.title for project in projects">
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group last">
+            <div class="col-sm-offset-2 col-sm-9">
+                <button  data-ng-click="addTask(task)" type="submit" class ="btn btn-success btn-sm">
+                    Add Task</button>
+                <button  data-ng-click="updateTask(task)" type="submit" class ="btn btn-success btn-sm">
+                    Update Task</button>
+                <button  data-ng-click="cancel()" type="submit" class ="btn btn-success btn-sm">
+                    Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>

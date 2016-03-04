@@ -1,0 +1,50 @@
+
+<div ng-controller="UserController">
+
+    <h1>Users</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Email</th>
+            <th>Role</th>
+
+            <th> Action</th>
+        </tr>
+        <tr>
+            <th><input ng-model="user.firstname" class="form-control"/></th>
+            <th><input ng-model="user.lastname" class="form-control"/></th>
+            <th><input ng-model="user.username" class="form-control"/></th>
+            <th><input ng-model="user.password" type="password" class="form-control"/></th>
+            <th><input ng-model="user.emailid" type="email" class="form-control"/></th>
+            <th>
+                <select ng-model="user.role"class="form-control" id="role">
+                <option class="form-control" value="Project Manager">Project Manager</option>
+                <option class="form-control" value="Team Lead">Team Lead</option>
+                <option class="form-control" value="Team Member">Team Member</option>
+                <option class="form-control" value="Others">Others</option>
+            </select>
+            <th>
+                <button ng-click="addUser(user)" class="btn btn-primary">Add</button>
+                <button ng-click="updateUser(user)" class="btn btn-primary btn-success">Update</button>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in users">
+            <td>{{user.username}}</td>
+            <td>{{user.role}}</td>
+            <td>{{user.emailid}}</td>
+            <td>
+                <button ng-click="removeUser(user)" class="btn btn-danger">Remove</button>
+                <button ng-click="selectUser($index)" class="btn btn-info">Select</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
