@@ -9,6 +9,4 @@
 
     function AdminController($scope,UserService, $location) {
     }
-
-
 })();
