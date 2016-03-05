@@ -16,13 +16,14 @@
         $scope.selectedForm = null;
         $scope.currentForms = findAll();
         $scope.message = null;
+        $scope.track = 0;
 
         function addForm(form) {
             if(form===null) {
                     $scope.message = "Enter a valid form name";
             }
             else {
-                if(!$scope.selectedForm) {
+                if($scope.track !== 1) {
                     FormService.createFormForUser(
                         UserService.getCurrentUser()._id,
                         form,
@@ -48,6 +49,7 @@
 
         function selectForm(index) {
 
+            $scope.track = 1;
             $scope.selectedForm =
                 {_id: $scope.currentForms[index]._id,
                     title: $scope.currentForms[index].title,
@@ -56,6 +58,7 @@
         }
 
         function updateForm(newform) {
+            $scope.track = 0;
             if($scope.selectedForm)
             {
             if(newform)
@@ -68,6 +71,7 @@
             }
             else {
                 $scope.message = "Select a form to update";
+                $scope.selectedForm = null;
             }
             }
         }
