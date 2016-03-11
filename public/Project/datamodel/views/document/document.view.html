@@ -1,0 +1,34 @@
+<div ng-controller="DocumentController">
+    <h1>Documents</h1>
+    <div ng-show="message" class="alert alert-danger" role="alert">{{message}}</div>
+    <div class="scrollit">
+    <table class="table table-responsive">
+        <thead>
+        <tr>
+            <th>Document name</th>
+            <th>Author</th>
+        </tr>
+        <tr>
+            <th><input ng-model="selectedDocument.name" class="form-control"/></th>
+            <th>
+                <select ng-model="selectedDocument.author" class="form-control" id="assignedAuthor" ng-options="author.username for author in users"/>
+            </th>
+            <th class = "nowrap">
+                <button  ng-click="addDocument(selectedDocument)" class="btn btn-primary">Add</button>
+                <button  ng-click="updateDocument(selectedDocument)" class="btn btn-primary btn-success">Update</button>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="doc in documents">
+            <td>{{doc.name}}</td>
+            <td>{{doc.author.username}}</td>
+            <td class = "nowrap">
+                <button  ng-click="selectDocument($index)" class="btn btn-info">Select</button>
+                <button  ng-click="removeDocument(document)" class="btn btn-danger">Delete</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+</div>

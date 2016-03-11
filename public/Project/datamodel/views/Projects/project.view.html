@@ -1,0 +1,53 @@
+<div ng-controller="ProjectController">
+    <h1>Projects</h1>
+    <div ng-show="message" class="alert alert-danger" role="alert">{{message}}</div>
+    <div class="scrollit">
+        <table class="table table-responsive">
+            <thead>
+            <tr>
+                <th>Project title</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Assigned Task</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+            </tr>
+            <tr>
+                <th><input ng-model="project.title" type="text" class="form-control" id="inputProjectTitle" placeholder="Project Title"></th>
+                <th><input ng-model="project.description" type="text-area" class="form-control" id="projectDescription" placeholder="Enter description here"></th>
+                <th>
+                    <select ng-model="project.status" class="form-control" id="projectStatus">
+                        <option class="form-control" value="Open">Open</option>
+                        <option class="form-control" value="Closed">Closed</option>
+                    </select>
+                </th>
+                <th><select multiple ng-model="project.projectTasks" class="form-control" id="assignedTasks" ng-options="task as task.title for task in tasks"></select></th>
+                <th><input id="projectDate" ng-model="project.startDate" type="date" class="form-control"/></th>
+                <th><input id="projectEndDate" ng-model="project.endDate" type="date" class="form-control"/></th>
+                <th><button  ng-click="addProject(project)" class="btn btn-primary">Add</button>
+                    <button  ng-click="updateProject(project)" class="btn btn-primary btn-success">Update</button>
+                </th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="project in projects">
+                <td>{{project.title}}</td>
+                <td>{{project.description}}</td>
+                <td>{{project.status}}</td>
+                <td>
+                <ul>
+                    <li ng-repeat="task in project.projectTasks">{{task.title}}</li>
+                </ul>
+                </td>
+                <td>{{project.startDate}}</td>
+                <td>{{project.endDate}}</td>
+                <td class = "nowrap">
+                    <button  ng-click="selectProject($index)" class="btn btn-info">Select</button>
+                    <button  ng-click="removeProject(project)" class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

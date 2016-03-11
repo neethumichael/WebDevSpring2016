@@ -1,0 +1,37 @@
+.nowrap {
+    white-space: nowrap;
+}
+.buttonMargin {
+    margin-top: 10px;
+}
+.body {
+    margin-top: 20px;
+}
+.container {
+    width: 100%;
+}
+.table {
+    width: 100%;
+    word-break: break-all;
+    box-sizing: border-box;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing: border-box;
+}
+.scrollit {
+    overflow:scroll;}
+
+.table-responsive {
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+}
+
+@media (max-width: 767px) {
+    .table-responsive .btn {
+        position: relative; /* Sometimes needs !important */
+    }
+}
+
+@media only screen and (max-width: 800px) {
+
+
+}

@@ -1,0 +1,45 @@
+p<div ng-controller="TaskController">
+                    <h1>Tasks</h1>
+                    <div ng-show="message" class="alert alert-danger" role="alert">{{message}}</div>
+                    <div class="scrollit">
+                        <table class="table table-responsive">
+                            <thead>
+                            <tr>
+                                <th>Task title</th>
+                                <th>Description</th>
+                                <th>Status</th>
+                                <th>Assigned User</th>
+                                <th>Assigned Project</th>
+                            </tr>
+                            <tr>
+                                <th><input ng-model="task.title" type="text" class="form-control" id="inputTaskTitle" placeholder="Task Title"></th>
+                                <th><input ng-model="task.description" type="text-area" class="form-control" id="taskDescription" placeholder="Enter description here"></th>
+                                <th><select ng-model="task.status" class="form-control" id="taskStatus">
+                                    <option class="form-control" value="Open">Open</option>
+                                    <otion class="form-control" value="Closed">Closed</option>
+                </select></th>
+               <th> <select ng-model="task.assigned_to" class="form-control" id="assignedUser" ng-options="user as user.username for user in users"/></th>
+                <th><select ng-model="task.projects" class="form-control" id="assignedProject" ng-options="project as project.title for project in projects"/></th>
+                <th><button  ng-click="addTask(task)" class="btn btn-primary">
+                    Add</button>
+                    <button  ng-click="updateTask(task)"  class="btn btn-primary btn-success">
+                        Update</button>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="task in tasks">
+                <td>{{task.title}}</td>
+                <td>{{task.description}}</td>
+                <td>{{task.status}}</td>
+                <td>{{task.projects}}</td>
+                <td>{{task.assigned_to}}</td>
+                <td class = "nowrap">
+                    <button  ng-click="selectTask($index)" class="btn btn-info">Select</button>
+                    <button  ng-click="removeTask(task)" class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
