@@ -25,13 +25,28 @@
     overflow-y: visible !important;
 }
 
-@media (max-width: 767px) {
-    .table-responsive .btn {
-        position: relative; /* Sometimes needs !important */
-    }
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1px solid #bbb;
+    overflow : hidden;
+}
+td,th {
+    border-top: 1px solid #ddd;
+    padding: 4px 8px;
+    overflow : hidden;
 }
 
-@media only screen and (max-width: 800px) {
 
+.button-test {
+    word-wrap: break-word;
+    max-width: 100%;
+    float: none;
+}
 
+@media screen and (max-width: 640px) {
+    table {
+        overflow-x: auto;
+        display: block;
+    }
 }
