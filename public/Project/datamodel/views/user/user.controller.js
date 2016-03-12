@@ -1,12 +1,13 @@
 /**
  * Created by neethu on 3/3/2016.
  */
-(function() {
+(function () {
+    'use strict';
     angular
         .module("ProjectTrackerApp")
         .controller("UserController", UserController);
 
-    function UserController($scope,UserService) {
+    function UserController($scope, UserService, $rootScope) {
         $scope.addUser = addUser;
         $scope.removeUser = removeUser;
         $scope.selectUser = selectUser;
@@ -18,10 +19,12 @@
         function addUser(user) {
             $scope.message = null;
             errorCheck(user);
-            if($scope.message){
+            if ($scope.message) {
                 return;
             }
             UserService.addUser(user);
+            $scope.user = null;
+            $rootScope.selectedUserIndex = null;
         }
 
         function removeUser(user) {
@@ -35,11 +38,12 @@
         function updateUser(user) {
             $scope.message = null;
             errorCheck(user);
-            if($scope.message){
+            if ($scope.message) {
                 return;
             }
-            UserService.updateUser(user);
+            $scope.user = UserService.updateUser(user);
             $scope.user = null;
+            $rootScope.selectedUserIndex = null;
         }
 
         function errorCheck(user) {
@@ -73,5 +77,5 @@
             }
         }
     }
-})();
+}());
 

@@ -18,17 +18,20 @@
             .when("/project", {
                 templateUrl: "views/Projects/project.view.html"
             })
-            .when("/renderTasks", {
-                templateUrl: "views/Task/renderTasks.view.html"
-            })
             .when("/task", {
                 templateUrl: "views/Task/task.view.html"
             })
             .when("/document", {
                 templateUrl: "views/document/document.view.html"
             })
-            .otherwise({
-                redirectTo: "index.html"
+            .when("/home", {
+                templateUrl: "views/home/home.view.html"
+            })
+            .when("/", {
+                templateUrl:"views/home/home.view.html"
+            })
+            .otherwise ({
+                redirectTo: "views/home/home.view.html"
             });
     }
 })();

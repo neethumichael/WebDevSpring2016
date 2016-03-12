@@ -1,21 +1,23 @@
 <div ng-controller="DocumentController">
     <h1>Documents</h1>
     <div ng-show="message" class="alert alert-danger" role="alert">{{message}}</div>
-    <div class="scrollit">
-    <table class="table table-responsive">
+        <table class="col-md-12 col-sm-12 col-xs-12 container-fluid table table-condensed table-responsive">
         <thead>
         <tr>
             <th>Document name</th>
             <th>Author</th>
+            <th>Action</th>
         </tr>
         <tr>
             <th><input ng-model="selectedDocument.name" class="form-control"/></th>
             <th>
-                <select ng-model="selectedDocument.author" class="form-control" id="assignedAuthor" ng-options="author.username for author in users"/>
+                <select ng-model="selectedDocument.author" class="form-control"
+                        id="assignedAuthor" ng-options="author.username for author in users track by author.username"/>
             </th>
             <th class = "nowrap">
-                <button  ng-click="addDocument(selectedDocument)" class="btn btn-primary">Add</button>
-                <button  ng-click="updateDocument(selectedDocument)" class="btn btn-primary btn-success">Update</button>
+                <button  ng-click="addDocument(selectedDocument)" class="button-add btn btn-primary">Add</button>
+                <button  ng-click="updateDocument(selectedDocument)"
+                         class="button-update btn btn-primary btn-success">Update</button>
             </th>
         </tr>
         </thead>
@@ -30,5 +32,4 @@
         </tr>
         </tbody>
     </table>
-    </div>
 </div>

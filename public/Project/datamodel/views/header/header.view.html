@@ -12,11 +12,14 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li data-ng-hide="currentUser" data-ng-class="{'active': $location.url() == '/user'}"><a href="#/user">User</a></li>
-                <li data-ng-hide="currentUser" data-ng-class="{'active': $location.url() == '/project'}"><a href="#/project">Projects</a></li>
-                <li data-ng-hide="currentUser" data-ng-class="{'active': $location.url() == '/task'}"><a href="#/user">Task</a></li>
-                <li data-ng-hide="currentUser" data-ng-class="{'active': $location.url() == '/document'}"><a href="#/document">Documents</a></li>
-
+                <li ng-class="{'active': $location.url() == '/user'}">
+                    <a href="#/user">User</a></li>
+                <li class="{'active': $location.url() == '/project'}">
+                    <a href="#/project">Projects</a></li>
+                <li class="{'active': $location.url() == '/task'}">
+                    <a href="#/task">Task</a></li>
+                <li class="{'active': $location.url() == '/document'}">
+                    <a href="#/document">Documents</a></li>
             </ul>
         </div>
     </div>

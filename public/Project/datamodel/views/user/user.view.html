@@ -3,54 +3,51 @@
         <div class="row">
             <h1>Users</h1>
             <div ng-show="message" class="alert alert-danger" role="alert">{{message}}</div>
-
-            <table class="col-md-12 col-sm-12 col-xs-12 table-bordered table-condensed table-responsive">
+            <table class="col-md-12 col-sm-12 col-xs-12 container-fluid table table-condensed table-responsive">
                 <thead>
                 <tr>
-                    <th class="button-test">First Name</th>
-                    <th class="button-test">Last Name</th>
-                    <th class="button-test">Username</th>
-                    <th  class="button-test">Password</th>
-                    <th class="button-test">Email</th>
-                    <th class="button-test">Role</th>
-                    <th class="button-test">Action</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Action</th>
                 </tr>
-                <tr>
-                    <th><input ng-model="user.firstname" type="text" class="button-test form-control"/></th>
-                    <th><input ng-model="user.lastname" type="text" class="button-test form-control"/></th>
-                    <th><input ng-model="user.username" type="text" class="button-test form-control"/></th>
-                    <th><input ng-model="user.password" type="password" class="button-test form-control"/></th>
-                    <th><input ng-model="user.emailid" type="email" class="button-test form-control"/></th>
+                    <th><input ng-model="user.firstname" type="text" class="form-control"/></th>
+                    <th><input ng-model="user.lastname" type="text" class="form-control"/></th>
+                    <th><input ng-model="user.username" type="text" class="form-control"/></th>
+                    <th><input ng-model="user.password" type="password" class="form-control"/></th>
+                    <th><input ng-model="user.emailid" type="email" class="form-control"/></th>
                     <th>
-                        <select ng-model="user.role"class="button-test form-control" id="role">
-                            <option class="button-test form-control" value="Project Manager">Project Manager</option>
-                            <option class="button-test form-control" value="Team Lead">Team Lead</option>
-                            <option class="button-test form-control" value="Team Member">Team Member</option>
-                            <option class="button-test form-control" value="Others">Others</option>
+                        <select ng-model="user.role"class="form-control" id="role">
+                            <option class="form-control" value="Project Manager">Project Manager</option>
+                            <option class="form-control" value="Team Lead">Team Lead</option>
+                            <option class="form-control" value="Team Member">Team Member</option>
+                            <option class="form-control" value="Others">Others</option>
                         </select>
                     <th class = "nowrap">
-                        <button  ng-click="addUser(user)" class="button-test btn btn-primary">Add</button>
-                        <button  ng-click="updateUser(user)" class="button-test btn btn-primary btn-success">Update</button>
+                        <button  ng-click="addUser(user)" class="button-add btn btn-primary">Add</button>
+                        <button  ng-click="updateUser(user)" class="button-update btn btn-primary btn-success">Update</button>
                     </th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="user in users">
-                    <td data-label="firstname">{{user.firstname}}</td>
-                    <td data-label="lastname">{{user.lastname}}</td>
-                    <td data-lael="username">{{user.username}}</td>
-                    <td data-lsbel="password">{{user.password}}</td>
-                    <td data-label="emailid">{{user.emailid}}</td>
-                    <td data-label="role">{{user.role}}</td>
+                    <td>{{user.firstname}}</td>
+                    <td>{{user.lastname}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.password}}</td>
+                    <td>{{user.emailid}}</td>
+                    <td>{{user.role}}</td>
                     <td  class = "nowrap">
-                        <button  ng-click="selectUser($index)" class="button-test btn btn-info">Select</button>
-                        <button  ng-click="removeUser(user)" class="button-test btn btn-danger">Delete</button>
+                        <button  ng-click="selectUser($index)" class="btn btn-info">Select</button>
+                        <button  ng-click="removeUser(user)" class="btn btn-danger">Delete</button>
                     </td>
                 </tr>
                 </tbody>
             </table>
-
+        </div>
         </div>
     </div>
-
 </div>

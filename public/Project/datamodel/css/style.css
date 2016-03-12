@@ -1,0 +1,46 @@
+.nowrap {
+    white-space: nowrap;
+}
+.buttonMargin {
+    margin-top: 10px;
+}
+.body {
+    margin-top: 20px;
+}
+.container {
+    width: 100%;
+}
+.assignedTask {
+    height: 34px;
+    width: 80px;
+}
+
+#assignedTasks {
+    height: 34px;
+    width: 80px;
+}
+.button-add {
+    min-width: 64.9219px;
+}
+
+.button-update {
+    max-width:66.4688px;
+}
+
+table {
+    width: 100%;
+    word-wrap: break-word;
+    table-layout:fixed;
+    display: block;
+}
+
+.assignedTask {
+    height: 34px;
+}
+
+ul, li {
+    margin-left: 5px; padding-left: 5px;
+}
+
+
+

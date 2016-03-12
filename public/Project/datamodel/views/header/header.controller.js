@@ -8,6 +8,5 @@
         .controller("HeaderController",HeaderController);
 
     function HeaderController($scope, $location) {
-
     }
 }());

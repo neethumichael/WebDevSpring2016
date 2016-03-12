@@ -1,7 +1,7 @@
 /**
  * Created by neethu on 3/10/2016.
  */
-(function() {
+(function () {
     'use strict';
     angular
         .module("GitApi")
@@ -17,13 +17,12 @@
                 $rootScope.repoDetails = data;
                 $rootScope.repDetail = true;
 
-                $http.get(REP_URL + Repository.id + "/commits").success(getSelectedRepCommitDetails)
+                $http.get(REP_URL + Repository.id + "/commits").success(getSelectedRepCommitDetails);
             });
         }
 
         function getSelectedRepCommitDetails(data) {
             $rootScope.commits = data;
-            console.log($rootScope.commits);
         }
     }
-})();
+}());

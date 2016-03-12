@@ -4,26 +4,23 @@
 /**
  * Created by neethu on 2/20/2016.
  */
-(function(){
+(function () {
     'use strict';
     angular
         .module("ProjectTrackerApp")
         .factory("UserService", UserService);
 
     function UserService($rootScope) {
-        var selectedUserIndex =null;
+        $rootScope.selectedUserIndex = null;
         var selectedUser = null;
 
         var model = {
-            users: [
-                {firstname: "Alice", lastname: "Wonderland", username: "alice", password: "alice",
-                    emailid: "alice@xyz.com", user_id: 123,
-                    role: "Project Manager"},
-                {firstname: "John", lastname: "Doe", username: "john_doe", password: "john_doe", emailid: "john_doe@xyz.com", user_id: 234,
-                    role: "Team Lead"},
-                {firstname: "Max", lastname: "Mathew", username: "max_mathew", password: "max_mathew", emailid: "max_mathew@xyz.com", user_id: 678,
-                    role: "Team Member"}
-            ],
+            users: [{firstname: "Alice", lastname: "Wonderland", username: "alice", password: "alice",
+                    emailid: "alice@xyz.com", user_id: 123, role: "Project Manager"},
+                {firstname: "John", lastname: "Doe", username: "john_doe", password: "john_doe",
+                    emailid: "john_doe@xyz.com", user_id: 234, role: "Team Lead"},
+                {firstname: "Max", lastname: "Mathew", username: "max_mathew", password: "max_mathew",
+                    emailid: "max_mathew@xyz.com", user_id: 678, role: "Team Member"}],
 
             updateUser: updateUser,
             selectUser: selectUser,
@@ -34,12 +31,11 @@
         return model;
 
         function getAllUsers() {
-            $rootScope.userss = model.users;
             return model.users;
         }
 
         function updateUser(user) {
-            model.users[selectedUserIndex] = {
+            model.users[$rootScope.selectedUserIndex] = {
                 firstname: user.firstname,
                 lastname: user.lastname,
                 username: user.username,
@@ -47,11 +43,11 @@
                 emailid: user.emailid,
                 role: user.role
             };
-            selectedUserIndex =null;
+            return model.users[$rootScope.selectedUserIndex];
         }
 
         function selectUser(index) {
-            selectedUserIndex = index;
+            $rootScope.selectedUserIndex = index;
             selectedUser = {
                 firstname: model.users[index].firstname,
                 lastname: model.users[index].lastname,
@@ -69,7 +65,7 @@
         }
 
         function addUser(user) {
-            if(!selectedUserIndex) {
+            if ($rootScope.selectedUserIndex === null) {
                 var newUser = {
                     userid: (new Date).getTime(),
                     firstname: user.firstname,
@@ -83,5 +79,5 @@
             }
         }
     }
-})();
+}());
 

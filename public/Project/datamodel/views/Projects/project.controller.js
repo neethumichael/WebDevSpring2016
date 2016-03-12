@@ -1,12 +1,13 @@
 /**
  * Created by neethu on 3/3/2016.
  */
-(function() {
+(function () {
+    'use strict';
     angular
         .module("ProjectTrackerApp")
         .controller("ProjectController", ProjectController);
 
-    function ProjectController($rootScope,$scope,ProjectService,$location,TaskService) {
+    function ProjectController($rootScope, $scope, ProjectService, TaskService) {
         $scope.addProject = addProject;
         $scope.removeProject = removeProject;
         $scope.selectProject = selectProject;
@@ -17,11 +18,12 @@
         function addProject(project) {
             $scope.message = null;
             errorCheck(project);
-            if($scope.message){
+            if ($scope.message) {
                 return;
             }
             ProjectService.addProject(project);
             $scope.project = null;
+            $rootScope.selectedProjectIndex = null;
         }
 
         function removeProject(project) {
@@ -29,20 +31,21 @@
         }
 
         function selectProject(index) {
-            $scope.project  = ProjectService.selectProject(index);
+            $scope.project = ProjectService.selectProject(index);
         }
         function updateProject(project) {
             $scope.message = null;
             errorCheck(project);
-            if($scope.message){
+            if ($scope.message) {
                 return;
             }
-            ProjectService.updateProject(project);
+            $scope.project = ProjectService.updateProject(project);
             $scope.project = null;
+            $rootScope.selectedProjectIndex = null;
         }
 
         function errorCheck(project) {
-            if(typeof project === "undefined") {
+            if (typeof project === "undefined") {
                 $scope.message = "Please fill in the required fields";
                 return;
             }
@@ -73,5 +76,5 @@
             }
         }
     }
-})();
+}());
 

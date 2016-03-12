@@ -7,39 +7,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="../../css/dashboard.css"/>
+    <link rel="stylesheet" href="../../css/mainProjectStyle.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular-route.js"></script>
-
-    <style>
-        .nowrap {
-            white-space: nowrap;
-        }
-
-        .navbar {
-            margin-bottom: 0;
-            background-color: #006699;
-            z-index: 9999;
-            border: 0;
-            font-size: 12px !important;
-            line-height: 1.42857143 !important;
-            letter-spacing: 4px;
-            border-radius: 0;
-        }
-
-        .navbar li a, .navbar .navbar-brand {
-            color: #fff !important;
-        }
-
-        .navbar-nav li a:hover, .navbar-nav li.active a {
-            color: #006699 !important;
-            background-color: #fff !important;
-        }
-        .navbar-default .navbar-toggle {
-            border-color: transparent;
-            color: #fff !important;
-        }
-    </style>
     <title>Welcome..!!</title>
 </head>
 <body>
@@ -56,10 +27,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li data-ng-hide="currentUser" data-ng-class="{'active': $location.url() == '/user'}"><a href="#/user">User</a></li>
-                <li data-ng-hide="currentUser" data-ng-class="{'active': $location.url() == '/project'}"><a href="#/project">Projects</a></li>
-                <li data-ng-hide="currentUser" data-ng-class="{'active': $location.url() == '/task'}"><a href="#/user">Task</a></li>
-                <li data-ng-hide="currentUser" data-ng-class="{'active': $location.url() == '/documents'}"><a href="#/documents">Documents</a></li>
+                <li><a href="../home/home.view.html">Home</a></li>
+                <li><a href="../user/user.view.html">Manage User</a></li>
+                <li class="active"><a href="../project/project.view.html">Projects</a></li>
             </ul>
         </div>
     </div>
@@ -69,12 +39,10 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <div data-ng-controller='SidebarController'>
-                <ul class="nav nav-sidebar"  >
-                    <li data-ng-class="{'active': $location.url() == '/home'}"><a href="#/home">Home</a></li>
-                    <li data-ng-class="{'active': $location.url() == '/user'}"><a href="#/user">User</a></li>
-                    <li data-ng-class="{'active': $location.url() == '/project'}"><a href="#/project">Projects</a></li>
-                    <li data-ng-class="{'active': $location.url() == '/task'}"><a href="#/task">Task</a></li>
-                    <li  data-ng-class="{'active': $location.url() == '/documents'}"><a href="#/documents">Documents</a></li>
+                <ul class="nav nav-sidebar">
+                    <li><a href="../home/home.view.html">Home</a></li>
+                    <li><a href="../user/user.view.html">Manage User</a></li>
+                    <li class="active"><a href="../project/project.view.html">Projects</a></li>
                 </ul>
             </div>
         </div>
@@ -83,31 +51,33 @@
                 <br>
     <h1>Projects</h1>
                 <div class="col-sm-12 col-md-12 col-lg-6">
-                    <div class="panel panel-primary">
+                    <div class="panelPadding panel panel-primary">
     <ul class="nav nav-tabs">
-        <li><a href="#/project">Add Project</a></li>
-        <li><a href="#/renderProjects">View All Projects</a></li>
+        <li><a href="../project/project.view.html">Add Project</a></li>
+        <li class="active"><a href="#">View All Projects</a></li>
     </ul>
     <table class="table table-responsive">
         <thead>
         <tr>
             <th> Title</th>
             <th> Description</th>
+            <th> Tasks</th>
+            <th> Action </th>
         </tr>
         </thead>
         <tbody>
         <tr>
             <td>TWC</td>
             <td>Web portal development</td>
-            <td >
-                <ul>
-                    <l1>fix login button</l1>
-                    <l2> validate user page</l2>
-                </ul>
+            <td>
+                fix login button
+                <br>
+                validate user page
+
             </td>
-            <td class="no-wrap">
-                <button class="btn btn-danger">Remove</button>
-                <button class="btn btn-info">Select</button>
+            <td>
+                <a><span class="glyphicon glyphicon-pencil" aria-hidden="true">  </span></a>
+                <a><span class="glyphicon glyphicon-remove" aria-hidden="true">  </span></a>
             </td>
         </tr>
         </tbody>

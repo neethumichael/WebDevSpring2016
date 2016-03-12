@@ -1,8 +1,8 @@
 /**
  * Created by neethu on 3/10/2016.
  */
-(function(){
+(function () {
     'use strict';
     angular
         .module("GitApi", []);
-})();
+}());

@@ -1,58 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <style>
-        .navbar {
-            margin-bottom: 0;
-            background-color: #006699;
-            z-index: 9999;
-            border: 0;
-            font-size: 12px !important;
-            line-height: 1.42857143 !important;
-            letter-spacing: 4px;
-            border-radius: 0;
-        }
-
-        .navbar li a, .navbar .navbar-brand {
-            color: #fff !important;
-        }
-
-        .navbar-nav li a:hover, .navbar-nav li.active a {
-            color: #006699 !important;
-            background-color: #fff !important;
-        }
-
-        .navbar-default .navbar-toggle {
-            border-color: transparent;
-            color: #fff !important;
-        }
-        body {
-            background: url("../../images/backgroundimage.png") no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-        }
-
-        .panel-default {
-            opacity: 0.9;
-            margin-top: 80px;
-
-
-        }
-
-        .form-group.last { margin-bottom:0px; }
-    </style>
     <title>Registration Page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../../css/mainProjectStyle.css"/>
 </head>
-<body>
+<body class = "login-register">
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -67,9 +24,9 @@
             <ul class="nav navbar-nav navbar-right">
 
                 <li><a href="../../index.html">Home</a></li>
-                <li><a href="#portfolio">About</a></li>
-                <li><a href="#pricing">Documentation</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="https://docs.google.com/document/d/1s-pW1upRP72_3fBu0s4DUlvko4SJmRr_ijLNLC4Jmqc">Documentation</a></li>
+                <li><a href="#">Contact</a></li>
                 <li><a href="../../views/login/login.html">Login</a></li>
                 <li><a href="#">Register</a></li>
             </ul>
@@ -77,7 +34,6 @@
     </div>
 </nav>
 <div class="row">
-
     <div class="col-md-4 col-md-offset-4">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -99,6 +55,21 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="inputFirstname" class="col-sm-3 control-label">
+                            Firstname</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="inputFirstname" placeholder="Firstname" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputLastname" class="col-sm-3 control-label">
+                            Lastname</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="inputLastname" placeholder="Lastname" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="inputEmail3" class="col-sm-3 control-label">
                             Email</label>
                         <div class="col-sm-9">
@@ -117,9 +88,15 @@
                     </select>
                     </div>
             </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <input type="checkbox" name="tandc" value="yes">
+                                I agree to Terms & Conditions</input>
+                        </div>
+                    </div>
                     <div class="form-group last">
                         <div class="col-sm-offset-2 col-sm-9">
-                            <button type="submit" class="btn btn-success btn-sm btn-block">
+                            <button type="submit" formaction="../home/home.view.html" class="btn btn-success btn-sm btn-block">
                                 Register</button>
                         </div>
                     </div>

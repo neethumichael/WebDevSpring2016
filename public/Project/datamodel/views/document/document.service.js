@@ -4,27 +4,25 @@
 /**
  * Created by neethu on 2/20/2016.
  */
-(function(){
+(function () {
     'use strict';
     angular
         .module("ProjectTrackerApp")
         .factory("DocumentService", DocumentService);
 
     function DocumentService($rootScope) {
-        var selectedDocumentIndex = null;
+        $rootScope.selectedDocumentIndex = null;
         var selectedDocument = null;
 
-        var user1 =
-            {firstname: "Alice", lastname: "Wonderland", username: "alice", password: "alice",
-                emailid: "alice@xyz.com", user_id: 123,
-                role: "Project Manager"};
-        var user2 =   {firstname: "John", lastname: "Doe", username: "john_doe", password: "john_doe", emailid: "john_doe@xyz.com", user_id: 234,
-                role: "Team Lead"};
+        var user1 = {firstname: "Alice", lastname: "Wonderland", username: "alice", password: "alice",
+                emailid: "alice@xyz.com", user_id: 123, role: "Project Manager"};
+        var user2 = {firstname: "John", lastname: "Doe", username: "john_doe", password: "john_doe",
+                emailid: "john_doe@xyz.com", user_id: 234, role: "Team Lead"};
 
         var model = {
             documents: [
-                {id: "890", name: "Project Scope", author: $rootScope.userss[0]},
-                {id: "547", name: "Requirement Tracebility Matrix", author: $rootScope.userss[1]}
+                {id: "890", name: "Project Scope", author: user1},
+                {id: "547", name: "Requirement Tracebility Matrix", author: user2}
             ],
 
             updateDocument: updateDocument,
@@ -41,15 +39,15 @@
         }
 
         function updateDocument(document) {
-            model.documents[selectedDocumentIndex] = {
+            model.documents[$rootScope.selectedDocumentIndex] = {
                 name: document.name,
                 author: document.author
             };
-            selectedDocumentIndex = null;
+            $rootScope.selectedDocumentIndex = null;
         }
 
         function selectDocument(index) {
-            selectedDocumentIndex = index;
+            $rootScope.selectedDocumentIndex = index;
             selectedDocument = {
                 name: model.documents[index].name,
                 author: model.documents[index].author
@@ -63,7 +61,7 @@
         }
 
         function addDocument(document) {
-            if(!selectedDocumentIndex) {
+            if ($rootScope.selectedDocumentIndex === null) {
                 var newDocument = {
                     id: (new Date).getTime(),
                     name: document.name,
@@ -73,5 +71,5 @@
             }
         }
     }
-})();
+}());
 

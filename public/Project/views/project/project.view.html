@@ -7,39 +7,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="../../css/dashboard.css"/>
+    <link rel="stylesheet" href="../../css/mainProjectStyle.css"/>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular-route.js"></script>
-
-    <style>
-        .nowrap {
-            white-space: nowrap;
-        }
-
-        .navbar {
-            margin-bottom: 0;
-            background-color: #006699;
-            z-index: 9999;
-            border: 0;
-            font-size: 12px !important;
-            line-height: 1.42857143 !important;
-            letter-spacing: 4px;
-            border-radius: 0;
-        }
-
-        .navbar li a, .navbar .navbar-brand {
-            color: #fff !important;
-        }
-
-        .navbar-nav li a:hover, .navbar-nav li.active a {
-            color: #006699 !important;
-            background-color: #fff !important;
-        }
-        .navbar-default .navbar-toggle {
-            border-color: transparent;
-            color: #fff !important;
-        }
-    </style>
     <title>Welcome..!!</title>
 </head>
 <body>
@@ -56,10 +27,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li data-ng-hide="currentUser" data-ng-class="{'active': $location.url() == '/user'}"><a href="#/user">User</a></li>
-                <li data-ng-hide="currentUser" data-ng-class="{'active': $location.url() == '/project'}"><a href="#/project">Projects</a></li>
-                <li data-ng-hide="currentUser" data-ng-class="{'active': $location.url() == '/task'}"><a href="#/user">Task</a></li>
-                <li data-ng-hide="currentUser" data-ng-class="{'active': $location.url() == '/documents'}"><a href="#/documents">Documents</a></li>
+                <li><a href="../home/home.view.html">Home</a></li>
+                <li><a href="../user/user.view.html">Manage User</a></li>
+                <li class="active"><a href="../project/project.view.html">Projects</a></li>
             </ul>
         </div>
     </div>
@@ -68,25 +38,21 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-            <div data-ng-controller='SidebarController'>
                 <ul class="nav nav-sidebar"  >
-                    <li data-ng-class="{'active': $location.url() == '/home'}"><a href="#/home">Home</a></li>
-                    <li data-ng-class="{'active': $location.url() == '/user'}"><a href="#/user">User</a></li>
-                    <li data-ng-class="{'active': $location.url() == '/project'}"><a href="#/project">Projects</a></li>
-                    <li data-ng-class="{'active': $location.url() == '/task'}"><a href="#/task">Task</a></li>
-                    <li  data-ng-class="{'active': $location.url() == '/documents'}"><a href="#/documents">Documents</a></li>
+                    <li><a href="../home/home.view.html">Home</a></li>
+                    <li><a href="../user/user.view.html">Manage User</a></li>
+                    <li class="active"><a href="../project/project.view.html">Projects</a></li>
                 </ul>
-            </div>
         </div>
         <div>
     <div  class="col-sm-12 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <br>
     <h1>Projects</h1>
-        <div class="col-sm-12 col-md-12 col-lg-6">
-        <div class="panel panel-primary">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="panelPadding panel panel-primary">
     <ul class="nav nav-tabs">
-        <li><a href="#/project">Add/Update Project</a></li>
-        <li><a href="#/renderProjects">View All Projects</a></li>
+        <li class="active"><a href="#">Add/Update Project</a></li>
+        <li><a href="renderProjects.html">View All Projects</a></li>
     </ul>
     <form class="form-horizontal" role="form">
         <div class="form-group">
@@ -115,16 +81,25 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="assignedTasks" class="col-sm-3 control-label">
-                Assigned Task</label>
-            <div class="col-sm-9" id="assignedTasks">
-                <select>
-                    <option> Task 1</option>
-                    <option> Task 2</option>
-                    <option> Task 3</option>
-                </select>
+            <label for="githubusername" class="col-sm-3 control-label">
+                Github username</label>
+            <div class="col-sm-9">
+                <input  type="text" class="form-control" id="githubusername"  placeholder="Github username">
             </div>
         </div>
+        <div class="form-group">
+            <label for="githubrepository" class="col-sm-3 control-label">
+                Github repository</label>
+
+                <div class="col-sm-9" id="githubrepository">
+                    <select class ="form-control">
+                        <option> Repository 1</option>
+                        <option> Repository 2</option>
+                        <option> Repository 3</option>
+                    </select>
+
+            </div>
+</div>
         <div class="form-group">
             <label for="projectDate" class="col-sm-3 control-label">
                 Start Date</label>
@@ -141,11 +116,11 @@
         </div>
         <div class="form-group last">
             <div class="col-sm-offset-2 col-sm-9">
-                <button   type="submit" class ="btn btn-success btn-sm">
+                <button   type="submit" class ="btn btn-primary btn-success">
                     Add Project</button>
-                <button   type="submit" class ="btn btn-success btn-sm">
+                <button   type="submit" class ="btn btn-primary btn-success">
                     Update Project</button>
-                <button   type="submit" class ="btn btn-success btn-sm">
+                <button   type="submit" class ="btn btn-primary">
                     Cancel</button>
             </div>
         </div>

@@ -2,11 +2,12 @@
  * Created by neethu on 3/3/2016.
  */
 (function () {
+    'use strict';
     angular
         .module("ProjectTrackerApp")
         .controller("DocumentController", DocumentController);
 
-    function DocumentController($rootScope,$scope,DocumentService,UserService) {
+    function DocumentController($rootScope, $scope, DocumentService, UserService) {
         $scope.addDocument = addDocument;
         $scope.removeDocument = removeDocument;
         $scope.selectDocument = selectDocument;
@@ -20,28 +21,31 @@
         function addDocument(document) {
             $scope.message = null;
             errorCheck(document);
-            if($scope.message){
+            if ($scope.message) {
                 return;
             }
             DocumentService.addDocument(document);
             $scope.selectedDocument = null;
+            $rootScope.selectedDocumentIndex = null;
         }
 
         function removeDocument(document) {
             DocumentService.removeDocument(document);
         }
+
         function selectDocument(index) {
             $scope.selectedDocument = DocumentService.selectDocument(index);
-            console.log("tes "+$scope.selectedDocument.author);
         }
+
         function updateDocument(document) {
             $scope.message = null;
             errorCheck(document);
-            if($scope.message){
+            if ($scope.message) {
                 return;
             }
             DocumentService.updateDocument(document);
             $scope.selectedDocument = null;
+            $rootScope.selectedDocumentIndex = null;
         }
 
         function errorCheck(document) {
@@ -59,4 +63,4 @@
             }
         }
     }
-})();
+}());
