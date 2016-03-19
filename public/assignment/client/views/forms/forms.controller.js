@@ -19,13 +19,28 @@
         vm.updateForm = updateForm;
         vm.deleteForm = deleteForm;
         vm.selectForm = selectForm;
+        vm.clickForm = clickForm;
         vm.findAll = findAll;
         vm.selectedForm = null;
+        vm.clickedForm = null;
         vm.currentForms = findAll();
         vm.message = null;
         vm.track = 0;
+        vm.templateUrl1 = null;
 
-        function addForm(form) {
+
+        function clickForm(index) {
+            vm.clickedForm =
+            {_id: vm.currentForms[index]._id,
+                title: vm.currentForms[index].title,
+                userId: vm.currentForms[index].userId
+            };
+            vm.templateUrl1 = "/form/"+vm.currentForms[index]._id+"/fields";
+            console.log("SDFS "+vm.templateUrl1);
+            return vm.templateUrl1;
+        }
+
+            function addForm(form) {
             if(form===null) {
                     vm.message = "Enter a valid form name";
             }
@@ -70,6 +85,8 @@
                     title: vm.currentForms[index].title,
                     userId: vm.currentForms[index].userId
         };
+            vm.templateUrl1 = "/form/"+vm.selectedForm._Id+"/fields";
+            console.log("SDFS "+vm.templateUrl1);
         }
 
         function updateForm(newform) {

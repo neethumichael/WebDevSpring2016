@@ -1,6 +1,7 @@
 /**
  * Created by neethu on 3/18/2016.
  */
+var uuid = require('node-uuid');
 var mock = require("./form.mock.json");
 module.exports = function() {
     var api = {
@@ -15,9 +16,11 @@ module.exports = function() {
     function createFieldForForm(formId,newField) {
         for (var u in mock) {
             if (mock[u]._id == formId) {
-                newField._id = Guid.create();
+                var uuid1 = uuid.v1();
+                newField._id = uuid1;
                 mock[u].fields.push(newField);
-                return newField;
+                console.log("inside model "+mock[u].fields.size);
+                return mock[u].fields;
             }
         }
         return null;
@@ -26,9 +29,11 @@ module.exports = function() {
     function getFieldsForForm(formId) {
         for (var u in mock) {
             if (mock[u]._id == formId) {
+                console.log("equal");
                 return mock[u].fields;
             }
         }
+
         return null;
     }
 

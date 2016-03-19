@@ -20,6 +20,8 @@
         return field_model;
 
         function createFieldForForm(formId, field) {
+            console.log("client formId "+formId);
+            console.log("client field "+field.label);
             return $http.post("/api/assignment/form/"+formId+"/field",field);
         }
 

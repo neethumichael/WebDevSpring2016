@@ -7,25 +7,36 @@
         .module("FormBuilderApp")
         .controller("FieldController", FieldController);
 
-    function FieldController($routeParams, FieldService, $location) {
+    function FieldController(FieldService, $location, $route, $routeParams) {
 
-        var formId = $routeParams.formId;
+        var formId = null;
         var userId = $routeParams.userId;
+
         var vm = this;
         vm.fields = null;
 
+
+        vm.addField = addField;
+        vm.deleteField = deleteField;
+
         function init() {
+            formId = $routeParams.formId;
+            console.log("formId tet"+formId);
             FieldService.getFieldsForForm(formId)
                 .then(function(response) {
                     var fields = response.data;
                     vm.fields = fields;
-                    $location.url("/fields");
+                    console.log("test fields size "+vm.fields.length);
+                    //console.log("test "+vm.fields[0].title);
+                   // $location.url("/fields");
                 });
         }
         init();
 
         function addField(fieldType) {
             var field;
+            formId = $routeParams.formId;
+            console.log("step1");
             if(fieldType == "Single Line Text Field" ) {
                 field = {"_id": null, "label": "New Text Field", "type": "TEXT", "placeholder": "New Field"};
             }
@@ -51,25 +62,31 @@
                     ]};
                 }
                 else {
-                    var field = {"_id": null, "label": "New Radio Buttons", "type": "RADIOS", "options": [
+                var field = {
+                    "_id": null, "label": "New Radio Buttons", "type": "RADIOS", "options": [
                         {"label": "Option X", "value": "OPTION_X"},
                         {"label": "Option Y", "value": "OPTION_Y"},
                         {"label": "Option Z", "value": "OPTION_Z"}
-                    ]}
-                }
+                    ]
+                };
+            }
 
+console.log("step 2");
             FieldService.createFieldForForm(formId,field)
                 .then (function(response) {
+                    console.log("done creating");
                     vm.fields = response.data;
-                    $location.url("/fields");
+                    console.log("total size "+response.data.length);
+                    //$location.url("/fields");
                 });
         }
 
         function deleteField(field) {
+            formId = $routeParams.formId;
             FieldService.deleteFieldFromForm(formId, fieldId)
                 .then(function(response) {
                     vm.fields = response.data;
-                    $location.url("/fields");
+                   // $location.url("/fields");
                 });
         }
     }
