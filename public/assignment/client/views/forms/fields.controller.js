@@ -18,16 +18,31 @@
         vm.addField = addField;
         vm.removeField = removeField;
         vm.syncOrder = syncOrder;
-        $(function() {
-            $( "#sortable" ).sortable({
-                axis: y
-            });
-            stop: $(function (e, ui) {
-                console.log("her");
-                syncOrder($('#sortable').sortable('toArray'));
 
-            })
+
+           var startIndex = -1;
+            var toUpdate;
+
+            $( "#sortable" ).sortable({
+
+                axis: 'y',
+            start: function (event, ui) {
+                // on start we define where the item is dragged from
+                startIndex = ($(ui.item).index());
+            console.log("fsd "+startIndex);},
+            stop: function (e, ui) {
+                var newIndex = ($(ui.item).index());
+                console.log("fsd "+newIndex);
+                FieldService.updateOrder(formId,startIndex,newIndex)
+                    .then(function(response) {
+                        vm.fields = response.data;
+                      //  console.log("vm.fields "+vm.fields[0].label);
+                    });
+                //syncOrder($('#sortable').sortable('toArray'));
+
+            }
         });
+console.log("fsaf "+startIndex);
         function init() {
             formId = $routeParams.formId;
             FieldService.getFieldsForForm(formId)
@@ -146,7 +161,6 @@
         function addField(fieldType) {
             var field;
             formId = $routeParams.formId;
-            console.log("step1");
             if(fieldType == "Single Line Text Field" ) {
                 field = {"_id": null, "label": "New Text Field", "type": "TEXT", "placeholder": "New Field"};
             }
@@ -181,12 +195,9 @@
                 };
             }
 
-console.log("step 2");
             FieldService.createFieldForForm(formId,field)
                 .then (function(response) {
-                    console.log("done creating");
                     vm.fields = response.data;
-                    console.log("total size "+response.data.length);
                     //$location.url("/fields");
                 });
         }
@@ -194,8 +205,6 @@ console.log("step 2");
         function removeField(field) {
             formId = $routeParams.formId;
             var fieldId = field._id;
-            console.log("test delete "+formId);
-            console.log("test delete fieldId "+fieldId);
             FieldService.deleteFieldFromForm(formId, fieldId)
                 .then(function(response) {
                     vm.fields = response.data;

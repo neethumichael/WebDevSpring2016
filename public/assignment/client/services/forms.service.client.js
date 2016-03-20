@@ -19,12 +19,10 @@
         return form_model;
 
         function createFormForUser(userId, form) {
-            console.log("client userId "+userId);
             return $http.post("/api/assignment/user/"+userId+"/form",form);
         }
 
         function findAllFormsForUser(userId) {
-            console.log("here"+userId);
             return $http.get("/api/assignment/user/"+userId+"/form");
         }
 

@@ -36,7 +36,6 @@
                 userId: vm.currentForms[index].userId
             };
             vm.templateUrl1 = "/form/"+vm.currentForms[index]._id+"/fields";
-            console.log("SDFS "+vm.templateUrl1);
             return vm.templateUrl1;
         }
 
@@ -86,11 +85,9 @@
                     userId: vm.currentForms[index].userId
         };
             vm.templateUrl1 = "/form/"+vm.selectedForm._Id+"/fields";
-            console.log("SDFS "+vm.templateUrl1);
         }
 
         function updateForm(newform) {
-            console.log("test inside updateForm");
             vm.track = 0;
             if(vm.selectedForm)
             {

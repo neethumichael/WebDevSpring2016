@@ -9,17 +9,30 @@ module.exports = function() {
         getFieldsForForm: getFieldsForForm,
         getFieldForForm: getFieldForForm,
         deleteFieldFromForm: deleteFieldFromForm,
-        updateField: updateField
+        updateField: updateField,
+        updateOrder: updateOrder
     };
     return api;
 
+    function updateOrder(formId, startIndex, endIndex) {
+        for (var u in mock) {
+            if (mock[u]._id == formId) {
+                var x = mock[u].fields[startIndex];
+                mock[u].fields[startIndex] = mock[u].fields[endIndex];
+                mock[u].fields[endIndex] = x;
+                return mock[u].fields;
+            }
+
+        }
+            return null;
+
+    }
     function createFieldForForm(formId,newField) {
         for (var u in mock) {
             if (mock[u]._id == formId) {
                 var uuid1 = uuid.v1();
                 newField._id = uuid1;
                 mock[u].fields.push(newField);
-                console.log("inside model "+mock[u].fields.size);
                 return mock[u].fields;
             }
         }
@@ -29,7 +42,6 @@ module.exports = function() {
     function getFieldsForForm(formId) {
         for (var u in mock) {
             if (mock[u]._id == formId) {
-                console.log("equal");
                 return mock[u].fields;
             }
         }
@@ -81,15 +93,12 @@ module.exports = function() {
                             mock[u].fields[n].label = updatedField.label;
                              for(var v in updatedField.options) {
                                  var temp = v.split(':');
-                                 console.log("temp[0] "+temp[0]);
-                                 console.log("temp[1] "+temp[1]);
                                  mock[u].fields[n].options[v].label  = temp[0];
                                  mock[u].fields[n].options[v].value  = temp[1];
                              }
 
                         }
                         //mock[u].fields[n] =updatedField;
-                       // console.log("test inside model "+mock[u].fields[n]);
                         return mock[u].fields;
                     }
                 }

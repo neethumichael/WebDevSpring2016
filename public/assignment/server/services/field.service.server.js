@@ -7,21 +7,28 @@ module.exports = function(app, formModel, userModel, fieldModel) {
     app.delete("/api/assignment/form/:formId/field/:fieldId",deleteFieldFromForm);
     app.post("/api/assignment/form/:formId/field",createFieldForForm);
     app.put("/api/assignment/form/:formId/field/:fieldId",updateField);
+    app.put("/api/assignment/form/:formId/field/start/:startIndex/end/:newIndex",updateOrder);
+
+
+
+    function updateOrder(req,res) {
+        var formId = req.params.formId;
+        var startIndex = req.params.startIndex;
+        var newIndex = req.params.newIndex;
+        var fields = fieldModel.updateOrder(formId,startIndex,newIndex);
+        return res.json(fields);
+    }
 
     function createFieldForForm(req,res) {
         var formId = req.params.formId;
         var newField = req.body;
-        console.log("test server "+formId);
-        console.log("test server body "+newField.label);
         var field = fieldModel.createFieldForForm(formId,newField);
         return res.json(field);
     }
 
     function getFieldsForForm(req,res) {
-        console.log("formId testtt server"+req.params.formId);
         var formId = req.params.formId;
         var fields = fieldModel.getFieldsForForm(formId);
-        console.log("fields "+fields[0].label);
         return res.json(fields);
     }
 

@@ -6,8 +6,8 @@
     </ul>
 
 
-      <div ui-sortable= "sortable" ng-model="model.fields">
-          <div ng-repeat="field in model.fields">
+      <div id="sortable"  ng-model="model.fields">
+          <div class="sortItem" ng-repeat="field in model.fields">
 <div ng-model="model.field">
               <div id = "{{field._id}}" class="form-group child" >
                   <div class="row">
@@ -85,7 +85,7 @@
                                     <div class="col-sm-6">
                                         <label for="newField">Add New Field:</label>
                                         <br>
-                                        <select ng-model="model.fieldType" id="newField">
+                                        <select class="form-control" ng-model="model.fieldType" id="newField">
                                             <option value="Single Line Text Field">Single Line Text Field</option>
                                             <option value="Multi Line Text Field">Multi Line Text Field</option>
                                             <option value="Date Field">Date Field</option>

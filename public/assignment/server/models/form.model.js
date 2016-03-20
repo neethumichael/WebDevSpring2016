@@ -15,12 +15,9 @@ module.exports = function() {
     return api;
 
     function Delete(formId) {
-        console.log("formidd "+formId);
         for (var u in mock) {
-            console.log("test "+mock[u].title);
             if (mock[u]._id == formId) {
                 mock.splice(u, 1);
-                console.log("deleted");
             }
         }
         mock;

@@ -15,13 +15,16 @@
             getFieldsForForm: getFieldsForForm,
             getFieldForForm: getFieldForForm,
             deleteFieldFromForm: deleteFieldFromForm,
-            updateField: updateField
+            updateField: updateField,
+            updateOrder: updateOrder
         };
         return field_model;
 
+        function updateOrder(formId,startIndex,newIndex) {
+            console.log("formId "+formId+"startIndex "+startIndex+"newIndex "+newIndex);
+            return $http.put("/api/assignment/form/"+formId+"/field/start/"+startIndex+"/end/"+newIndex);
+        }
         function createFieldForForm(formId, field) {
-            console.log("client formId "+formId);
-            console.log("client field "+field.label);
             return $http.post("/api/assignment/form/"+formId+"/field",field);
         }
 
