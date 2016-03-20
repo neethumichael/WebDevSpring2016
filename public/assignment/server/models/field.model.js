@@ -55,7 +55,7 @@ module.exports = function() {
                 for(var n in mock[u].fields) {
                     if(mock[u].fields[n]._id == fieldId) {
                         mock[u].fields.splice(n, 1);
-                        return mock[u];
+                        return mock[u].fields;
                     }
                 }
             }
@@ -69,8 +69,28 @@ module.exports = function() {
                 for(var n in mock[u].fields) {
                     if(mock[u].fields[n]._id == fieldId) {
                         updatedField._id = mock[u].fields[n]._id;
-                        mock[u].fields[n] =updatedField;
-                        return mock[u];
+
+                        if(updatedField.type == "TEXT" || updatedField.type == "TEXTAREA") {
+                            mock[u].fields[n].label = updatedField.label;
+                            mock[u].fields[n].placeholder = updatedField.placeholder;
+                        }
+                        else if (updatedField.type == "DATE") {
+                            mock[u].fields[n].label = updatedField.label;
+                        }
+                        else if(updatedField.type == "OPTIONS" || updatedField.type == "CHECKBOXES" || updatedField.type == "RADIOS" ) {
+                            mock[u].fields[n].label = updatedField.label;
+                             for(var v in updatedField.options) {
+                                 var temp = v.split(':');
+                                 console.log("temp[0] "+temp[0]);
+                                 console.log("temp[1] "+temp[1]);
+                                 mock[u].fields[n].options[v].label  = temp[0];
+                                 mock[u].fields[n].options[v].value  = temp[1];
+                             }
+
+                        }
+                        //mock[u].fields[n] =updatedField;
+                       // console.log("test inside model "+mock[u].fields[n]);
+                        return mock[u].fields;
                     }
                 }
             }

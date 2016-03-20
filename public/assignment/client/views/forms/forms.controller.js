@@ -90,12 +90,13 @@
         }
 
         function updateForm(newform) {
+            console.log("test inside updateForm");
             vm.track = 0;
             if(vm.selectedForm)
             {
             if(newform)
             {
-                FormService.updateFormById(vm.selectedForm._id,newform)
+                FieldService.updateFieldById(vm.selectedForm._id,newform)
                     .then(function(response){
                         vm.selectedForm = null;
                         vm.currentForms = findAll();

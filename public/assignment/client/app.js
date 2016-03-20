@@ -4,5 +4,5 @@
 (function(){
     'use strict';
     angular
-        .module("FormBuilderApp", ["ngRoute"]);
+        .module("FormBuilderApp", ['ngRoute' ,'ui.bootstrap','ui.sortable']);
 })();

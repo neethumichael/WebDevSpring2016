@@ -7,7 +7,7 @@
         .module("FormBuilderApp")
         .controller("FieldController", FieldController);
 
-    function FieldController(FieldService, $location, $route, $routeParams) {
+    function FieldController(FieldService, $location, $route, $routeParams, $uibModal, $log, $rootScope) {
 
         var formId = null;
         var userId = $routeParams.userId;
@@ -15,23 +15,133 @@
         var vm = this;
         vm.fields = null;
 
-
         vm.addField = addField;
-        vm.deleteField = deleteField;
+        vm.removeField = removeField;
+        vm.syncOrder = syncOrder;
+        $(function() {
+            $( "#sortable" ).sortable({
+                axis: y
+            });
+            stop: $(function (e, ui) {
+                console.log("her");
+                syncOrder($('#sortable').sortable('toArray'));
 
+            })
+        });
         function init() {
             formId = $routeParams.formId;
-            console.log("formId tet"+formId);
             FieldService.getFieldsForForm(formId)
                 .then(function(response) {
                     var fields = response.data;
                     vm.fields = fields;
-                    console.log("test fields size "+vm.fields.length);
-                    //console.log("test "+vm.fields[0].title);
-                   // $location.url("/fields");
                 });
         }
         init();
+
+        function syncOrder(elementPositions) {
+            for(var u in elementPositions) {
+            }
+        }
+
+        vm.modalUpdate = function (selectedField) {
+            //vm.selectedField = selectedField;
+
+            var textUrl = null;
+            if(selectedField.type == "TEXT" || selectedField.type == "TEXTAREA") {
+                textUrl = 'views/forms/editModal/singleLine.edit.view.html';
+            }
+            else if(selectedField.type == "DATE") {
+                textUrl = 'views/forms/editModal/date.email.edit.view.html';
+            }
+            else if(selectedField.type == "OPTIONS" || selectedField.type == "CHECKBOXES" || selectedField.type == "RADIOS" ) {
+                textUrl = 'views/forms/editModal/options.edit.view.html';
+            }
+            else {
+                console.log("invalid option");
+                return;
+            }
+
+            var updateField = $uibModal.open({
+
+                templateUrl: textUrl,
+                controller: function($uibModalInstance, field, $scope) {
+                   if(selectedField.type == "TEXT" || selectedField.type == "TEXTAREA") {
+                        $scope.field = {
+                            _id: field._id,
+                            label: field.label,
+                            type: field.type,
+                            placeholder: field.placeholder
+                        };
+                    }
+                    else if (selectedField.type == "DATE") {
+                        $scope.field = {
+                            _id: field._id,
+                            label: field.label,
+                            type: field.type
+                        };
+                    }
+                    else if(selectedField.type == "OPTIONS" || selectedField.type == "CHECKBOXES" || selectedField.type == "RADIOS" ) {
+                        $scope.field = {
+                            _id: field._id,
+                            label: field.label,
+                            type: field.type,
+                            options: field.options
+                        };
+                        for(var u in field.options) {
+                            $scope.field.options[u] = field.options[u].label+":"+field.options[u].value;
+                        }
+                    }
+                    else {
+                        console.log("invalid option");
+                        return;
+                    }
+
+                    $scope.ok = function () {
+
+                     // $scope.field = selectedField;
+
+                        $uibModalInstance.close(field);
+
+                    };
+
+                    $scope.cancel = function () {
+                        $scope.field = field;
+                        $uibModalInstance.dismiss('cancel');
+                    };
+
+                    $scope.updateField = function(newField) {
+                        vm.track = 0;
+
+                        if(newField)
+                        {
+                            FieldService.updateField(formId,newField._id,newField)
+                                .then(function(response){
+                                    vm.fields = response.data;
+                                    $scope.field = response.data;
+                                    vm.selectedField = null;
+                                    //$location.path()
+                                });
+                        }
+                        else {
+                            vm.message = "Select a field to update";
+                            vm.selectedField = null;
+                        }
+                    }
+                },
+                resolve: {
+                    field: function () {
+                        return selectedField;
+                    }
+                }
+            });
+
+            updateField.result.then(function (selectedField) {
+
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
 
         function addField(fieldType) {
             var field;
@@ -81,14 +191,18 @@ console.log("step 2");
                 });
         }
 
-        function deleteField(field) {
+        function removeField(field) {
             formId = $routeParams.formId;
+            var fieldId = field._id;
+            console.log("test delete "+formId);
+            console.log("test delete fieldId "+fieldId);
             FieldService.deleteFieldFromForm(formId, fieldId)
                 .then(function(response) {
                     vm.fields = response.data;
                    // $location.url("/fields");
                 });
         }
-    }
+
+            }
 }());
 

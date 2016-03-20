@@ -4,184 +4,82 @@
         <li><a href="#/forms">Forms</a></li>
         <li class="active"><a href="#/fields">Fields</a></li>
     </ul>
-    <table class="table table-fixed table-responsive">
-        <tbody>
-
-        <tr ng-repeat="field in model.fields">
-
-<td>
-    <form>
-    <div ng-switch on="field.type">
-        <div ng-switch-when="TEXT">
-            <div class="form-group" >
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label for="FirstName">{{field.label}}</label>
-                        <br>
-                        <input type="text" id="FirstName" class="form-control" placeholder="{{field.placeholder}}"/>
-                    </div>
-                    <div class="col-sm-6">
-                        <br>
-                        <br>
-                        <a><span class="glyphicon glyphicon-pencil" aria-hidden="true">  </span></a>
-                        <a><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-                        <a><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-                        <a><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div ng-switch-when="EMAIL">
-            <div class="form-group" >
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label for="email">{{field.label}}</label>
-                        <br>
-                        <input type="email" id="email" class="form-control" placeholder="{{field.placeholder}}"/>
-                    </div>
-                    <div class="col-sm-6">
-                        <br>
-                        <br>
-                        <a><span class="glyphicon glyphicon-pencil" aria-hidden="true">  </span></a>
-                        <a><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-                        <a><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-                        <a><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div ng-switch-when = "TEXTAREA">
-            <div class="form-group" >
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label for="textArea">{{field.label}}</label>
-                        <br>
-                        <textarea id="textArea" placeholder="{{field.placeholder}}" class="form-control" rows="4" cols="50"/>
-                    </div>
-                    <div class="col-sm-6">
-                        <br>
-                        <br>
-                        <a><span class="glyphicon glyphicon-pencil" aria-hidden="true">  </span></a>
-                        <a><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-                        <a><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-                        <a><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div ng-switch-when = "DATE">
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label for="Date" >{{field.label}}</label>
-                        <br>
-                        <input type="date" class="form-control" id="Date" placeholder="{{field.placeholder}}"/>
-                    </div>
-                    <div class="col-sm-6">
-                        <br>
-                        <br>
-                        <a><span class="glyphicon glyphicon-pencil" aria-hidden="true">  </span></a>
-                        <a><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-                        <a><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-                        <a><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div ng-switch-when = "OPTIONS">
-
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label for="option">{{field.label}}:</label>
-                        <br>
-                        {{field.options}}
-                        <select id="option" class="form-control" ng-options="item as item.label for item in field.options"></select>
-
-                    </div>
-                    <div class="col-sm-6">
-                        <br>
-                        <br>
-                        <a><span class="glyphicon glyphicon-pencil" aria-hidden="true">  </span></a>
-                        <a><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-                        <a><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-                        <a><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
-                    </div>
-                </div>
-            </div>
-            </div>
-        <div ng-switch-when = "CHECKBOXES">
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label>
-                            {{field.label}}:<</label>
-                        <br>
-                        <div ng-repeat ="option in field.options">
-                        <input  type="checkbox" name="roles" value="{{option.label}}" />{{option.label}}<br/>
-                            </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <br>
-                        <br>
-                        <a><span class="glyphicon glyphicon-pencil" aria-hidden="true">  </span></a>
-                        <a><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-                        <a><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-                        <a><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
-                    </div>
-                </div>
-            </div>
-            </div>
-
-        <div ng-switch-when = "RADIOS">
-        <div class="form-group">
-            <div class="row">
-                <div class="col-sm-6">
-                    <label>
-                        {{field.label}}:  </label>
-                    <br>
-                    <div ng-repeat ="option in field.options">
-                    <input type="radio" name="agreement" value="{{option.label}}"> {{option.label}}<br>
-                        </div>
-
-                </div>
-                <div class="col-sm-6">
-                    <br>
-                    <br>
-                    <a><span class="glyphicon glyphicon-pencil" aria-hidden="true">  </span></a>
-                    <a><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-                    <a><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-                    <a><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
-                </div>
-            </div>
-        </div>
-            </div>
 
 
+      <div ui-sortable= "sortable" ng-model="model.fields">
+          <div ng-repeat="field in model.fields">
+<div ng-model="model.field">
+              <div id = "{{field._id}}" class="form-group child" >
+                  <div class="row">
+                      <div class="col-sm-6">
+                          <div ng-switch on="field.type">
+                              <div ng-switch-when="TEXT">
+                          <label for="FirstName1">{{field.label}}:</label>
+                          <br>
+                          <input type="text" id="FirstName1" class="form-control" placeholder="{{field.placeholder}}"/>
+                              </div>
 
-    </div>
+
+                          <div ng-switch-when = "TEXTAREA">
+                              <label for="textArea">{{field.label}}:</label>
+                              <br>
+                              <textarea id="textArea" placeholder="{{field.placeholder}}" class="form-control" rows="4" cols="50"/>
+                              </div>
+
+                          <div ng-switch-when = "DATE">
+                              <label for="Date" >{{field.label}}:</label>
+                              <br>
+                              <input type="date" class="form-control" id="Date" placeholder="{{field.placeholder}}"/>
+                              </div>
 
 
+                          <div ng-switch-when = "OPTIONS">
+                              <label for="option">{{field.label}}:</label>
+                              <br>
+                              <select id="option" ng-model ="field.options" class="form-control" ng-options="option.value for option in field.options track by option.value"></select>
+                          </div>
+
+                          <div ng-switch-when = "CHECKBOXES">
+                              <label>
+                                  {{field.label}}:</label>
+                              <br>
+                              <div ng-repeat ="option in field.options track by option.value">
+                                  <input  type="checkbox" name="roles" value="{{option.value}}" />{{option.value}}<br/>
+                              </div>
+                              </div>
 
 
+                          <div ng-switch-when = "RADIOS">
+                              <label>
+                                  {{field.label}}: </label>
+                              <br>
+                              <div ng-repeat ="option in field.options track by option.label">
+                                  <input type="radio" name="agreement" value="{{option.value}}"> {{option.value}}<br>
+                              </div>
+                              </div>
+
+                          </div>
+                      </div>
+                      <div ng-if="field.type == 'RADIOS' || field.type == 'CHECKBOXES' || field.type == 'CHECKBOXES'
+                      || field.type == 'OPTIONS' || field.type == 'DATE' || field.type == 'TEXTAREA' || field.type == 'TEXT'">
+                          <div class="col-sm-6">
+                              <br>
+                              <br>
+                              <a><span ng-click = "model.modalUpdate(field)" class="glyphicon glyphicon-pencil" aria-hidden="true">  </span></a>
+                              <a><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+                              <a><span ng-click = "model.removeField(field)" class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                              <a><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
+
+</div>
+                  </div>
+                      </div>
+              </div>
+
+      </div>
+          </div>
+          </div>
 
 
-
-</form>
-</td>
-
-
-        </tr>
-
-</td>
-        <tr>
-            <td>
-                <form>
                     <div class="form-group">
                         <div class="row">
                                     <div class="col-sm-6">
@@ -204,11 +102,7 @@
                             </div>
                         </div>
                     </div>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+
 </div>
 </div>
 </div>
