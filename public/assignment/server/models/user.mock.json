@@ -5,7 +5,8 @@
     "firstName": "Alice",
     "lastName": "Wonderland",
     "username": "alice",
-    "password": "alice"
+    "password": "alice",
+    "roles": ["student"]
   },
   {
     "_id": 234,
@@ -13,7 +14,8 @@
     "lastName": "Hope",
     "username": "bob",
     "password": "bob",
-    "email": "bob@gmail.com"
+    "email": "bob@gmail.com",
+    "roles": ["admin"]
   },
   {
     "_id": 345,
@@ -21,7 +23,8 @@
     "lastName": "Brown",
     "username": "charlie",
     "password": "charlie",
-    "email": "charlie@gmail.com"
+    "email": "charlie@gmail.com",
+    "roles": ["faculty"]
   },
   {
     "_id": 456,
@@ -29,7 +32,8 @@
     "lastName": "Craig",
     "username": "dan",
     "password": "dan",
-    "email": "dan.craig@gmail.com"
+    "email": "dan.craig@gmail.com",
+    "roles": ["faculty", "admin"]
   },
   {
     "_id": 567,
@@ -37,7 +41,8 @@
     "lastName": "Norton",
     "username": "ed",
     "password": "ed",
-    "email": "edward.norton@gmail.com"
+    "email": "edward.norton@gmail.com",
+    "roles": ["student"]
   }
 ]
 
