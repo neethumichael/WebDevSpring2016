@@ -57,7 +57,7 @@ console.log("fsaf "+startIndex);
             for(var u in elementPositions) {
             }
         }
-
+var tempField;
         vm.modalUpdate = function (selectedField) {
             //vm.selectedField = selectedField;
 
@@ -100,11 +100,15 @@ console.log("fsaf "+startIndex);
                             _id: field._id,
                             label: field.label,
                             type: field.type,
-                            options: field.options
+                           // options: field.options
                         };
-                        for(var u in field.options) {
-                            $scope.field.options[u] = field.options[u].label+":"+field.options[u].value;
-                        }
+                     $scope.field.options="";
+                       for(var u in field.options) {
+                           $scope.field.options+=(field.options[u].label+":"+field.options[u].value);
+                           $scope.field.options+="\n";
+                       }
+
+
                     }
                     else {
                         console.log("invalid option");
@@ -126,13 +130,14 @@ console.log("fsaf "+startIndex);
 
                     $scope.updateField = function(newField) {
                         vm.track = 0;
+                        console.log(newField.options);
 
-                        if(newField)
+                            if(newField)
                         {
-                            FieldService.updateField(formId,newField._id,newField)
+                            FieldService.updateField(formId,field._id,newField)
                                 .then(function(response){
                                     vm.fields = response.data;
-                                    $scope.field = response.data;
+                                   // $scope.field = response.data;
                                     vm.selectedField = null;
                                     //$location.path()
                                 });

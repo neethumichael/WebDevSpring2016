@@ -76,34 +76,59 @@ module.exports = function() {
     }
 
     function updateField(formId,fieldId,updatedField) {
+        console.log("updatedField label "+updatedField.type);
         for (var u in mock) {
             if (mock[u]._id == formId) {
+                console.log("form found");
                 for(var n in mock[u].fields) {
+                    console.log("FDs "+mock[u].fields[n]._id);
                     if(mock[u].fields[n]._id == fieldId) {
-                        updatedField._id = mock[u].fields[n]._id;
+                        console.log("field found");
 
+                        mock[u].fields[n].label = updatedField.label;
                         if(updatedField.type == "TEXT" || updatedField.type == "TEXTAREA") {
-                            mock[u].fields[n].label = updatedField.label;
+                            updatedField._id = mock[u].fields[n]._id;
+
                             mock[u].fields[n].placeholder = updatedField.placeholder;
+                            return mock[u].fields;
                         }
                         else if (updatedField.type == "DATE") {
-                            mock[u].fields[n].label = updatedField.label;
+                            updatedField._id = mock[u].fields[n]._id;
+                            return mock[u].fields;
+
                         }
                         else if(updatedField.type == "OPTIONS" || updatedField.type == "CHECKBOXES" || updatedField.type == "RADIOS" ) {
-                            mock[u].fields[n].label = updatedField.label;
-                             for(var v in updatedField.options) {
-                                 var temp = v.split(':');
-                                 mock[u].fields[n].options[v].label  = temp[0];
-                                 mock[u].fields[n].options[v].value  = temp[1];
+
+                            console.log("here");
+                                var  temp1 = updatedField.options.split("\n");
+                             for(var v in temp1) {
+                                 var temp = temp1[v].split(":");
+                                 if (mock[u].fields[n].options[v]) {
+                                     updatedField._id = mock[u].fields[n]._id;
+                                 mock[u].fields[n].options[v].label = temp[0];
+                                 mock[u].fields[n].options[v].value = temp[1];
                              }
+                                 else {
+                                     mock[u].fields[n].options.push({
+                                         label: temp[0],
+                                         value: temp[1]
+                                     });
+                                     }
+
+                                 }
+                            console.log("after pushing "+mock[u].fields[n].options.length);
+                            return mock[u].fields;
+                             }
+
 
                         }
                         //mock[u].fields[n] =updatedField;
-                        return mock[u].fields;
+
+
                     }
                 }
             }
-        }
         return null;
+        }
+
     }
-}

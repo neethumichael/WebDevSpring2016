@@ -50,6 +50,10 @@ module.exports = function(app, formModel, userModel, fieldModel) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
         var updatedForm = req.body;
+        console.log("inside server");
+        console.log("field "+updatedForm.options);
+        console.log("fieldId"+fieldId);
+        console.log("formId "+formId);
         var fields = fieldModel.updateField(formId,fieldId,updatedForm);
         return res.json(fields);
     }
