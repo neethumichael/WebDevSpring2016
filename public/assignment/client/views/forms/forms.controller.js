@@ -7,97 +7,79 @@
         .module("FormBuilderApp")
         .controller("FormController", FormController);
 
-    function FormController($location, $routeParams, FormService,$rootScope,UserService) {
+    function FormController(FormService, UserService, FieldService) {
 
         var vm = this;
 
-        function init() {
-
-        }
-        init();
         vm.addForm = addForm;
         vm.updateForm = updateForm;
         vm.deleteForm = deleteForm;
         vm.selectForm = selectForm;
         vm.clickForm = clickForm;
-        vm.findAll = findAll;
+        vm.findAllForms = findAllForms;
         vm.selectedForm = null;
         vm.clickedForm = null;
-        vm.currentForms = findAll();
         vm.message = null;
-        vm.track = 0;
         vm.templateUrl1 = null;
 
+        function init() {
+            vm.currentForms = findAllForms();
+        }
+        init();
 
         function clickForm(index) {
+            vm.templateUrl = "/form/"+vm.currentForms[index]._id+"/fields";
             vm.clickedForm =
             {_id: vm.currentForms[index]._id,
                 title: vm.currentForms[index].title,
                 userId: vm.currentForms[index].userId
             };
-            vm.templateUrl1 = "/form/"+vm.currentForms[index]._id+"/fields";
-            return vm.templateUrl1;
+            return vm.templateUrl;
         }
 
-            function addForm(form) {
+        function addForm(form) {
             if(form===null) {
-                    vm.message = "Enter a valid form name";
+                vm.message = "Enter a valid form name";
             }
             else {
-                if(vm.track !== 1) {
                     UserService.getCurrentUser()
-                        .then (
-                            function(response)
-                            {
-                                FormService.createFormForUser(
-                                    response.data._id,form)
-                                    .then(
-                                        function(response) {
-                                            vm.selectedForm = null;
-                                            vm.currentForms = findAll();
-                                            $location.url("/forms");
-                                        }
-                                    );
-                            }
-                        );
-                }
+                        .then (function(response) {
+                            FormService.createFormForUser(response.data._id,form)
+                                .then(function(response) {
+                                    vm.selectedForm = null;
+                                    vm.currentForms = findAllForms();
+                                });
+                            });
             }
         }
 
         function deleteForm(index) {
-
-            vm.selectedForm =
-                vm.currentForms[index];
+            vm.selectedForm = vm.currentForms[index];
             FormService.deleteFormById(vm.selectedForm._id)
                 .then(function(response) {
-                    vm.currentForms = findAll();
+                    vm.currentForms = findAllForms();
                     vm.selectedForm = null;
-                    $location.url("/forms");
-            })
+            });
         }
 
         function selectForm(index) {
-
             vm.track = 1;
             vm.selectedForm =
                 {_id: vm.currentForms[index]._id,
                     title: vm.currentForms[index].title,
                     userId: vm.currentForms[index].userId
-        };
+                };
             vm.templateUrl1 = "/form/"+vm.selectedForm._Id+"/fields";
         }
 
         function updateForm(newform) {
             vm.track = 0;
-            if(vm.selectedForm)
-            {
-            if(newform)
-            {
-                FieldService.updateFieldById(vm.selectedForm._id,newform)
+            if(vm.selectedForm) {
+            if(newform) {
+                FormService.updateFormById(vm.selectedForm._id,newform)
                     .then(function(response){
                         vm.selectedForm = null;
-                        vm.currentForms = findAll();
-                        $location.url("/forms");
+                        vm.currentForms = findAllForms();
                 });
             }
             else {
@@ -106,7 +88,8 @@
             }
             }
         }
-        function findAll() {
+
+        function findAllForms() {
             var cur_form =null;
             var user;
              UserService.getCurrentUser()

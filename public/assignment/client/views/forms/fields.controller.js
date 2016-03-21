@@ -11,38 +11,28 @@
 
         var formId = null;
         var userId = $routeParams.userId;
+        var startIndex = -1;
+        var tempField;
 
         var vm = this;
-        vm.fields = null;
 
+        vm.fields = null;
         vm.addField = addField;
         vm.removeField = removeField;
-        vm.syncOrder = syncOrder;
 
-
-           var startIndex = -1;
-            var toUpdate;
-
-            $( "#sortable" ).sortable({
-
-                axis: 'y',
+        $( "#sortable" ).sortable({
+            axis: 'y',
             start: function (event, ui) {
-                // on start we define where the item is dragged from
-                startIndex = ($(ui.item).index());
-            console.log("fsd "+startIndex);},
+                startIndex = ($(ui.item).index());},
             stop: function (e, ui) {
                 var newIndex = ($(ui.item).index());
-                console.log("fsd "+newIndex);
                 FieldService.updateOrder(formId,startIndex,newIndex)
                     .then(function(response) {
                         vm.fields = response.data;
-                      //  console.log("vm.fields "+vm.fields[0].label);
                     });
-                //syncOrder($('#sortable').sortable('toArray'));
-
             }
         });
-console.log("fsaf "+startIndex);
+
         function init() {
             formId = $routeParams.formId;
             FieldService.getFieldsForForm(formId)
@@ -53,13 +43,7 @@ console.log("fsaf "+startIndex);
         }
         init();
 
-        function syncOrder(elementPositions) {
-            for(var u in elementPositions) {
-            }
-        }
-var tempField;
         vm.modalUpdate = function (selectedField) {
-            //vm.selectedField = selectedField;
 
             var textUrl = null;
             if(selectedField.type == "TEXT" || selectedField.type == "TEXTAREA") {
@@ -76,51 +60,44 @@ var tempField;
                 return;
             }
 
-            var updateField = $uibModal.open({
-
+            var updateField = $uibModal.open ({
                 templateUrl: textUrl,
                 controller: function($uibModalInstance, field, $scope) {
                    if(selectedField.type == "TEXT" || selectedField.type == "TEXTAREA") {
-                        $scope.field = {
-                            _id: field._id,
-                            label: field.label,
-                            type: field.type,
-                            placeholder: field.placeholder
-                        };
-                    }
-                    else if (selectedField.type == "DATE") {
-                        $scope.field = {
-                            _id: field._id,
-                            label: field.label,
-                            type: field.type
-                        };
-                    }
-                    else if(selectedField.type == "OPTIONS" || selectedField.type == "CHECKBOXES" || selectedField.type == "RADIOS" ) {
-                        $scope.field = {
-                            _id: field._id,
-                            label: field.label,
-                            type: field.type,
-                           // options: field.options
-                        };
-                     $scope.field.options="";
+                       $scope.field = {
+                           _id: field._id,
+                           label: field.label,
+                           type: field.type,
+                           placeholder: field.placeholder
+                       };
+                   }
+                   else if (selectedField.type == "DATE") {
+                       $scope.field = {
+                           _id: field._id,
+                           label: field.label,
+                           type: field.type
+                       };
+                   }
+                   else if(selectedField.type == "OPTIONS" || selectedField.type == "CHECKBOXES" || selectedField.type == "RADIOS" ) {
+                       $scope.field = {
+                           _id: field._id,
+                           label: field.label,
+                           type: field.type
+                       };
+
+                       $scope.field.options="";
                        for(var u in field.options) {
-                           $scope.field.options+=(field.options[u].label+":"+field.options[u].value);
-                           $scope.field.options+="\n";
+                           $scope.field.options += (field.options[u].label+":"+field.options[u].value);
+                           $scope.field.options += "\n";
                        }
-
-
                     }
-                    else {
-                        console.log("invalid option");
-                        return;
-                    }
+                   else {
+                       console.log("invalid option");
+                       return;
+                   }
 
                     $scope.ok = function () {
-
-                     // $scope.field = selectedField;
-
                         $uibModalInstance.close(field);
-
                     };
 
                     $scope.cancel = function () {
@@ -130,16 +107,11 @@ var tempField;
 
                     $scope.updateField = function(newField) {
                         vm.track = 0;
-                        console.log(newField.options);
-
-                            if(newField)
-                        {
+                        if(newField) {
                             FieldService.updateField(formId,field._id,newField)
                                 .then(function(response){
                                     vm.fields = response.data;
-                                   // $scope.field = response.data;
                                     vm.selectedField = null;
-                                    //$location.path()
                                 });
                         }
                         else {
@@ -155,13 +127,10 @@ var tempField;
                 }
             });
 
-            updateField.result.then(function (selectedField) {
-
-            }, function () {
+            updateField.result.then(function (selectedField) {}, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
         };
-
 
         function addField(fieldType) {
             var field;
@@ -169,41 +138,38 @@ var tempField;
             if(fieldType == "Single Line Text Field" ) {
                 field = {"_id": null, "label": "New Text Field", "type": "TEXT", "placeholder": "New Field"};
             }
-
-                else if (fieldType == "Multi Line Text Field" ) {
-                    field =  {"_id": null, "label": "New Text Field", "type": "TEXTAREA", "placeholder": "New Field"}
-                }
-                else if (fieldType == "Date Field" ) {
-                    field = {"_id": null, "label": "New Date Field", "type": "DATE"};
-                }
-                else if (fieldType == "Dropdown Field" ) {
-                    field = {"_id": null, "label": "New Dropdown", "type": "OPTIONS", "options": [
-                        {"label": "Option 1", "value": "OPTION_1"},
-                        {"label": "Option 2", "value": "OPTION_2"},
-                        {"label": "Option 3", "value": "OPTION_3"}
-                    ]};
-                }
-                else if (fieldType == "Checkboxes Field") {
-                    field = {"_id": null, "label": "New Checkboxes", "type": "CHECKBOXES", "options": [
-                        {"label": "Option A", "value": "OPTION_A"},
-                        {"label": "Option B", "value": "OPTION_B"},
-                        {"label": "Option C", "value": "OPTION_C"}
-                    ]};
-                }
-                else {
+            else if (fieldType == "Multi Line Text Field" ) {
+                field =  {"_id": null, "label": "New Text Field", "type": "TEXTAREA", "placeholder": "New Field"}
+            }
+            else if (fieldType == "Date Field" ) {
+                field = {"_id": null, "label": "New Date Field", "type": "DATE"};
+            }
+            else if (fieldType == "Dropdown Field" ) {
+                field = {"_id": null, "label": "New Dropdown", "type": "OPTIONS", "options": [
+                    {"label": "Option 1", "value": "OPTION_1"},
+                    {"label": "Option 2", "value": "OPTION_2"},
+                    {"label": "Option 3", "value": "OPTION_3"}
+                ]};
+            }
+            else if (fieldType == "Checkboxes Field") {
+                field = {"_id": null, "label": "New Checkboxes", "type": "CHECKBOXES", "options": [
+                    {"label": "Option A", "value": "OPTION_A"},
+                    {"label": "Option B", "value": "OPTION_B"},
+                    {"label": "Option C", "value": "OPTION_C"}
+                ]};
+            }
+            else {
                 var field = {
                     "_id": null, "label": "New Radio Buttons", "type": "RADIOS", "options": [
                         {"label": "Option X", "value": "OPTION_X"},
                         {"label": "Option Y", "value": "OPTION_Y"},
                         {"label": "Option Z", "value": "OPTION_Z"}
-                    ]
-                };
+                    ]};
             }
 
             FieldService.createFieldForForm(formId,field)
                 .then (function(response) {
                     vm.fields = response.data;
-                    //$location.url("/fields");
                 });
         }
 
@@ -213,10 +179,8 @@ var tempField;
             FieldService.deleteFieldFromForm(formId, fieldId)
                 .then(function(response) {
                     vm.fields = response.data;
-                   // $location.url("/fields");
                 });
         }
-
-            }
+    }
 }());
 
