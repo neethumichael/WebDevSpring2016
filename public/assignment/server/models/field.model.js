@@ -22,11 +22,10 @@ module.exports = function() {
                 mock[u].fields[endIndex] = x;
                 return mock[u].fields;
             }
-
         }
             return null;
-
     }
+
     function createFieldForForm(formId,newField) {
         for (var u in mock) {
             if (mock[u]._id == formId) {
@@ -45,7 +44,6 @@ module.exports = function() {
                 return mock[u].fields;
             }
         }
-
         return null;
     }
 
@@ -114,21 +112,14 @@ module.exports = function() {
                                          value: temp[1]
                                      });
                                      }
-
                                  }
                             console.log("after pushing "+mock[u].fields[n].options.length);
                             return mock[u].fields;
                              }
-
-
                         }
-                        //mock[u].fields[n] =updatedField;
-
-
                     }
                 }
             }
         return null;
         }
-
     }

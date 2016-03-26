@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../css/dashboard.css"/>
+    <link rel="stylesheet" href="../../css/mainProjectStyle.css"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular-route.js"></script>
+    <title>Welcome..!!</title>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/home">Project Tracker</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="../home/home.view.html">Home</a></li>
+                <li><a href="../user/user.view.html">Manage User</a></li>
+                <li><a href="../project/project.view.html">Projects</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <div>
+                <ul class="nav nav-sidebar"  >
+                    <li class="active"><a href="../home/home.view.html">Home</a></li>
+                    <li><a href="../user/user.view.html">Manage User</a></li>
+                    <li><a href="../project/project.view.html">Projects</a></li>
+                </ul>
+            </div>
+        </div>
+        <div  class="col-sm-12 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <br>
+            <h2>My Dashboard</h2>
+            <div class="col-sm-12 col-md-12 col-lg-6">
+                <div class="homePanel panel panel-primary">
+                    <div class="panel-heading">
+                        <h5 class="text-center">Welcome<span class="glyphicon glyphicon-saved pull-right"></span></h5>
+                    </div>
+                    <div class="panel-body text-center">
+                        <p class="lead">
+                            <strong>Welcome to ProjectTracker</strong>
+                        </p>
+                        <p>Not sure where to start? Check out the ProjectTracker guide</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-6">
+                <div class="homePanel panel panel-primary">
+                    <div class="panel-heading">
+                        <h5 class="text-center">Assigned to me<span class="glyphicon glyphicon-screenshot pull-right"></span></h5>
+                    </div>
+                    You currently have no issues assigned to you. Enjoy your day!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

@@ -22,6 +22,7 @@ module.exports = function(app, formModel, userModel) {
             return res.json(findAll());
         }
     }
+
     function findUserByUsername(username) {
         var user = userModel.findUserByUsername(username);
             return user;
@@ -34,6 +35,7 @@ module.exports = function(app, formModel, userModel) {
     }
 
     function findUserByCredentials(username,password) {
+
        var user = userModel.findUserByCredentials({username: username,password: password});
 
         return user;

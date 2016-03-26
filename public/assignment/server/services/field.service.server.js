@@ -9,8 +9,6 @@ module.exports = function(app, formModel, userModel, fieldModel) {
     app.put("/api/assignment/form/:formId/field/:fieldId",updateField);
     app.put("/api/assignment/form/:formId/field/start/:startIndex/end/:newIndex",updateOrder);
 
-
-
     function updateOrder(req,res) {
         var formId = req.params.formId;
         var startIndex = req.params.startIndex;
@@ -50,10 +48,6 @@ module.exports = function(app, formModel, userModel, fieldModel) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
         var updatedForm = req.body;
-        console.log("inside server");
-        console.log("field "+updatedForm.options);
-        console.log("fieldId"+fieldId);
-        console.log("formId "+formId);
         var fields = fieldModel.updateField(formId,fieldId,updatedForm);
         return res.json(fields);
     }
