@@ -11,12 +11,15 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#/home">Home</a></li>
+                <li ng-hide="currentUser"><a href="#/home">Home</a></li>
+                <li ng-show="currentUser"><a href="#/dashboard">Home</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="https://docs.google.com/document/d/1s-pW1upRP72_3fBu0s4DUlvko4SJmRr_ijLNLC4Jmqc/">Documentation</a></li>
                 <li><a href="#myModal" data-toggle="modal" >Contact</a></li>
-                <li><a href="#/login">Login</a></li>
-                <li><a href="#/register">Register</a></li>
+                <li ng-show="currentUser"><a href="#/profile">{{currentUser.username}}</a></li>
+                <li ng-hide="currentUser"><a href="#/login">Login</a></li>
+                <li ng-show="currentUser" ng-click="model.logout()"><a href="#/home">Logout</a></li>
+                <li ng-hide="currentUser"><a href="#/register">Register</a></li>
             </ul>
         </div>
     </div>

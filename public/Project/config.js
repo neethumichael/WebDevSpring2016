@@ -9,24 +9,6 @@
 
     function configuration($routeProvider) {
         $routeProvider
-            .when("/home", {
-                templateUrl: "views/home/home.view.html"
-            })
-            .when("/profile", {
-                templateUrl: "views/users/profile.view.html",
-                controller: "ProfileController",
-                controllerAs: "model"
-            })
-            .when("/register", {
-                templateUrl: "views/users/register.view.html",
-                controller: "RegisterController",
-                controllerAs: "model"
-            })
-            .when("/login", {
-                templateUrl: "views/users/login.view.html",
-                controller: "LoginController",
-                controllerAs: "model"
-            })
             .when("/user", {
                 templateUrl: "views/user/user.view.html",
             })
@@ -35,21 +17,41 @@
             })
             .when("/project", {
                 templateUrl: "views/project/project.view.html",
+                controller: "ProjectController",
+                controllerAs: "model"
             })
             .when("/dashboard", {
                  templateUrl: "views/dashboard/dashboard.view.html",
 
         })
             .when("/login", {
-                templateUrl: "views/login/login.view.html"
+                templateUrl: "views/login/login.view.html",
+                controller: "LoginController",
+                controllerAs: "model"
             })
             .when("/", {
                 templateUrl:"views/home/home.view.html"
             })
+            .when("/renderProjects", {
+                templateUrl:"views/project/renderProjects.html"
+        })
             .when("/home", {
                 templateUrl:"views/home/home.view.html"
             })
-            .when("/register", {templateUrl: "views/register/register.view.html"
+            .when("/profile", {
+                templateUrl: "views/profile/profile.view.html",
+                controller: "ProfileController",
+                controllerAs: "model"
+            })
+            .when("/search", {
+                templateUrl: "views/search/searchRepositories.view.html",
+                controller: "SearchController",
+                controllerAs: "model"
+            })
+            .when("/register", {
+                templateUrl: "views/register/register.view.html",
+                controller: "RegisterController",
+                controllerAs: "model"
             })
             .otherwise({
                 redirectTo: "views/home/home.view.html"

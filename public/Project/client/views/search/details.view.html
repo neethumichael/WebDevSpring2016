@@ -1,0 +1,26 @@
+<div ng-controller="DetailsController">
+    <div ng-show="repDetail">
+        <h4> Repository Full Name </h4>
+        <p> {{repoDetails.full_name}} </p>
+        <h4> Created on </h4>
+        <p> {{repoDetails.created_at}} </p>
+        <h4> Commits </h4>
+        <table class="table table-striped table-responsive">
+            <thead>
+            <tr>
+                <th>SHA</th>
+                <th>Committer Name</th>
+                <th>Committer Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr  ng-repeat="commit in commits">
+                <td> {{commit.sha.substring(0,6)}} </td>
+                <td> {{commit.commit.committer.name}} </td>
+                <td> {{commit.commit.committer.date | date}} </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

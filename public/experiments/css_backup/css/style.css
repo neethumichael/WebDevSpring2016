@@ -1,0 +1,31 @@
+.nowrap {
+    white-space: nowrap;
+}
+
+.buttonMargin {
+    margin-top: 10px;
+}
+
+.body {
+    margin-top: 20px;
+}
+
+.container {
+    width: 100%;
+}
+
+.bodyRep {
+    padding-left: 20px;
+}
+
+table {
+    width: 100%;
+    word-wrap: break-word;
+    table-layout:fixed;
+}
+
+
+
+
+
+

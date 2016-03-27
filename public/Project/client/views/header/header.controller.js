@@ -7,7 +7,7 @@
         .module("ProjectTrackerApp")
         .controller("HeaderController",HeaderController);
 
-    function HeaderController( $location) {
+    function HeaderController( $location, UserService) {
         var vm = this;
 
         vm.logout = logout;

@@ -1,0 +1,50 @@
+
+<div class="body bodyRep" ng-controller="SearchController">
+<div class="container-fluid"  >
+    <div ng-show="message" class="alert alert-danger" role="alert">{{message}}</div>
+    <h1>Search from GitHub API</h1>
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-horizontal">
+            <h3> Enter username </h3>
+                <div class="form-group">
+            <input type="text" class="form-control" id="ghusername" ng-model="username" placeholder="Github username..." required>
+            <button ng-click="getGitInfo(username)" class="btn btn-primary btn-block buttonMargin">
+                Search Repository </button>
+                </div>
+            </div>
+            <div ng-show="loaded">
+                <div ng-show="reposFound" ng-controller="DetailsController">
+                    <table class="table table-striped table-responsive">
+                        <thead>
+                        <tr>
+                            <th>Repositories</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-click="searchRepository(repo)" ng-repeat="repo in repos">
+                            <td> {{repo.name}} </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div  class="col-xs-6 col-sm-6 col-md-6">
+            <div ng-show="loaded">
+                <h2> {{user.name}}
+                    <span class="smallname">(@<a href="{{user.html_url}}" target="_blank"> {{user.login}} </a>)</span>
+                </h2>
+                <div>
+                    Followers: {{ user.followers }} - Following: {{ user.following }}
+                    <br>
+                    Repositories: {{ user.public_repos }}
+                </div>
+                <img ng-src="{{user.avatar_url}}" height="200px" />
+                <br>
+            </div>
+        <div  ng-include="'views/search/details.view.html'"></div>
+        </div>
+    </div>
+</div>
+</div>

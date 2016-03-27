@@ -71,6 +71,11 @@ module.exports = function(app, userModel) {
         res.json(user);
     }
 
+    function logout(req, res) {
+        //req.session.destroy();
+        res.send(200);
+    }
+
     function loggedin(req, res) {
         res.json(req.session.currentUser);
     }
