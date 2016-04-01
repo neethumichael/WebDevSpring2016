@@ -102,8 +102,10 @@ module.exports = function(db, mongoose) {
                 {$set: newForm},
                 function (err, doc) {
                     if (!err) {
+                        console.log("not error "+doc);
                         deferred.resolve(doc);
                     } else {
+                        console.log("reject");
                         deferred.reject(err);
                     }
                 }

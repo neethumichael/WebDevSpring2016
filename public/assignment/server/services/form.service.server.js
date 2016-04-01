@@ -24,6 +24,7 @@ module.exports = function(app, formModel, userModel) {
         formModel.Update(formId,form)
             .then(
                 function (doc) {
+                    console.log("doc "+doc);
                     res.json(doc);
                 },
                 function (err) {

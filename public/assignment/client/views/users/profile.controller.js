@@ -42,7 +42,7 @@
                 vm.message = "Please provide a username";
                 return;
             }
-            if (!user.email) {
+            if (!user.emails) {
                vm.message = "Please provide an email id";
                 return;
             }

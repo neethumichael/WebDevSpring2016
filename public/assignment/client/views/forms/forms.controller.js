@@ -42,14 +42,17 @@
                 vm.message = "Enter a valid form name";
             }
             else {
+              //  vm.selectedForm = null;
+                if (vm.selectedForm ==null) {
                     UserService.getCurrentUser()
-                        .then (function(response) {
-                            FormService.createFormForUser(response.data._id,form)
-                                .then(function(response) {
+                        .then(function (response) {
+                            FormService.createFormForUser(response.data._id, form)
+                                .then(function (response) {
                                     vm.selectedForm = null;
                                     vm.currentForms = findAllForms();
                                 });
-                            });
+                        });
+                }
             }
         }
 
