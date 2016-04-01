@@ -1,8 +1,11 @@
 /**
  * Created by neethu on 3/17/2016.
  */
-var mock = require("./user.mock.json");
-module.exports = function () {
+var q = require("q");
+module.exports = function (db, mongoose) {
+
+    var UserSchema = require("./user.schema.server.js")(mongoose);
+    var UserModel = mongoose.model('User', UserSchema, 'User');
     var api = {
         Create: Create,
         FindAll: FindAll,
@@ -10,74 +13,109 @@ module.exports = function () {
         Update: Update,
         Delete: Delete,
         findUserByUsername: findUserByUsername,
-        findUserByCredentials: findUserByCredentials,
-        findIndexByUsername: findIndexByUsername
+        findUserByCredentials: findUserByCredentials
     };
     return api;
 
     function Delete(userId) {
-        for (var u in mock) {
-            if (mock[u]._id === userId) {
-                mock.splice(u, 1);
-            }
-        }
-        mock;
+        var deferred = q.defer ();
+        UserModel
+            .remove (
+                {_id: userId},
+                function (err, stats) {
+                    if (!err) {
+                        deferred.resolve(stats);
+                    } else {
+                        deferred.reject(err);
+                    }
+                }
+            );
+        return deferred.promise;
     }
 
     function findUserByUsername(userName) {
-        for(var u in mock) {
-            if( mock[u].username === userName)
-                return mock[u];
-        }
-        return null;
-    }
-
-    function findIndexByUsername(userName) {
-        for(var u in mock) {
-            if( mock[u].username === userName)
-
-                return u;
-        }
-        return null;
+        var deferred = q.defer ();
+        UserModel
+            .findOne (
+                {username: userName.toString()},
+                function (err, doc) {
+                    if (!err) {
+                        console.log(typeof doc);
+                            deferred.resolve(doc);
+                    } else {
+                        deferred.reject(err);
+                    }
+                }
+            );
+        return deferred.promise;
     }
 
     function FindAll() {
-        return mock;
+        var deferred = q.defer ();
+        UserModel.find (
+            function (err, users) {
+                if (!err) {
+                    deferred.resolve (users);
+                } else {
+                    deferred.reject (err);
+                }
+            }
+        );
+        return deferred.promise;
     }
 
     function Update(user) {
-        if(user) {
-            var n = findIndexByUsername(user.username);
-            if(n) {
-                user._id = mock[n]._id;
-                mock[n] = user;
-                return mock[n];
-            }
-        }
-        return null;
+        var deferred = q.defer();
+        UserModel
+            .update (
+                {username: user.username},
+                {$set: user},
+                function (err, doc) {
+                    if (!err) {
+                        deferred.resolve(user);
+                    } else {
+                        deferred.reject(err);
+                    }
+                }
+            );
+        return deferred.promise;
     }
 function FindById(userId) {
-    for(var u in mock) {
-        if( mock[u]._id === userId ) {
-            return mock[u];
+    var deferred = q.defer();
+    UserModel.findById(userId, function(err,doc) {
+        if (err) {
+            deferred.reject(err);
+        } else {
+            deferred.resolve(doc);
         }
-    }
-    return null;
+    });
+    return deferred.promise;
 }
 
 function Create(user) {
-    user._id = "ID_" + (new Date()).getTime();
-    mock.push(user);
-    return user;
+    var deferred = q.defer();
+    UserModel.create(user, function (err,doc) {
+        console.log(doc);
+        if(err) {
+            deferred.reject(err);
+        } else {
+            deferred.resolve(doc);
+        }
+
+    });
+    return deferred.promise;
 }
 
 function findUserByCredentials(credentials) {
-    for(var u in mock) {
-        if( mock[u].username === credentials.username &&
-            mock[u].password === credentials.password) {
-            return mock[u];
+    var deferred = q.defer();
+    UserModel.findOne(credentials, function(err, doc) {
+        if(err) {
+            deferred.reject(err);
+        } else {
+            deferred.resolve(doc);
         }
     }
-    return null;
+    );
+    return deferred.promise;
 }
 }

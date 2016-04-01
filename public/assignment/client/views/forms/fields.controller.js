@@ -46,7 +46,8 @@
         vm.modalUpdate = function (selectedField) {
 
             var textUrl = null;
-            if(selectedField.type == "TEXT" || selectedField.type == "TEXTAREA") {
+            if(selectedField.type == "TEXT" || selectedField.type == "TEXTAREA" || selectedField.type == "PASSWORD"
+            || selectedField.type == "EMAIL") {
                 textUrl = 'views/forms/editModal/singleLine.edit.view.html';
             }
             else if(selectedField.type == "DATE") {
@@ -63,7 +64,8 @@
             var updateField = $uibModal.open ({
                 templateUrl: textUrl,
                 controller: function($uibModalInstance, field, $scope) {
-                   if(selectedField.type == "TEXT" || selectedField.type == "TEXTAREA") {
+                   if(selectedField.type == "TEXT" || selectedField.type == "TEXTAREA" || selectedField.type == "PASSWORD"
+                    || selectedField.type == "EMAIL"){
                        $scope.field = {
                            _id: field._id,
                            label: field.label,
@@ -136,23 +138,29 @@
             var field;
             formId = $routeParams.formId;
             if(fieldType == "Single Line Text Field" ) {
-                field = {"_id": null, "label": "New Text Field", "type": "TEXT", "placeholder": "New Field"};
+                field = {"label": "New Text Field", "type": "TEXT", "placeholder": "New Field"};
+            }
+            else if(fieldType == "Password Field") {
+                field = {"label": "New Password Field", "type": "PASSWORD", "placeholder": "New Field"};
+            }
+            else if(fieldType == "Email Field") {
+                field = {"label": "New Email Field", "type": "EMAIL", "placeholder": "xyz@domain.com"};
             }
             else if (fieldType == "Multi Line Text Field" ) {
-                field =  {"_id": null, "label": "New Text Field", "type": "TEXTAREA", "placeholder": "New Field"}
+                field =  {"label": "New Text Field", "type": "TEXTAREA", "placeholder": "New Field"}
             }
             else if (fieldType == "Date Field" ) {
-                field = {"_id": null, "label": "New Date Field", "type": "DATE"};
+                field = {"label": "New Date Field", "type": "DATE"};
             }
             else if (fieldType == "Dropdown Field" ) {
-                field = {"_id": null, "label": "New Dropdown", "type": "OPTIONS", "options": [
+                field = {"label": "New Dropdown", "type": "OPTIONS", "options": [
                     {"label": "Option 1", "value": "OPTION_1"},
                     {"label": "Option 2", "value": "OPTION_2"},
                     {"label": "Option 3", "value": "OPTION_3"}
                 ]};
             }
             else if (fieldType == "Checkboxes Field") {
-                field = {"_id": null, "label": "New Checkboxes", "type": "CHECKBOXES", "options": [
+                field = {"label": "New Checkboxes", "type": "CHECKBOXES", "options": [
                     {"label": "Option A", "value": "OPTION_A"},
                     {"label": "Option B", "value": "OPTION_B"},
                     {"label": "Option C", "value": "OPTION_C"}
@@ -160,7 +168,7 @@
             }
             else {
                 var field = {
-                    "_id": null, "label": "New Radio Buttons", "type": "RADIOS", "options": [
+                    "label": "New Radio Buttons", "type": "RADIOS", "options": [
                         {"label": "Option X", "value": "OPTION_X"},
                         {"label": "Option Y", "value": "OPTION_Y"},
                         {"label": "Option Z", "value": "OPTION_Z"}
@@ -176,6 +184,7 @@
         function removeField(field) {
             formId = $routeParams.formId;
             var fieldId = field._id;
+
             FieldService.deleteFieldFromForm(formId, fieldId)
                 .then(function(response) {
                     vm.fields = response.data;

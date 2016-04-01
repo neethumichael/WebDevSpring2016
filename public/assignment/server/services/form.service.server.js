@@ -7,33 +7,68 @@ module.exports = function(app, formModel, userModel) {
 
     function Delete(req,res) {
         var formId = req.params.formId;;
-        var forms = formModel.Delete(formId);
-        res.json(forms);
+        formModel.Delete(formId)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function Update(req,res) {
         var formId = req.params.formId;
         var form = req.body;
-        form = formModel.Update(formId,form);
-        res.json(form);
+        formModel.Update(formId,form)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function findAllForms(req,res) {
         var userId = req.params.userId;
-        var forms =  formModel.FindAll(userId);
-        res.json(forms);
+        formModel.FindAll(userId)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function findById(req, res) {
         var formId = req.params.formId;
-        var form = formModel.findById(formId);
-        res.json(form);
+        formModel.findById(formId)
+            .then(
+            function (doc) {
+                res.json(doc);
+            },
+            function (err) {
+                res.status(400).send(err);
+            }
+        );
     }
 
     function Create(req, res) {
         var userId = req.params.userId;
         var form = req.body;
-        form = formModel.Create(userId,form);
-        res.json(form);
+        formModel.Create(userId,form)
+            .then(
+            function (doc) {
+                res.json(doc);
+            },
+            function (err) {
+                res.status(400).send(err);
+            }
+        );
     }
 }

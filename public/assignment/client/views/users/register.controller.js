@@ -45,11 +45,9 @@
                 vm.message = "Passwords must match";
                 return;
             }
-            console.log("jdhd "+user.username);
             UserService.findUserByUsername(user.username).then(
             function(response) {
-                console.log("what "+response.data);
-                if (response.data !== null) {
+                if (response.data!= null || (typeof response.data) == "undefined") {
                     vm.message = "User already exists";
                     return;
                 }
@@ -57,13 +55,18 @@
                     UserService.createUser(user)
                         .then(function(response){
                             var currentUser = response.data;
-                            console.log("test in controller "+response.data.username);
                             UserService.setCurrentUser(currentUser);
                             $location.url('/profile');
-                        });
+                        }),
+                        function (error) {
+                            vm.message = error;
+                        };
 
                 }
-            });
+            }),
+                function (error) {
+                    vm.message = error;
+                };
 
 
         }

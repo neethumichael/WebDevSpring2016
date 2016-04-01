@@ -21,7 +21,6 @@
         return field_model;
 
         function updateOrder(formId,startIndex,newIndex) {
-            console.log("formId "+formId+"startIndex "+startIndex+"newIndex "+newIndex);
             return $http.put("/api/assignment/form/"+formId+"/field/start/"+startIndex+"/end/"+newIndex);
         }
         function createFieldForForm(formId, field) {
@@ -41,8 +40,6 @@
         }
 
         function updateField(formId, fieldId, field) {
-            console.log("field "+field.options);
-            console.log("fieldId"+fieldId);
             return $http.put("/api/assignment/form/"+formId+"/field/"+fieldId,field);
         }
     }
