@@ -26,6 +26,16 @@
 .button {
     display: block;
     width: 100%;
+    white-space: nowrap;
+}
+
+.modal {
+    width: 30%; /* respsonsive width */
+    margin-left: 35%;
+    margin-top: 5%;
+   /* width/2) */
+
+
 }
 
 

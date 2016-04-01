@@ -75,7 +75,6 @@
                     user.phones = "";
                     console.log(typeof user.email);
                     for(var u in emails) {
-                        console.log("test "+emails[u]);
                         user.emails += emails[u]+",";
                     }
                     user.emails = user.emails.substring(0,user.emails.length-1);
