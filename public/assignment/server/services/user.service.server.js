@@ -11,79 +11,66 @@ module.exports = function(app, formModel, userModel) {
     function forAllUsers(req,res) {
         if(req.query.username && req.query.password) {
             return findUserByCredentials(req.query.username,req.query.password, req, res);
-
         }
         else if(req.query.username) {
             return findUserByUsername(req.query.username,req,res);
-
-}
-else {
-
-        return findAll();
+        }
+        else {
+            return findAll();
+        }
     }
 
-}
-
-function findUserByUsername(username,req,res) {
-    userModel.findUserByUsername(username)
-        .then(
-            function (doc) {
+    function findUserByUsername(username,req,res) {
+        userModel.findUserByUsername(username)
+            .then(function (doc) {
                 res.json(doc);
             },
             function (err) {
                 res.status(400).send(err);
             }
         );
-}
+    }
 
-function Delete(req,res) {
-    var user = req.body;
-    userModel.Delete(user)
-        .then(
-            function (doc) {
+    function Delete(req,res) {
+        var user = req.body;
+        userModel.Delete(user)
+            .then(function (doc) {
                 res.json(doc);
             },
-            function (err) {
-                res.status(400).send(err);
-            }
-        );
-}
+                function (err) {
+                    res.status(400).send(err);
+                });
+    }
 
-function findUserByCredentials(username,password, req, res) {
+    function findUserByCredentials(username,password, req, res) {
 
-    userModel.findUserByCredentials({username: username,password: password})
-        .then(
-            function (doc) {
-                req.session.currentUser = doc;
-                return res.json(doc);
-            },
+        userModel.findUserByCredentials({username: username,password: password})
+        .then(function (doc) {
+            req.session.currentUser = doc;
+            return res.json(doc);
+        },
             function (err) {
-                return res.status(400).send(err);;
-            }
-        );
+                return res.status(400).send(err);
+            });
     }
 
     function Update(req,res) {
         var userId = req.params.id;
         var user = req.body;
         if(typeof user.emails == "String") {
-            console.log("here emails");
             user.emails = user.emails.split(",");
         }
         if(typeof user.phones == "String") {
-            console.log("here phones");
             user.phones = user.phones.split(",");
         }
         userModel.Update(user)
-            .then(
-                function (doc) {
-                    req.session.currentUser = doc;
-                    res.json(doc);
-                },
+            .then(function (doc) {
+                req.session.currentUser = doc;
+                res.json(doc);
+            },
                 function (err) {
                     res.status(400).send(err);
-                }
-            );
+                });
     }
 
     function findAll(req , res) {

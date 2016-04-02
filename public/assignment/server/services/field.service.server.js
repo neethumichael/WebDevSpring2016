@@ -51,28 +51,24 @@ module.exports = function(app, formModel, userModel, fieldModel) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
         fieldModel.getFieldForForm(formId,fieldId)
-            .then(
-            function (doc) {
+            .then(function (doc) {
                 res.json(doc);
             },
             function (err) {
                 res.status(400).send(err);
-            }
-        );
+            });
     }
 
     function deleteFieldFromForm(req,res) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
         fieldModel.deleteFieldFromForm(formId,fieldId)
-            .then(
-                function (doc) {
-                    res.json(doc.fields);
-                },
+            .then(function (doc) {
+                res.json(doc.fields);
+            },
                 function (err) {
                     res.status(400).send(err);
-                }
-            );
+                });
     }
 
     function updateField(req,res) {
@@ -80,13 +76,11 @@ module.exports = function(app, formModel, userModel, fieldModel) {
         var fieldId = req.params.fieldId;
         var updatedForm = req.body;
         var fields = fieldModel.updateField(formId,fieldId,updatedForm)
-            .then(
-                function (doc) {
-                    res.json(doc.fields);
-                },
+            .then(function (doc) {
+                res.json(doc.fields);
+            },
                 function (err) {
                     res.status(400).send(err);
-                }
-            );
+                });
     }
 }
