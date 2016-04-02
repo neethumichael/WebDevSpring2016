@@ -71,7 +71,6 @@
                     var user = response.data;
                   //  var emails = user.emails;
                     //var phones = user.phones;
-                   // user.emails = "";
                   //  user.phones = "";
                   /*  for(var u in emails) {
                         user.emails += emails[u]+",";
