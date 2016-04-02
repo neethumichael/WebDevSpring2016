@@ -69,19 +69,18 @@
                 if (response.data) {
                     vm.message = "User updated successfully"
                     var user = response.data;
-                    var emails = user.emails;
-                    var phones = user.phones;
-                    user.emails = "";
-                    user.phones = "";
-                    console.log(typeof user.email);
-                    for(var u in emails) {
+                  //  var emails = user.emails;
+                    //var phones = user.phones;
+                   // user.emails = "";
+                  //  user.phones = "";
+                  /*  for(var u in emails) {
                         user.emails += emails[u]+",";
                     }
                     user.emails = user.emails.substring(0,user.emails.length-1);
                     for(var u in phones) {
                         user.phones += phones[u]+",";
                     }
-                    user.phones = user.phones.substring(0,user.phones.length-1);
+                    user.phones = user.phones.substring(0,user.phones.length-1);*/
                     UserService.setCurrentUser(user);
                 } else {
                     vm.message = "Unable to update the user";

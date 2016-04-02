@@ -80,6 +80,7 @@ module.exports = function (db, mongoose) {
             );
         return deferred.promise;
     }
+
 function FindById(userId) {
     var deferred = q.defer();
     UserModel.findById(userId, function(err,doc) {
@@ -101,7 +102,6 @@ function Create(user) {
         } else {
             deferred.resolve(doc);
         }
-
     });
     return deferred.promise;
 }

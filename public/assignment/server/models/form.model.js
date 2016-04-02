@@ -59,7 +59,6 @@ module.exports = function(db, mongoose) {
     }
 
     function Create(userId,form) {
-        console.log("userId model "+userId);
         var newForm = {
             userId: userId,
             title: form.title
@@ -102,10 +101,8 @@ module.exports = function(db, mongoose) {
                 {$set: newForm},
                 function (err, doc) {
                     if (!err) {
-                        console.log("not error "+doc);
                         deferred.resolve(doc);
                     } else {
-                        console.log("reject");
                         deferred.reject(err);
                     }
                 }

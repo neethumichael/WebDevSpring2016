@@ -67,9 +67,11 @@ function findUserByCredentials(username,password, req, res) {
         var userId = req.params.id;
         var user = req.body;
         if(typeof user.emails == "String") {
+            console.log("here emails");
             user.emails = user.emails.split(",");
         }
         if(typeof user.phones == "String") {
+            console.log("here phones");
             user.phones = user.phones.split(",");
         }
         userModel.Update(user)
