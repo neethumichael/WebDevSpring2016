@@ -66,10 +66,18 @@ module.exports = function (db, mongoose) {
 
     function Update(user) {
         var deferred = q.defer();
+        var newUser ={
+            username: user.username,
+            password: user.password,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            emails: user.emails,
+            phones: user.phones
+        };
         UserModel
             .update (
                 {username: user.username},
-                {$set: user},
+                {$set: newUser},
                 function (err, doc) {
                     if (!err) {
                         deferred.resolve(user);
