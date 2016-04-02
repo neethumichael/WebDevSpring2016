@@ -107,7 +107,7 @@ module.exports = function(db, mongoose) {
                             fields: doc.fields,
                             created: doc.created,
                             updated: doc.updated
-                        }
+                        };
                         deferred.resolve(Form);
                     } else {
                         deferred.reject(err);
