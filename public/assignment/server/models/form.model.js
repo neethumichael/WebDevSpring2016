@@ -101,7 +101,14 @@ module.exports = function(db, mongoose) {
                 {$set: newForm},
                 function (err, doc) {
                     if (!err) {
-                        deferred.resolve(doc);
+                        var Form ={
+                            userId: doc.userId,
+                            title: doc.title,
+                            fields: doc.fields,
+                            created: doc.created,
+                            updated: doc.updated
+                        }
+                        deferred.resolve(Form);
                     } else {
                         deferred.reject(err);
                     }
