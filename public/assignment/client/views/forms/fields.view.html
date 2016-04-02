@@ -1,10 +1,13 @@
 <div ng-controller='FieldController as model'>
     <h1 class="header">Forms : Registration Form</h1>
-    <div ng-show="model.message" class="alert alert-danger" role="alert">{{model.message}}</div>
+
     <ul class="nav nav-tabs">
         <li><a href="#/forms">Forms</a></li>
         <li class="active"><a href="#/fields">Fields</a></li>
     </ul>
+    <br>
+    <div ng-show="model.message" class="alert alert-danger" role="alert">{{model.message}}</div>
+    <div ng-hide="model.setStatus">
     <div id="sortable"  ng-model="model.fields">
         <div class="sortItem" ng-repeat="field in model.fields">
             <div ng-model="model.field">
@@ -106,4 +109,5 @@
         </div>
     </div>
 </div>
+    </div>
 

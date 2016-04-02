@@ -15,7 +15,8 @@
         var tempField;
 
         var vm = this;
-
+        var tk =0;
+vm.setStatus = false;
         vm.fields = null;
         vm.addField = addField;
         vm.removeField = removeField;
@@ -35,6 +36,11 @@
 
         function init() {
             formId = $routeParams.formId;
+            if(!formId || typeof formId == "undefined") {
+                vm.setStatus = true;
+                vm.message = "Select a form to view corresponding fields";
+            }
+
             FieldService.getFieldsForForm(formId)
                 .then(function(response) {
                     var fields = response.data;
@@ -89,6 +95,7 @@
 
                        $scope.field.options="";
                        for(var u in field.options) {
+
                            $scope.field.options += (field.options[u].label+":"+field.options[u].value);
                            $scope.field.options += "\n";
                        }
@@ -108,19 +115,22 @@
                     };
 
                     $scope.updateField = function(newField) {
-                        vm.track = 0;
-                        if(newField) {
-                            FieldService.updateField(formId,field._id,newField)
-                                .then(function(response){
-                                    vm.fields = response.data;
-                                    vm.selectedField = null;
-                                });
+
+
+                            vm.track = 0;
+                            if (newField) {
+                                FieldService.updateField(formId, field._id, newField)
+                                    .then(function (response) {
+                                        vm.fields = response.data;
+                                        vm.selectedField = null;
+                                    });
+                            }
+                            else {
+                                vm.message = "Select a field to update";
+                                vm.selectedField = null;
+                            }
                         }
-                        else {
-                            vm.message = "Select a field to update";
-                            vm.selectedField = null;
-                        }
-                    }
+
                 },
                 resolve: {
                     field: function () {

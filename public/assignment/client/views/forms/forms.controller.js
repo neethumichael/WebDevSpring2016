@@ -43,7 +43,8 @@
             }
             else {
               //  vm.selectedForm = null;
-                if (vm.selectedForm ==null) {
+                console.log("vm.selectedFomr "+vm.selectedForm);
+                if (vm.track !== 1) {
                     UserService.getCurrentUser()
                         .then(function (response) {
                             FormService.createFormForUser(response.data._id, form)
@@ -63,6 +64,7 @@
                     vm.currentForms = findAllForms();
                     vm.selectedForm = null;
             });
+            vm.selectedForm = null;
         }
 
         function selectForm(index) {
@@ -90,6 +92,7 @@
                 vm.selectedForm = null;
             }
             }
+            vm.selectedForm = null;
         }
 
         function findAllForms() {
