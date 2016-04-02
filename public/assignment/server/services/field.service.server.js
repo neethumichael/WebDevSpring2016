@@ -17,8 +17,8 @@ module.exports = function(app, formModel, userModel, fieldModel) {
         var newIndex = req.params.newIndex;
         fieldModel.updateOrder(formId,startIndex,newIndex)
             .then(function (doc) {
-                res.json(doc.fields);
-            },
+                    res.json(doc.fields);
+                },
                 function (err) {
                     res.status(400).send(err);
                 });
@@ -28,19 +28,29 @@ module.exports = function(app, formModel, userModel, fieldModel) {
         var formId = req.params.formId;
         var newField = req.body;
         fieldModel.createFieldForForm(formId,newField)
-            .then(
-                function (doc) {
+            .then(function (doc) {
                     res.json(doc.fields);
                 },
                 function (err) {
                     res.status(400).send(err);
-                }
-            );
+                });
     }
 
     function getFieldsForForm(req,res) {
         var formId = req.params.formId;
         fieldModel.getFieldsForForm(formId)
+            .then(function (doc) {
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                });
+    }
+
+    function getFieldForForm(req,res) {
+        var formId = req.params.formId;
+        var fieldId = req.params.fieldId;
+        fieldModel.getFieldForForm(formId,fieldId)
             .then(
                 function (doc) {
                     res.json(doc);
@@ -49,20 +59,6 @@ module.exports = function(app, formModel, userModel, fieldModel) {
                     res.status(400).send(err);
                 }
             );
-    }
-
-    function getFieldForForm(req,res) {
-        var formId = req.params.formId;
-        var fieldId = req.params.fieldId;
-        fieldModel.getFieldForForm(formId,fieldId)
-            .then(
-            function (doc) {
-                res.json(doc);
-            },
-            function (err) {
-                res.status(400).send(err);
-            }
-        );
     }
 
     function deleteFieldFromForm(req,res) {

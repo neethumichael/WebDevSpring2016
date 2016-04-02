@@ -99,7 +99,8 @@ module.exports = function(formModel) {
                         updatedField.type == "RADIOS" ) {
 
                         if(updatedField.options) {
-
+                            var temp_option = field.options;
+                            field.options=[];
 
                             var temp1 = updatedField.options.split("\n");
 
@@ -107,14 +108,14 @@ module.exports = function(formModel) {
                                 var temp = temp1[v].split(":");
 
 
-                               /* if (field.options[v]) {
-                                    if (temp[0] && temp[1]) {
-                                        field.options[v].label = temp[0];
-                                        field.options[v].value = temp[1];
-                                    }
-                                }
-                               else */
-                               {
+                                /* if (field.options[v]) {
+                                 if (temp[0] && temp[1]) {
+                                 field.options[v].label = temp[0];
+                                 field.options[v].value = temp[1];
+                                 }
+                                 }
+                                 else */
+                                {
 
                                     if (temp[0] && temp[1]) {
                                         field.options.push({
@@ -122,16 +123,14 @@ module.exports = function(formModel) {
                                             value: temp[1]
                                         });
                                     }
-                                   else if (temp[0] || temp[1]) {
+                                    else if (temp[0] || temp[1]) {
                                         field.options.push(temp_option[v]);
                                     }
                                 }
-
-
                             }
                         }
                         else {
-
+                            return form;
                         }
 
                         return form.save();
