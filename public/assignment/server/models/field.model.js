@@ -127,8 +127,6 @@ module.exports = function(formModel) {
                                         field.options.push(temp_option[v]);
                                     }
                                 }
-
-
                             }
                         }
                      else {
