@@ -59,7 +59,8 @@ vm.setStatus = false;
             else if(selectedField.type == "DATE") {
                 textUrl = 'views/forms/editModal/date.email.edit.view.html';
             }
-            else if(selectedField.type == "OPTIONS" || selectedField.type == "CHECKBOXES" || selectedField.type == "RADIOS" ) {
+            else if(selectedField.type == "OPTIONS" || selectedField.type == "CHECKBOXES"
+                || selectedField.type == "RADIOS" ) {
                 textUrl = 'views/forms/editModal/options.edit.view.html';
             }
             else {
@@ -70,8 +71,11 @@ vm.setStatus = false;
             var updateField = $uibModal.open ({
                 templateUrl: textUrl,
                 controller: function($uibModalInstance, field, $scope) {
-                   if(selectedField.type == "TEXT" || selectedField.type == "TEXTAREA" || selectedField.type == "PASSWORD"
-                    || selectedField.type == "EMAIL"){
+                   if(selectedField.type == "TEXT"
+                       || selectedField.type == "TEXTAREA"
+                       || selectedField.type == "PASSWORD"
+                       || selectedField.type == "EMAIL"){
+
                        $scope.field = {
                            _id: field._id,
                            label: field.label,
@@ -86,7 +90,9 @@ vm.setStatus = false;
                            type: field.type
                        };
                    }
-                   else if(selectedField.type == "OPTIONS" || selectedField.type == "CHECKBOXES" || selectedField.type == "RADIOS" ) {
+                   else if(selectedField.type == "OPTIONS"
+                       || selectedField.type == "CHECKBOXES"
+                       || selectedField.type == "RADIOS" ) {
                        $scope.field = {
                            _id: field._id,
                            label: field.label,
@@ -95,13 +101,11 @@ vm.setStatus = false;
 
                        $scope.field.options="";
                        for(var u in field.options) {
-
                            $scope.field.options += (field.options[u].label+":"+field.options[u].value);
                            $scope.field.options += "\n";
                        }
                     }
                    else {
-                       console.log("invalid option");
                        return;
                    }
 
@@ -115,7 +119,6 @@ vm.setStatus = false;
                     };
 
                     $scope.updateField = function(newField) {
-
 
                             vm.track = 0;
                             if (newField) {
@@ -151,16 +154,23 @@ vm.setStatus = false;
                 field = {"label": "New Text Field", "type": "TEXT", "placeholder": "New Field"};
             }
             else if(fieldType == "Password Field") {
-                field = {"label": "New Password Field", "type": "PASSWORD", "placeholder": "New Field"};
+                field = {"label": "New Password Field",
+                    "type": "PASSWORD",
+                    "placeholder": "New Field"};
             }
             else if(fieldType == "Email Field") {
-                field = {"label": "New Email Field", "type": "EMAIL", "placeholder": "xyz@domain.com"};
+                field = {"label": "New Email Field",
+                    "type": "EMAIL",
+                    "placeholder": "xyz@domain.com"};
             }
             else if (fieldType == "Multi Line Text Field" ) {
-                field =  {"label": "New Text Field", "type": "TEXTAREA", "placeholder": "New Field"}
+                field =  {"label": "New Text Field",
+                    "type": "TEXTAREA",
+                    "placeholder": "New Field"}
             }
             else if (fieldType == "Date Field" ) {
-                field = {"label": "New Date Field", "type": "DATE"};
+                field = {"label": "New Date Field",
+                    "type": "DATE"};
             }
             else if (fieldType == "Dropdown Field" ) {
                 field = {"label": "New Dropdown", "type": "OPTIONS", "options": [

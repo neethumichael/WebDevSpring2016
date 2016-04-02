@@ -9,8 +9,7 @@
 
     function FieldService($http) {
 
-        var field_model =
-        {
+        var field_model = {
             createFieldForForm : createFieldForForm,
             getFieldsForForm: getFieldsForForm,
             getFieldForForm: getFieldForForm,
@@ -20,27 +19,27 @@
         };
         return field_model;
 
-        function updateOrder(formId,startIndex,newIndex) {
-            return $http.put("/api/assignment/form/"+formId+"/field/start/"+startIndex+"/end/"+newIndex);
+        function updateOrder(formId, startIndex, newIndex) {
+            return $http.put("/api/assignment/form/" + formId + "/field/start/" + startIndex + "/end/" + newIndex);
         }
         function createFieldForForm(formId, field) {
-            return $http.post("/api/assignment/form/"+formId+"/field",field);
+            return $http.post("/api/assignment/form/" + formId + "/field", field);
         }
 
         function getFieldsForForm(formId) {
-            return $http.get("/api/assignment/form/"+formId+"/field");
+            return $http.get("/api/assignment/form/" + formId + "/field");
         }
 
         function getFieldForForm(formId, fieldId) {
-            return $http.get("/api/assignment/form/"+formId+"/field/"+fieldId);
+            return $http.get("/api/assignment/form/" + formId + "/field/" + fieldId);
         }
 
         function deleteFieldFromForm(formId, fieldId) {
-            return $http.delete("/api/assignment/form/"+formId+"/field/"+fieldId);
+            return $http.delete("/api/assignment/form/" + formId + "/field/" + fieldId);
         }
 
         function updateField(formId, fieldId, field) {
-            return $http.put("/api/assignment/form/"+formId+"/field/"+fieldId,field);
+            return $http.put("/api/assignment/form/" + formId + "/field/" +fieldId, field);
         }
     }
 }());

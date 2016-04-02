@@ -1,7 +1,7 @@
 /**
  * Created by neethu on 2/20/2016.
  */
-(function(){
+(function () {
     'use strict';
     angular
         .module("FormBuilderApp")
@@ -25,12 +25,12 @@
         return model;
 
         function findUserByUsername(username) {
-            return $http.get("/api/assignment/user?username="+username);
+            return $http.get("/api/assignment/user?username=" + username);
         }
         function findUserByCredentials(credentials) {
             var userName = credentials.username;
             var passWord = credentials.password;
-            return $http.get("/api/assignment/user?username="+userName+"&password="+passWord);
+            return $http.get("/api/assignment/user?username=" + userName + "&password=" + passWord);
         }
 
         function findAllUsers() {
@@ -38,15 +38,15 @@
         }
 
         function createUser(user) {
-            return $http.post("/api/assignment/user",user);
+            return $http.post("/api/assignment/user" , user);
         }
 
         function deleteUserById(userId) {
-            return $http.delete("/api/assignment/user/"+userId);
+            return $http.delete("/api/assignment/user/" + userId);
         }
 
         function updateUser(userId, user) {
-            return $http.put("/api/assignment/user/"+userId,user);
+            return $http.put("/api/assignment/user/" + userId, user);
         }
 
         function getCurrentUser() {

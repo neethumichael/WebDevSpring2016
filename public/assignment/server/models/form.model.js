@@ -65,17 +65,15 @@ module.exports = function(db, mongoose) {
         };
 
     var deferred = q.defer();
-    FormModel.create(newForm, function (err,doc) {
-        console.log(doc);
-        if(err) {
-            deferred.reject(err);
-        } else {
-            deferred.resolve(doc);
-        }
-
-    });
-    return deferred.promise;
-}
+        FormModel.create(newForm, function (err,doc) {
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
+            }
+        });
+        return deferred.promise;
+    }
 
     function FindAll(userId) {
         var deferred = q.defer ();
@@ -108,7 +106,6 @@ module.exports = function(db, mongoose) {
                 {$set: Form},
                 function (err, doc) {
                     if (!err) {
-
                         deferred.resolve(doc);
                     } else {
                         deferred.reject(err);

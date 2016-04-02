@@ -89,41 +89,39 @@ module.exports = function (db, mongoose) {
         return deferred.promise;
     }
 
-function FindById(userId) {
-    var deferred = q.defer();
-    UserModel.findById(userId, function(err,doc) {
-        if (err) {
-            deferred.reject(err);
-        } else {
-            deferred.resolve(doc);
-        }
-    });
-    return deferred.promise;
-}
-
-function Create(user) {
-    var deferred = q.defer();
-    UserModel.create(user, function (err,doc) {
-        console.log(doc);
-        if(err) {
-            deferred.reject(err);
-        } else {
-            deferred.resolve(doc);
-        }
-    });
-    return deferred.promise;
-}
-
-function findUserByCredentials(credentials) {
-    var deferred = q.defer();
-    UserModel.findOne(credentials, function(err, doc) {
-        if(err) {
-            deferred.reject(err);
-        } else {
-            deferred.resolve(doc);
-        }
+    function FindById(userId) {
+        var deferred = q.defer();
+        UserModel.findById(userId, function(err,doc) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
+            }
+        });
+        return deferred.promise;
     }
-    );
-    return deferred.promise;
-}
+
+    function Create(user) {
+        var deferred = q.defer();
+        UserModel.create(user, function (err,doc) {
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
+            }
+        });
+        return deferred.promise;
+    }
+
+    function findUserByCredentials(credentials) {
+        var deferred = q.defer();
+        UserModel.findOne(credentials, function(err, doc) {
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
+            }
+        });
+        return deferred.promise;
+    }
 }

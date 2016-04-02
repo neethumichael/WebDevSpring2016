@@ -9,8 +9,7 @@
 
     function FormService() {
 
-        var form_model =
-                {
+        var form_model = {
             forms: [
                 {"_id": "000", "title": "Contacts", "userId": 123},
                 {"_id": "010", "title": "ToDo", "userId": 123},

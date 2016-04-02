@@ -16,41 +16,35 @@ module.exports = function(app, formModel, userModel, fieldModel) {
         var startIndex = req.params.startIndex;
         var newIndex = req.params.newIndex;
         fieldModel.updateOrder(formId,startIndex,newIndex)
-            .then(
-                function (doc) {
-                    res.json(doc.fields);
-                },
+            .then(function (doc) {
+                res.json(doc.fields);
+            },
                 function (err) {
                     res.status(400).send(err);
-                }
-            );
+                });
     }
 
     function createFieldForForm(req,res) {
         var formId = req.params.formId;
         var newField = req.body;
         fieldModel.createFieldForForm(formId,newField)
-            .then(
-                function (doc) {
-                    res.json(doc.fields);
-                },
+            .then(function (doc) {
+                res.json(doc.fields);
+            },
                 function (err) {
                     res.status(400).send(err);
-                }
-            );
+                });
     }
 
     function getFieldsForForm(req,res) {
         var formId = req.params.formId;
         fieldModel.getFieldsForForm(formId)
-            .then(
-                function (doc) {
-                    res.json(doc);
-                },
+            .then(function (doc) {
+                res.json(doc);
+            },
                 function (err) {
                     res.status(400).send(err);
-                }
-            );
+                });
     }
 
     function getFieldForForm(req,res) {

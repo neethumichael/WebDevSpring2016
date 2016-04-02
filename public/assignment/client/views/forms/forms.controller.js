@@ -28,9 +28,9 @@
         init();
 
         function clickForm(index) {
-            vm.templateUrl = "/form/"+vm.currentForms[index]._id+"/fields";
-            vm.clickedForm =
-            {_id: vm.currentForms[index]._id,
+            vm.templateUrl = "/form/" + vm.currentForms[index]._id + "/fields";
+            vm.clickedForm = {
+                _id: vm.currentForms[index]._id,
                 title: vm.currentForms[index].title,
                 userId: vm.currentForms[index].userId
             };
@@ -42,11 +42,9 @@
                 vm.message = "Enter a valid form name";
             }
             else {
-              //  vm.selectedForm = null;
-                console.log("vm.selectedFomr "+vm.selectedForm);
                 if (vm.track !== 1) {
                     UserService.getCurrentUser()
-                        .then(function (response) {
+                        .then(function(response) {
                             FormService.createFormForUser(response.data._id, form)
                                 .then(function (response) {
                                     vm.selectedForm = null;
@@ -69,12 +67,12 @@
 
         function selectForm(index) {
             vm.track = 1;
-            vm.selectedForm =
-                {_id: vm.currentForms[index]._id,
-                    title: vm.currentForms[index].title,
-                    userId: vm.currentForms[index].userId
-                };
-            vm.templateUrl1 = "/form/"+vm.selectedForm._Id+"/fields";
+            vm.selectedForm = {
+                _id: vm.currentForms[index]._id,
+                title: vm.currentForms[index].title,
+                userId: vm.currentForms[index].userId
+            };
+            vm.templateUrl1 = "/form/" + vm.selectedForm._Id + "/fields";
         }
 
         function updateForm(newform) {
@@ -82,7 +80,7 @@
             if(vm.selectedForm) {
             if(newform) {
                 FormService.updateFormById(vm.selectedForm._id,newform)
-                    .then(function(response){
+                    .then(function(response) {
                         vm.selectedForm = null;
                         vm.currentForms = findAllForms();
                 });
@@ -99,14 +97,12 @@
             var cur_form =null;
             var user;
              UserService.getCurrentUser()
-                 .then ( function(response) {
+                 .then (function(response) {
                      user = response.data;
-                     FormService.findAllFormsForUser(
-                         user._id)
-                         .then(
-                             function(response){
-                                 vm.currentForms =response.data;
-                             });
+                     FormService.findAllFormsForUser(user._id)
+                         .then(function(response) {
+                             vm.currentForms = response.data;
+                         });
                  });
             return vm.currentForms;
         }

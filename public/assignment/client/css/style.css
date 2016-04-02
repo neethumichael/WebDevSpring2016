@@ -12,13 +12,11 @@
     color: #555555;
 }
 
-.table-row
-{
+.table-row {
     width: 71.7%;
 }
 
-.myDiv
-{
+.myDiv {
     padding:0 18px;
 
 }
@@ -33,9 +31,6 @@
     width: 30%; /* respsonsive width */
     margin-left: 35%;
     margin-top: 5%;
-   /* width/2) */
-
-
 }
 
 

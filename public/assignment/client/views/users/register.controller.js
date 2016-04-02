@@ -45,6 +45,7 @@
                 vm.message = "Passwords must match";
                 return;
             }
+
             UserService.findUserByUsername(user.username).then(
             function(response) {
                 if (response.data!= null || (typeof response.data) == "undefined") {
@@ -61,14 +62,11 @@
                         function (error) {
                             vm.message = error;
                         };
-
                 }
             }),
                 function (error) {
                     vm.message = error;
                 };
-
-
         }
     }
 }());

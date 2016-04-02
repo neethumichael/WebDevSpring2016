@@ -21,8 +21,7 @@
 
             if(typeof user_cred!== "undefined") {
                 UserService.findUserByCredentials(user_cred)
-                    .then(function(response)
-                    {
+                    .then(function(response) {
                         var user = response.data;
                         if(response.data) {
                             $rootScope.currentUser = user;
@@ -33,7 +32,7 @@
                             vm.message = "Invalid credentials";
                         }
                     });
-                    }
+            }
             else {
                vm.message = "Username/password field is empty";
             }
