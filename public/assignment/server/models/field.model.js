@@ -52,6 +52,7 @@ module.exports = function(formModel) {
                     return err;
                 }
             );
+
     }
 
     function getFieldForForm(formId,fieldId) {
@@ -83,10 +84,8 @@ module.exports = function(formModel) {
                 function(form){
                     var field   = form.fields.id(updatedField._id);
                     field.label = updatedField.label;
-                    if(updatedField.type == "TEXT"
-                        || updatedField.type == "TEXTAREA"
-                        || updatedField.type == "EMAIL"
-                        || updatedField.type == "PASSWORD") {
+                    if(updatedField.type == "TEXT" || updatedField.type == "TEXTAREA"
+                        || updatedField.type == "EMAIL" || updatedField.type == "PASSWORD") {
 
                         field.placeholder = updatedField.placeholder;
                         return form.save();
@@ -100,13 +99,23 @@ module.exports = function(formModel) {
                         updatedField.type == "RADIOS" ) {
 
                         if(updatedField.options) {
-                            var temp_option = field.options;
-                            field.options=[];
+
 
                             var temp1 = updatedField.options.split("\n");
 
                             for (var v in temp1) {
                                 var temp = temp1[v].split(":");
+
+
+                               /* if (field.options[v]) {
+                                    if (temp[0] && temp[1]) {
+                                        field.options[v].label = temp[0];
+                                        field.options[v].value = temp[1];
+                                    }
+                                }
+                               else */
+                               {
+
                                     if (temp[0] && temp[1]) {
                                         field.options.push({
                                             label: temp[0],
@@ -116,14 +125,18 @@ module.exports = function(formModel) {
                                    else if (temp[0] || temp[1]) {
                                         field.options.push(temp_option[v]);
                                     }
+                                }
+
+
                             }
                         }
                         else {
-                            return form;
+
                         }
 
                         return form.save();
                     }
-                });
+                }
+            );
     }
 }
