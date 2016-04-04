@@ -1,8 +1,8 @@
 [
-{"id": 567, "title": "TWC","commits":null, "description": "Web development", "status": "Closed", "userId": 123,
+{"id": 567, "title": "TWC", "description": "Web development", "status": "Closed", "userId": 123,
 "projectTasks":
-[{"id": 567, "title": "xyz","commits":null, "description": "lorem ispusm", "status": "Open", "project_id": "09", "assigned_to": "alice", "priority":"high"}
-,{"id": 987, "title": "abc","commits":null, "description": "lorem ispusm hg ygsh", "status": "Closed", "project_id": "08", "assigned_to": "bob", "priority": "low"}]
+[{"id": 567, "title": "xyz", "description": "lorem ispusm", "status": "Open", "project_id": "09", "assigned_to": "alice", "priority":"high"}
+,{"id": 987, "title": "abc", "description": "lorem ispusm hg ygsh", "status": "Closed", "project_id": "08", "assigned_to": "bob", "priority": "low"}]
 },
-{"id": 987, "title": "Shell","commits":null,"userId": 123, "description": "ETL", "status": "Open", "project_id": "08", "projectTasks": [{"id": 567, "title": "xyz", "description": "lorem ispusm", "status": "Open", "project_id": "09", "assigned_to": "alice", "priority":"high"}]}
+{"id": 987, "title": "Shell","userId": 123, "description": "ETL", "status": "Open", "project_id": "08", "projectTasks": [{"id": 567, "title": "xyz", "description": "lorem ispusm", "status": "Open", "project_id": "09", "assigned_to": "alice", "priority":"high"}]}
 ]

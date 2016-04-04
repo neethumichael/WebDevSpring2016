@@ -21,8 +21,7 @@
         <tbody>
         <tr ng-repeat="project in model.projects">
             <td>{{project.title}}</td>
-            <td>{{project.commitMessage}}</td>
-            <td>{{project.committer}}</td>
+            <td>{{project.description}}</td>
             <td>
                 <button ng-click="model.removeProject($index)" class="btn btn-danger">Remove</button>
                 <button ng-click="model.selectProject($index)" class="btn btn-info">Select</button>

@@ -7,75 +7,25 @@
                 .module("ProjectTrackerApp")
                 .controller("ProjectController", ProjectController);
 
-            function ProjectController($rootScope,UserService, ProjectService,$location, $http, $timeout)
+            function ProjectController($rootScope,UserService, ProjectService,$location)
             {
                 var vm = this;
-vm.profile = false;
+
         vm.message = null;
-                vm.project = false;
-                var REP_URL = "https://api.github.com/repositories/";
-                var USER_URL = "https://api.github.com/users/";
+                vm.project = null;
         function init() {
 
            vm.projects = findAllProjects();
         }
-        init()
+        init();
 
-vm.gUsername;
-var commits;
        vm.addProject = addProject;
        vm.removeProject = removeProject;
         vm.selectProject = selectProject;
        vm.updateProject = updateProject;
                 vm.findAllProjects = findAllProjects;
-                vm.getGitInfo = getGitInfo;
         vm.cancel = cancel;
        // var test_proj =   {id: 567, title: "TWC", description: "Web development", status: "Closed", projectTasks: ["abc"],  startDate:new Date(2013, 3,3), endDate: new Date(2015, 3,3)};
-
-                function getGitInfo(username) {
-                    if (username === undefined) {
-                        vm.message = "Enter a valid username";
-                        return;
-                    }
-vm.gUsername = username;
-                    var CURRENT_USER_URL = USER_URL+username;
-                    $http.get(CURRENT_USER_URL)
-                        .success(getUserDetails)
-                        .error(function () {
-                            vm.userNotFound = true;
-                        });
-                }
-
-                function getUserDetails(data) {
-                    vm.user = data;
-                    vm.loaded = true;
-console.log("inside getUserDetails"+vm.gUsername);
-                    $http.get(USER_URL+ vm.gUsername + "/repos")
-                        .success(renderRepositories);
-                }
-
-                function renderRepositories(response) {
-                    vm.repos = response;
-                    vm.reposFound = response.length;
-                }
-
-
-                function searchRepository(Repository) {
-                    console.log("Fds "+Repository);
-                    console.log("fhsdj "+REP_URL+Repository.id);
-
-
-                        return $http.get(REP_URL + Repository.id + "/commits").success(getSelectedRepCommitDetails);
-
-                }
-
-                function getSelectedRepCommitDetails(data) {
-
-                    commits = data;
-                    console.log("commits "+commits);
-                    return commits;
-                }
-
 
                 function findAllProjects() {
                     var cur_proj =null;
@@ -102,56 +52,18 @@ console.log("inside getUserDetails"+vm.gUsername);
                 });
         }
 
-        function addProject(project) {
-vm.profile = false;
-            searchRepository(project.repos).then(function (Result)
-            {
-                vm.commits = commits;
-                console.log("vm.commits" + commits);
-               var count =0;
-
-                    for (var u in commits) {
-                        count++;
-                    }
-var test= "finish";
-                vm.size = count;
-            if (count > 0) {
-
-                for(var u in commits) {
-                    var s = commits[u].commit.message;
-                    console.log("s= "+s);
-                        if (s.indexOf(test)> -1) {
-                            project.status = "Completed";
-                        }
-                        break;
-
-                }
-                if(!project.status)
-                project.status = "Started";
-
-            }
-            else if (count <= 0) {
-                project.status = "Not Started";
-            }
-                project.commits = commits;
-                project.commitMessage = commits[count-1].commit.message;
-                console.log("tes message"+project.commitMessage);
-                project.committer = commits[count-1].commit.committer.name;
-                console.log("test status"+project.status);
-                UserService.getCurrentUser()
-                    .then ( function(response) {
-                        user = response.data;
-                        console.log("controller "+user._id);
-                        ProjectService.addProject(project,user._id)
-                            .then(function (reponse) {
-                                vm.project = null;
-                                $location.url('/renderProjects');
-                            });
-                    });
-
-        });
-
-
+        function addProject(project)
+        {
+            UserService.getCurrentUser()
+                .then ( function(response) {
+                    user = response.data;
+                    console.log("controller "+user._id);
+                    ProjectService.addProject(project,user._id)
+                        .then(function (reponse) {
+                            vm.project = null;
+                            $location.url('/renderProjects');
+                        });
+                });
 
         }
 
@@ -167,7 +79,6 @@ var test= "finish";
         }
         function selectProject(index)
         {
-            vm.profile = true;
             var project =
              ProjectService.selectProject(index)
                 .then(function (response) {
