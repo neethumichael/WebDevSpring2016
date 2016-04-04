@@ -29,6 +29,7 @@
                             $location.url("/profile");
                         }
                         else {
+                            vm.error = err;
                             vm.message = "Invalid credentials";
                         }
                     });
