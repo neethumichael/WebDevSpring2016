@@ -1,7 +1,4 @@
 /**
- * Created by neethu on 3/17/2016.
- */
-/**
  * Created by neethu on 2/20/2016.
  */
 (function(){
@@ -17,38 +14,27 @@
             })
             .when("/profile", {
                 templateUrl: "views/users/profile.view.html",
-                controller: "ProfileController",
-                controllerAs: "model"
+                controller: "ProfileController"
             })
             .when("/admin", {
                 templateUrl: "views/admin/admin.view.html",
-                controller: "AdminController",
-                controllerAs: "model"
+                controller: "AdminController"
             })
             .when("/register", {
                 templateUrl: "views/users/register.view.html",
-                controller: "RegisterController",
-                controllerAs: "model"
+                controller: "RegisterController"
             })
             .when("/login", {
                 templateUrl: "views/users/login.view.html",
-                controller: "LoginController",
-                controllerAs: "model"
+                controller: "LoginController"
             })
             .when("/forms", {
                 templateUrl: "views/forms/forms.view.html",
-                controller: "FormController",
-                controllerAs: "model"
+                controller: "FormController"
             })
             .when("/fields", {
                 templateUrl: "views/forms/fields.view.html",
-                controller: "FieldController",
-                controllerAs: "model"
-            })
-            .when("/form/:formId/fields", {
-                templateUrl: "views/forms/fields.view.html",
-                controller: "FieldController",
-                controllerAs: "model"
+                controller: "FieldController"
             })
             .when("/", {
                 templateUrl:"views/home/home.view.html"
@@ -58,4 +44,3 @@
             });
     }
 })();
-

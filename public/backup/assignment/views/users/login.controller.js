@@ -7,34 +7,27 @@
         .module("FormBuilderApp")
         .controller("LoginController", LoginController);
 
-    function LoginController($location, UserService, $rootScope) {
-        var vm = this;
-
-        vm.login = login;
-        vm.message = null;
-
-        function init() {
-        }
-        init();
+    function LoginController($scope, $location, UserService, $rootScope) {
+        $scope.login = login;
+        $scope.message = null;
 
         function login(user_cred) {
 
             if(typeof user_cred!== "undefined") {
-                UserService.findUserByCredentials(user_cred)
-                    .then(function(response) {
-                        var user = response.data;
-                        if(response.data) {
+                var user = UserService.findUserByCredentials(user_cred.username, user_cred.password,
+                    function(user) {
+                        if(user) {
                             $rootScope.currentUser = user;
                             UserService.setCurrentUser(user);
                             $location.url("/profile");
                         }
                         else {
-                            vm.message = "Invalid credentials";
+                            $scope.message = "Invalid credentials";
                         }
                     });
             }
             else {
-                vm.message = "Username/password field is empty";
+                $scope.message = "Username/password field is empty";
             }
         }
     }

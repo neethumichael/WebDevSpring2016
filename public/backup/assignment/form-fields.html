@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="Assignment 1" content="Assignment 1">
+    <meta name="Neethu" content="Neethu">
+
+    <title>Welcome!</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="home.html">Form Maker</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Username</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a href="home.html">Home<span class="sr-only">(current)</span></a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="admin.html">Admin</a></li>
+                <li class="active"><a href="forms.html">Forms</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-8 col-sm-offset-3 col-md-9 col-md-offset-2 main table-responsive">
+            <h1 class="header">Forms : Registration Form</h1>
+            <ul class="nav nav-tabs">
+                <li><a href="forms.html">Forms</a></li>
+                <li class="active"><a href="form-fields.html">Fields</a></li>
+            </ul>
+            <table class="table table-fixed">
+
+                <tbody>
+                <tr>
+
+
+
+                    <form>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="FirstName">First Name:</label>
+
+                                    <br>
+                                    <input type="text" id="FirstName" class="form-control" placeholder="First Name"/>
+                                </div>
+
+
+
+                                <div class="col-sm-6">
+                                    <br>
+                                    <br>
+                                    <a><span class="glyphicon glyphicon-pencil" aria-hidden="true">  </span></a>
+                                    <a><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+                                    <a><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                                    <a><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="LastName" >Last Name:</label>
+
+                                    <br>
+                                    <input type="text" id="LastName" class= "form-control" placeholder="Last Name"/>
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <br>
+                                    <br>
+                                    <a><span class="glyphicon glyphicon-pencil" aria-hidden="true">  </span></a>
+                                    <a><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+                                    <a><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                                    <a><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="Date" >Date Of Birth:</label>
+                                    <br>
+                                    <input type="date" class="form-control" id="Date" placeholder="Select Date"/>
+                                </div>
+                                <div class="col-sm-6">
+                                    <br>
+                                    <br>
+                                    <a><span class="glyphicon glyphicon-pencil" aria-hidden="true">  </span></a>
+                                    <a><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+                                    <a><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                                    <a><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="gender">Gender:</label>
+
+                                    <br>
+                                    <select id="gender">
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <br>
+                                    <br>
+                                    <a><span class="glyphicon glyphicon-pencil" aria-hidden="true">  </span></a>
+                                    <a><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+                                    <a><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                                    <a><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>
+                                        Roles:</label>
+                                    <br>
+                                        <input  type="checkbox" name="roles" value="Admin" />Admin <br/>
+                                        <input  type="checkbox" name="roles" value="Student" />Student<br/>
+                                        <input  type="checkbox" name="roles" value="User" />User<br/>
+
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <br>
+                                    <br>
+                                    <a><span class="glyphicon glyphicon-pencil" aria-hidden="true">  </span></a>
+                                    <a><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+                                    <a><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                                    <a><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-6">
+
+                                    <label>
+                                        License Agreement:  </label>
+                                        <br>
+                                        <input type="radio" name="agreement" value="Yes" checked> Yes<br>
+                                        <input type="radio" name="agreement" value="No"> No<br>
+
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <br>
+                                    <br>
+                                    <a><span class="glyphicon glyphicon-pencil" aria-hidden="true">  </span></a>
+                                    <a><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+                                    <a><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                                    <a><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </form>
+
+
+
+                </tr>
+                <tr>
+                    <td>
+
+                        <form>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label for="newField">Add New Field:</label>
+
+                                        <br>
+                                        <select id="newField">
+                                            <option value="Single Line Text">Single Line Text</option>
+                                            <option value="Date">Date</option>
+                                            <option value="Dropdown">Dropdown</option>
+                                            <option value="Checkboxes">Checkboxes</option>
+                                            <option value="Radio buttons">Radio buttons</option>
+                                            <option value="Paragraph Text Field">Paragraph Text Field</option>
+
+                                        </select>
+
+                                    </div>
+
+
+
+                                    <div class="col-sm-6">
+                                        <br>
+                                        <div class="myDiv">
+                                        <a><span class="glyphicon glyphicon-plus" aria-hidden="true">  </span></a>
+                                        </div>
+                                        </div>
+
+                                </div>
+
+                            </div>
+
+
+
+
+                </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</body>
+</html>

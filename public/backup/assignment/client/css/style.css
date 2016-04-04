@@ -1,0 +1,36 @@
+.bg-1 {
+    background-color: #1abc9c; /* Green */
+    color: #ffffff;
+}
+
+.bg-2 {
+    background-color: #474e5d; /* Dark Blue */
+    color: #ffffff;
+}
+.bg-3 {
+    background-color: #ffffff; /* White */
+    color: #555555;
+}
+
+.table-row {
+    width: 71.7%;
+}
+
+.myDiv {
+    padding:0 18px;
+
+}
+
+.button {
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+}
+
+.modal {
+    width: 30%; /* respsonsive width */
+    margin-left: 35%;
+    margin-top: 5%;
+}
+
+
