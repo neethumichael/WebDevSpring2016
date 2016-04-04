@@ -13,7 +13,8 @@
         $rootScope.$on('$routeChangeSuccess', function(event, current) {
             // Look at $location.path()
             // If it isn't what you want, toggle showSideBar...
-            if($location.url() == '/dashboard')
+            if($location.url() == '/dashboard' || $location.url() == '/project' || $location.url() == '/profile'
+            || $location.url() == '/search')
             $rootScope.showSideBar = true;
             else
                 $rootScope.showSideBar = false;

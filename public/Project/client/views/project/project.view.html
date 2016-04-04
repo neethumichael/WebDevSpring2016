@@ -1,16 +1,4 @@
 <div ng-controller="ProjectController as model">
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-                <ul class="nav nav-sidebar"  >
-                    <li><a href="#/home">Home</a></li>
-                    <li><a href="#/user">Manage User</a></li>
-                    <li class="active"><a href="#/project">Projects</a></li>
-                </ul>
-        </div>
-        <div>
-    <div  class="col-sm-12 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <br>
     <h1>Projects</h1>
         <div class="col-sm-12 col-md-12 col-lg-12">
         <div class="panelPadding panel panel-primary">
@@ -35,20 +23,17 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="projectStatus" class="col-sm-3 control-label">
+            <label  class="col-sm-3 control-label">
                 Status</label>
             <div class="col-sm-9">
-                <select  ng-model="currentProject.status" class="form-control" id="projectStatus">
-                    <option class="form-control" value="Open">Open</option>
-                    <option class="form-control" value="Closed">Closed</option>
-                </select>
+                {{currentProject.status}}
             </div>
         </div>
         <div class="form-group">
             <label for="githubusername" class="col-sm-3 control-label">
                 Github username</label>
             <div class="col-sm-9">
-                <input  ng-model="currentProject.gusername" type="text" class="form-control" id="githubusername"  placeholder="Github username">
+                <input  ng-disabled="model.profile" ng-model="currentProject.gusername" ng-change ="model.getGitInfo(currentProject.gusername)" ng-model-options="{debounce:3000}" type="text" class="form-control" id="githubusername"  placeholder="Github username" required>
             </div>
         </div>
         <div class="form-group">
@@ -56,10 +41,9 @@
                 Github repository</label>
 
                 <div class="col-sm-9" id="githubrepository">
-                    <select ng-model="currentProject.grepository" class ="form-control">
-                        <option> Repository 1</option>
-                        <option> Repository 2</option>
-                        <option> Repository 3</option>
+
+                    {{model.profile}}
+                    <select ng-disabled="model.profile" id="option" ng-model ="currentProject.repos" class="form-control" ng-options="repo.name for repo in model.repos track by repo.name" required>
                     </select>
 
             </div>
@@ -96,5 +80,5 @@
         </panel>
         </div>
     </div>
-    </div>
+
 </div>
