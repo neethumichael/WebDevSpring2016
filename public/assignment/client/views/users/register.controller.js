@@ -49,10 +49,12 @@
             UserService.findUserByUsername(user.username).then(
             function(response) {
                 if (response.data!= null || (typeof response.data) == "undefined") {
+                    console.log("inside if");
                     vm.message = "User already exists";
                     return;
                 }
                 else {
+                    console.log("inside else");
                     UserService.createUser(user)
                         .then(function(response){
                             var currentUser = response.data;

@@ -26,6 +26,7 @@
                         var user = response.data;
                         if(response.data) {
                             $rootScope.currentUser = user;
+                            console.log("test"+$rootScope.currentUser);
                             UserService.setCurrentUser(user);
                             $location.url("/dashboard");
                         }

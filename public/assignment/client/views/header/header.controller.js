@@ -18,10 +18,13 @@
         function logout() {
             UserService
                 .logout()
-                .then(function(){
+                .then(function(response){
                     UserService.setCurrentUser(null);
                     $location.url("/home");
-                });
+                }),
+            function(err) {
+                vm.error = err;
+            }
         }
     }
 }());

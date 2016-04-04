@@ -28,11 +28,18 @@ mongoose.connect(connectionString, function(err, test) {
     }
 });
 
-app.use(express.cookieParser());
-app.use(express.session({secret: '1234567890QWERTY'}));
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
+
+app.use(session({secret: 'this is the secret',
+    resave: true,
+    saveUninitialized: true}));
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(__dirname + '/public'));
 require("./public/assignment/server/app.js")(app, db, mongoose);
 require("./public/Project/server/app.js")(app, db, mongoose);
