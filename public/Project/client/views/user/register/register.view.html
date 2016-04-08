@@ -1,0 +1,85 @@
+<div ng-controller='RegisterController as model'>
+<div class = "login-register">
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-pencil"></span>Register</div>
+            <div class="panel-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="inputUsername" class="col-sm-3 control-label">
+                            Username</label>
+                        <div class="col-sm-9">
+                            <input ng-model="model.user.username" type="text" class="form-control" id="inputUsername" placeholder="Username" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-3 control-label">
+                            Password</label>
+                        <div class="col-sm-9">
+                            <input ng-model="model.user.password" type="password" class="form-control" id="inputPassword3" placeholder="Password" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword2" class="col-sm-3 control-label">
+                            Verify Password</label>
+                        <div class="col-sm-9">
+                            <input ng-model="model.user.password2" type="password" class="form-control" id="inputPassword2" placeholder="Password" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputFirstname" class="col-sm-3 control-label">
+                            Firstname</label>
+                        <div class="col-sm-9">
+                            <input type="text" ng-model="model.user.firstName" class="form-control" id="inputFirstname" placeholder="Firstname" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputLastname" class="col-sm-3 control-label">
+                            Lastname</label>
+                        <div class="col-sm-9">
+                            <input type="text" ng-model="model.user.lastName" class="form-control" id="inputLastname" placeholder="Lastname" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">
+                            Email</label>
+                        <div class="col-sm-9">
+                            <input type="email" ng-model="model.user.email" class="form-control" id="inputEmail3" placeholder="Email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="role" class="col-sm-3 control-label">
+                            Role</label>
+                    <div class="col-sm-9">
+                    <select ng-model="model.user.roles" class="form-control" id="role">
+                        <option class="form-control" value="Project Manager">Project Manager</option>
+                        <option class="form-control" value="Team Lead">Team Lead</option>
+                        <option class="form-control" value="Team Member">Team Member</option>
+                    </select>
+                    </div>
+            </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <input type="checkbox"  ng-model = "model.terms" name="tandc" value="yes">
+                                I agree to Terms & Conditions</input>
+                        </div>
+                    </div>
+                    <div class="form-group last">
+                        <div class="col-sm-offset-2 col-sm-9">
+                            <button type="submit" ng-click="model.register(model.user,model.terms)" class="btn btn-success btn-sm btn-block">
+                                Register</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+    </div>
+
+
+</div>
+    </div>
+</div>
+</div>

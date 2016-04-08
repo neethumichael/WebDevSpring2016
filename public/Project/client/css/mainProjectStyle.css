@@ -1,6 +1,6 @@
 .navbar {
     margin-bottom: 0;
-    background-color: #006699;
+    background-color: darkcyan;
     z-index: 9999;
     border: 0;
     font-size: 12px !important;
@@ -8,21 +8,17 @@
     letter-spacing: 4px;
     border-radius: 0;
 }
-.jumbotron {
-    margin-bottom: 0px;!important
-}
-.navbar li a, .navbar .navbar-brand {
-    color: #fff !important;
-}
+
+.navbar-fixed-top { background-color: darkcyan; }
+
+.navbar li a, .navbar .navbar-brand { color: #fff !important; }
 
 .navbar-nav li a:hover, .navbar-nav li.active a {
-    color: #006699 !important;
+    color: darkcyan !important;
     background-color: #fff !important;
 }
 
-.homePanel {
-    height: 200px;
-}
+.homePanel { height: 200px; }
 
 .navbar-default .navbar-toggle {
     border-color: transparent;
@@ -34,38 +30,107 @@
     margin-top: 80px;
 }
 
-.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
-    position : static;
+.panel-primary>.panel-heading  {
+    background-color: darkcyan;
 }
+
+.panelPadding { padding: 25px; }
+
 .login-register {
     opacity: 0.8;
     filter: alpha(opacity=10);
-    background-image: url("../images/backgroundimage.png");
+    background-image: url("http://thenextweb.com/wp-content/blogs.dir/1/files/2014/05/laptop-on-work-desk.jpg");
     width: 100%;
     background-size: cover;
 }
 
+.btn {
+    background-color: darkcyan;
+}
+
+.btn:hover {
+    background-color: grey;
+    color: white;
+}
+
 .form-group.last { margin-bottom:0px; }
-.section1 {
-    opacity: 0.8;
+
+.mainPageSection1 {
     filter: alpha(opacity=10);
-    background-image: url("../images/backgroundimage.png");
+    background-image: url("https://aragonresearch.com/wp-content/uploads/2014/08/research-topics.jpg");
     width: 100%;
     height: 650px;
     background-size: cover;
     color: #ffffff;
 }
 
+.listSpace { margin-left: 3px; }
+
 .small-image {
-    border: 10px solid transparent;
+
+    border: 10px solid darkcyan;
     margin-bottom: 25px;
     width: 80%;
     height: 80%;
-    opacity: 0.7;
 }
-.small-image:hover {
-    border-color: #f1f1f1;
+.section2 {
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    color: #ffffff;
+    background-image: url("https://it.arvato.com/content/dam/arvato/images/industries-material/photos/arvato_Industrie_Insurance_530681661.jpg");
 }
+
+.section3 {
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    color: #ffffff;
+    background-image: url("http://images.nailsmag.com/post/M-na0512studyingLaptopLibrary-1.jpg");
+}
+
+.textRight {
+    float:right;
+    color: white;
+}
+
+.textBackground {
+    background-color: rgba(255,255,255,0.5);
+    font-size: 16pt;
+    font-family: FontAwesome;
+    border-radius: 25px
+}
+
+.textBackground:hover {
+    background-color: darkcyan;
+    color: white;
+
+}
+
+.textLeft {
+    color: white;
+}
+
+.footerClass {
+    background-color: darkcyan;
+    bottom: 0px;
+
+}
+
+.footer {
+    z-index:9999;
+    bottom: 0px;
+}
+
+.section4 {
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    color: #ffffff;
+    background-image: url("http://41.media.tumblr.com/02a2211f64fea1e6c117a77c769731ee/tumblr_nspmqjqBgv1ubwg5wo1_500.jpg");
+}
+ .small-image:hover { border-color: #f1f1f1; }
+
 .carousel-inner img {
     -webkit-filter: grayscale(20%);
     filter: grayscale(20%); /* make all photos black and white */
@@ -77,6 +142,7 @@
     padding: 0;
     object-fit: cover;
 }
+
 .carousel {
     padding-right: 0; /*15px in bootstrap.css*/
     padding-left: 0;  /*idem*/
@@ -87,9 +153,21 @@
     margin: auto;
 }
 
-.carousel-caption h3 {
-    color: #fff !important;
+.container {
+    padding-right: 0; /*15px in bootstrap.css*/
+    padding-left: 0;  /*idem*/
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+    height: 100%;
+    margin: auto;
 }
+
+.carousel-caption h3 {
+    color: white !important;
+}
+
+.mainText { color: darkcyan; }
 
 @media (max-width: 600px) {
     .carousel-caption {

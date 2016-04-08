@@ -2,54 +2,53 @@
 <html lang="en" ng-app="ProjectTrackerApp">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../../css/dashboard.css"/>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular-route.js"></script>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/dashboard.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" href="css/mainProjectStyle.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-sortable/0.13.4/sortable.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.4/ui-bootstrap-tpls.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.4/ui-bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.4/ui-bootstrap.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.4/ui-bootstrap-tpls.js"></script>
-    <script src = "js/script.js"></script>
-    <script src="../app.js"></script>
-    <script src="../config.js"></script>
-    <script src="services/user.service.client.js"></script>
-    <script src="views/header/header.controller.js"></script>
-    <script src="views/login/login.controller.js"></script>
-    <script src="views/sidebar/sidebar.controller.js"></script>
-    <script src="views/main.controller.js"></script>
-    <script src="views/register/register.controller.js"></script>
-    <script src="views/project/project.controller.js"></script>
-    <script src="services/project.client.service.js"></script>
-    <script src="views/profile/profile.controller.js"></script>
-    <script src="views/search/details.controller.js"></script>
-    <script src="views/search/searchRepository.controller.js"></script>
-
-    <title>Home Page</title>
+    <title>Project Tracker</title>
     <meta charset="utf-8">
 </head>
 <body ng-controller='mainController as model'>
 <div ng-include="'views/header/header.view.html'"></div>
-
-<!--<div ng-if ="showSideBar">-->
-    <div ng-if="showSideBar" class="container-fluid">
-        <div class="row">
-            <div class="col-sm-3 col-md-2 sidebar" ng-include="'views/sidebar/sidebar.view.html'"></div>
-            <div  ng-view class="col-sm-12  col-md-10 main"></div>
-        </div>
-        </div>
-    <!--</div>-->
-
-<div ng-if ="!showSideBar" class="nopadding">
-        <div ng-view></div>
+<div ng-if="showSideBar" class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar" ng-include="'views/sidebar/sidebar.view.html'"></div>
+        <div  ng-view class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"></div>
+    </div>
 </div>
+<div ng-if ="!showSideBar">
+    <div ng-view></div>
+</div>
+<div ng-include="'views/footer/footer.view.html'"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular-route.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-sortable/0.13.4/sortable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.4/ui-bootstrap-tpls.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.4/ui-bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.4/ui-bootstrap.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.4/ui-bootstrap-tpls.js"></script>
+<script src="../app.js"></script>
+<script src="../config.js"></script>
+<script src="main.controller.js"></script>
+<script src="views/home/home.controller.js"></script>
+<script src="services/user.service.client.js"></script>
+<script src="views/header/header.controller.js"></script>
+<script src="views/user/login/login.controller.js"></script>
+<script src="views/sidebar/sidebar.controller.js"></script>
+<script src="views/user/register/register.controller.js"></script>
+<script src="views/user/profile/profile.controller.js"></script>
+<!--<script src="views/project/project.controller.js"></script>
 
+<script src="services/project.client.service.js"></script>
+
+<script src="views/search/details.controller.js"></script>
+<script src="views/user/searchRepository.controller.js"></script>
+<script src="views/user/details.controller.js"></script>
+<script src="views/project/details.controller.js"></script> !-->
 </body>
 </html>

@@ -15,6 +15,11 @@
             .when("/contact", {
                 templateUrl: "views/ContactUs/contact.view.html"
             })
+            .when("/userGitProfile", {
+                templateUrl: "views/user/user.gitprofile.view.html",
+                controller: "SearchController",
+                controllerAs: "model"
+            })
             .when("/project", {
                 templateUrl: "views/project/project.view.html",
                 controller: "ProjectController",
@@ -25,10 +30,15 @@
 
         })
             .when("/login", {
-                templateUrl: "views/login/login.view.html",
+                templateUrl: "views/user/login/login.view.html",
                 controller: "LoginController",
                 controllerAs: "model"
             })
+            .when("/projectCommits", {
+                templateUrl: "views/project/project.commits.view.html",
+                controller: "DetailsController",
+                controllerAs: "model"
+        })
             .when("/", {
                 templateUrl:"views/home/home.view.html"
             })
@@ -36,10 +46,11 @@
                 templateUrl:"views/project/renderProjects.html"
         })
             .when("/home", {
-                templateUrl:"views/home/home.view.html"
+                templateUrl:"views/home/home.view.html",
+                controller: "HomeController"
             })
             .when("/profile", {
-                templateUrl: "views/profile/profile.view.html",
+                templateUrl: "views/user/profile/profile.view.html",
                 controller: "ProfileController",
                 controllerAs: "model"
             })
@@ -49,7 +60,7 @@
                 controllerAs: "model"
             })
             .when("/register", {
-                templateUrl: "views/register/register.view.html",
+                templateUrl: "views/user/register/register.view.html",
                 controller: "RegisterController",
                 controllerAs: "model"
             })

@@ -1,0 +1,21 @@
+<div data-ng-controller="ProjectController as model">
+    <h1>Projects</h1>
+    <ul class="nav nav-tabs">
+        <li><a href="#/project">Add Project</a></li>
+        <li><a href="#/renderProjects">View All Projects</a></li>
+    </ul>
+    <table class="table">
+        </thead>
+        <tbody>
+        <tr ng-repeat="project in model.projects">
+            <td>{{project.title}}</td>
+            <td ng-click = "model.gitprojectCommits($index)"><a href="#/projectCommits">{{project.commitMessage}}</a></td>
+            <td ng-click = "model.gitUserProfile($index)"><a href="#/userGitProfile">{{project.committer}}</a></td>
+            <td>
+                <button ng-click="model.removeProject($index)" class="btn btn-danger">Remove</button>
+                <button ng-click="model.selectProject($index)" class="btn btn-info">Select</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
