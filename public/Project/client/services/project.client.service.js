@@ -13,7 +13,6 @@
         var selectedProject = null;
         var model = {
             updateProject: updateProject,
-            selectProject: selectProject,
             deleteProject: deleteProject,
             addProject: addProject,
             getAllProjects: getAllProjects,
@@ -55,9 +54,6 @@
             return selectedProject;
         }
 
-        function selectProject(index) {
-            return $http.get("/api/projecttracker/project/selectProject/"+index);
-        }
 
         function findAllProjectsForUser(userId) {
             return $http.get("/api/assignment/project/"+userId+"/user");

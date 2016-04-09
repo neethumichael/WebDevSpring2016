@@ -57,6 +57,7 @@ module.exports = function(app, userModel) {
         var userId = req.params.id;
         var user = req.body;
 
+
         userModel.Update(user)
             .then(function (doc) {
                     req.session.currentUser = doc;

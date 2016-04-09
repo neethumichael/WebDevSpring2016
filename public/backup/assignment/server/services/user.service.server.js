@@ -137,18 +137,33 @@ module.exports = function(app, formModel, userModel) {
     function localStrategy(username, password, done) {
         console.log("username "+username);
         console.log("password "+password);
-
-        userModel.findUserByCredentials({username: username,password: password})
-            .then(
-                function(user) {
-                    console.log(user.username);
-                    if(!user) { return done(null,false);}
-                    return             done(null,user);
-                },
-                function(err) {
-                    if(err) { return done(err);}
-                }
-            );
+      if(username && password) {
+          userModel.findUserByCredentials({username: username, password: password})
+              .then(
+                  function (user) {
+                      console.log(user.username);
+                      if (!user) {
+                          return done(null, false);
+                      }
+                      return done(null, user);
+                  },
+                  function (err) {
+                      if (err) {
+                          return done(err);
+                      }
+                  }
+              );
+      }
+        else {
+          userModel.findUserByUsername(username)
+              .then(function (doc) {
+                      return done(null, user);
+                  },
+                  function (err) {
+                      return done(err);
+                  }
+              );
+      }
     }
 
     function serializeUser(user, done) {
@@ -175,7 +190,8 @@ module.exports = function(app, formModel, userModel) {
             res.json(user);
         }
         else if(req.query.username) {
-            return findUserByUsername(req.query.username,req,res);
+            var user = req.user;
+            res.json(user);
         }
         else {
             return findAll();

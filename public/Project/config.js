@@ -36,7 +36,7 @@
             })
             .when("/projectCommits", {
                 templateUrl: "views/project/project.commits.view.html",
-                controller: "DetailsController",
+                controller: "ProjectController",
                 controllerAs: "model"
         })
             .when("/", {

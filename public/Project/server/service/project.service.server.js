@@ -1,55 +1,74 @@
-module.exports = function(app, userModel, projectModel) {
+module.exports = function(app, projectModel) {
 
     app.post("/api/projecttracker/project/:userId", create);
-    app.get("/api/projecttracker/project",getAllProjects);
+    app.get("/api/projecttracker/project", findAllProjectsForUser);
     app.put("/api/projecttracker/project", Update);
     app.delete("/api/projecttracker/project/:id", Delete);
-    app.get("/api/projecttracker/project/selectProject/:index",selectProject);
-    app.get("/api/assignment/project/:userId/user",findAllProjectsForUser);
+    app.get("/api/assignment/project/:userId/user", findAllProjectsForUser);
 
-        function getAllProjects(req, res) {
-            var projects = projectModel.FindAll();
-            console.log("fdsf"+projects);
-            return res.json(projects);
-        }
+    function Delete(req, res) {
+        var id = req.params.id;
 
-        function Update(req,res) {
-           // var projectId = req.params.id;
-            var project = req.body;
-            project = projectModel.Update(project);
+        projectModel.Delete(id)
+            .then(
+                function (projects) {
+                    res.json(projects);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
 
-        res.json(project);
-        }
+    function Update(req, res) {
+        var project = req.body;
+        projectModel.findProjectByTitle(project.title)
+            .then(
+                function (projectOld) {
+                    projectModel.Update(projectOld._id,project)
+                        .then(
+                            function (project) {
+                                res.json(project);
+                            },
+                            function (err) {
+                                res.status(400).send(err);
+                            }
+                        );
+                },
+                function (err) {
+                    res.status(400).send(err);
+                });
+    }
 
-        function create(req, res) {
-            var userId = req.params.userId;
-            var project = req.body;
-            project = projectModel.Create(project,userId);
-            res.json(project);
-        }
-
-    function selectProject(req,res) {
-        var index = req.params.index;
-        var project = projectModel.selectProject(index);
-
-
-            res.json(project);
-        }
-
-    function findAllProjectsForUser(req,res) {
+    function findAllProjectsForUser(req, res) {
         var userId = req.params.userId;
-        console.log("server service "+userId);
-        var projects =  projectModel.FindAll(userId);
-        res.json(projects);
+        projectModel.FindAll(userId)
+            .then(
+                function (projects) {
+                    res.json(projects);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
-        function Delete(req,res) {
-            var id = req.params.id;
-            console.log("delete "+id);
-            var projects = projectModel.Delete(id);
-            res.json(projects);
-        }
+
+    function create(req, res) {
+        var userId = req.params.userId;
+        var project = req.body;
+        projectModel.Create(userId, project)
+            .then(
+                function (project) {
+                    res.json(project);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
     }
+
+};
 
 
 

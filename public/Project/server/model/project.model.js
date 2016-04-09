@@ -1,93 +1,120 @@
 /**
  * Created by neethu on 3/17/2016.
  */
-var mock = require("./project.mock.json");
-module.exports = function () {
+var q = require("q");
+var mongoose = require("mongoose");
+module.exports = function (db, mongoose) {
+
+    var ProjectSchema = require("./project.schema.js")(mongoose);
+    var ProjectModel = mongoose.model('ProjectData', ProjectSchema, 'ProjectData');
     var api = {
         Create: Create,
         FindAll: FindAll,
         FindById: FindById,
         Update: Update,
         Delete: Delete,
-        getIndex: getIndex,
-        selectProject: selectProject
+        findProjectByTitle: findProjectByTitle
     };
     return api;
 
     function Delete(id) {
-        console.log("input "+id);
-        for (var u in mock) {
-            console.log("mock[u] "+mock[u].id);
-            if (mock[u].id == id) {
-                mock.splice(u, 1);
-            }
-        }
-        return mock;
+        var deferred = q.defer ();
+        ProjectModel
+            .remove (
+                {_id: id},
+                function (err, stats) {
+                    if (!err) {
+                        deferred.resolve(stats);
+                    } else {
+                        deferred.reject(err);
+                    }
+                }
+            );
+        return deferred.promise;
     }
 
-
-
-    function getIndex(Project) {
-        for(var p in mock) {
-            if(mock[p].title===Project.title)
-                return p;
-        }
-        return -1;
-    }
-
-    function selectProject(index) {
-        var selectedProject = {
-            title: mock[index].title,
-            description: mock[index].description,
-            status: mock[index].status,
-            gusername: mock[index].gusername,
-            repos: mock[index].repos,
-            startDate: mock[index].startDate,
-            endDate: mock[index].endDate
+    function Update(Id, project) {
+        var deferred = q.defer();
+        var Project ={
+            title: project.title,
+            commits: project.commits,
+            gusername: project.gusername,
+            repos: project.repos,
+            userId: project.userId,
+            description: project.description,
+            status: project.status
         };
-        return selectedProject;
-    }
-
-
-    function Update(project) {
-        if(project) {
-            var n = getIndex(project);
-            if(n) {
-                project.id = mock[n].id;
-                mock[n] = project;
-                return mock[n];
-            }
-        }
-        return null;
+        ProjectModel
+            .update (
+                {_id: Id},
+                {$set: Project},
+                function (err, doc) {
+                    if (!err) {
+                        deferred.resolve(doc);
+                    } else {
+                        deferred.reject(err);
+                    }
+                }
+            );
+        return deferred.promise;
     }
 
     function FindAll(userId) {
-        var listOfProjects = [];
-        var f;
-        console.log("dfs "+userId);
-
-        for (f in mock) {
-            console.log("inside "+mock[f].userId);
-            if (mock[f].userId == userId) {
-                listOfProjects.push(mock[f]);
+        var deferred = q.defer ();
+        ProjectModel.find ({
+                userId: {$in: userId}
+            },
+            function (err, forms) {
+                if (!err) {
+                    console.log("here "+forms);
+                    deferred.resolve (forms);
+                } else {
+                    deferred.reject (err);
+                }
             }
-        }
-        return listOfProjects;
+        );
+        return deferred.promise;
     }
 
     function FindById(projectId) {
-        for(var u in mock) {
-            if( mock[u]._id === projectId ) {
-                return mock[u];
-            }
-        }
-        return null;
+        return ProjectModel.findById (projectId);
     }
 
-    function Create(project,userId) {
-        project.id = "ID_" + (new Date()).getTime();
-        project.userId = userId;
-        mock.push(project);
-        return project;
+    function Create(userId,project) {
+        var newProject = {
+            userId: userId,
+            title: project.title,
+            commits: project.commits,
+            gusername: project.gusername,
+            repos: project.repos,
+            description: project.description,
+            status: project.status
+        };
+
+        var deferred = q.defer();
+        ProjectModel.create(newProject, function (err,doc) {
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
+            }
+        });
+        return deferred.promise;
+    }
+
+    function findProjectByTitle(title) {
+        var deferred = q.defer ();
+        ProjectModel
+            .findOne (
+                {title: title.toString()},
+                function (err, doc) {
+                    if (!err) {
+                        deferred.resolve(doc);
+                    } else {
+                        deferred.reject(err);
+                    }
+                }
+            );
+        return deferred.promise;
     }
 }
