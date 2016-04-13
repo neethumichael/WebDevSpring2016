@@ -16,7 +16,8 @@ module.exports = function(mongoose) {
         description: String,
         status: String,
         endDate: Date,
-        startDate: Date
+        startDate: Date,
+        accessEmail: String
     }, {collection: 'projectData'});
     return ProjectSchema;
 };

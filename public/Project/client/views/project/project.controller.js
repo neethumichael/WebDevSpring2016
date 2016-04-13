@@ -11,6 +11,8 @@
         var vm = this;
 
         vm.message = null;
+        vm.normalRender = true;
+        vm.selectedProject;
         var profile;
         if($rootScope.profile!= true)
             $rootScope.profile = false;
@@ -33,6 +35,23 @@
         vm.gitUserProfile = gitUserProfile;
         vm.gitprojectCommits = gitprojectCommits;
         vm.cancel = cancel;
+        vm.updateProjectManagerVisibilty = updateProjectManagerVisibilty;
+        vm.updateProjectManager = updateProjectManager;
+
+        function updateProjectManager(index,currentProjectemail) {
+            console.log("test in client "+currentProjectemail);
+            var project = vm.projects[index];
+            ProjectService.updateProjectManager(project,currentProjectemail)
+                .then(function (response){
+                    vm.normalRender = true;
+                    vm.projects = findAllProjects();
+                });
+        }
+
+        function updateProjectManagerVisibilty(index) {
+            vm.normalRender = false;
+            vm.cond = index;
+        }
 
         function getGitInfo(username) {
             if (username === undefined) {

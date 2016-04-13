@@ -20,22 +20,23 @@
             getCurrentProject: getCurrentProject,
             resetProject: resetProject,
             findAllProjectsForUser: findAllProjectsForUser,
-            searchProject: searchProject
+            searchProject: searchProject,
+            updateProjectManager: updateProjectManager
         };
         return model;
         $rootScope.projects = projects;
+
+        function updateProjectManager(project,currentProjectemail) {
+            return $http.put("/api/projecttracker/project/editAccess/"+project._id+"/"+currentProjectemail);
+        }
 
         function resetProject() {
             $rootScope.project = null;
         }
 
-        function searchProject(searchString) {
-            console.log("data.title "+searchString.title);
-            console.log("data.status "+searchString.status);
-            console.log("data.keywords "+searchString.keywords);
-            //return $http.get("/api/projecttracker/project/search?title=" + searchString.title + "&status=" + searchString.status
-           // +"&keywords=" +searchString.keywords);
-            return $http.get("/api/projecttracker/project/search/"+searchString.title+"/"+searchString.status+"/"+searchString.keywords);
+        function searchProject(searchString, user) {
+            return $http.get("/api/projecttracker/project/search/"+searchString.title+"/"+searchString.status+"/"
+                +searchString.keywords+"/user/"+user._id+"/"+user.roles+"/"+user.email);
         }
 
         function updateProject(project) {
@@ -56,14 +57,11 @@
 
         function setCurrentProject(project) {
             selectedProject = project;
-           // console.log("fset dsj"+$rootScope.project.title);
         }
 
         function getCurrentProject() {
-            console.log(selectedProject.title);
             return selectedProject;
         }
-
 
         function findAllProjectsForUser(userId) {
             return $http.get("/api/assignment/project/"+userId+"/user");

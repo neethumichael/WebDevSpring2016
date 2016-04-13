@@ -6,26 +6,50 @@ module.exports = function(app, projectModel) {
     app.delete("/api/projecttracker/project/:id", Delete);
     app.get("/api/assignment/project/:userId/user", findAllProjectsForUser);
    // app.get("/api/projecttracker/project/search",searchProject);
-    app.get("/api/projecttracker/project/search/:title/:status/:keywords",searchProject);
-   // return $http.get("/api/projecttracker/project/search?title=" + searchString.title + "&status=" + searchString.status
-    //    +"&keywords=" +searchString.keywords);
-   // return $http.get("/api/projecttracker/user?username="+userName+"&password="+passWord);
-   // app.get("/api/projecttracker/project/search/:searchString",searchProject);
+    app.get("/api/projecttracker/project/search/:title/:status/:keywords/user/:userId/:roles/:email",searchProject);
+    app.put("/api/projecttracker/project/editAccess/:projectId/:email",updateProjectAccess);
+
+
+    function updateProjectAccess(req, res) {
+        var projectAccess = req.params.email;
+
+        var projectId = req.params.projectId;
+        projectModel.FindById(projectId)
+            .then(
+                function (projectOld) {
+                    var project = projectOld;
+                    project.accessEmail = projectAccess;
+                    projectModel.Update(projectOld._id,project)
+                        .then(
+                            function (project) {
+                                res.json(project);
+                            },
+                            function (err) {
+                                res.status(400).send(err);
+                            }
+                        );
+                },
+                function (err) {
+                    res.status(400).send(err);
+                });
+    }
+
 
     function searchProject(req, res) {
         var title = req.params.title;
         var status = req.params.status;
         var keywords = req.params.keywords;
-        console.log("ygjh");
+        var userId = req.params.userId;
+        var roles = req.params.roles;
+        var email = req.params.email;
+
         var searchString =  {
             title: title,
-             status: status,
+            status: status,
             keywords: keywords
         }
-        console.log("data.title "+searchString.title);
-        console.log("data.status "+searchString.status);
-        console.log("data.keywords "+searchString.keywords);
-        projectModel.searchProject(searchString)
+
+        projectModel.searchProject(searchString, userId, roles, email)
             .then(
                 function (projects) {
                     res.json(projects);
@@ -33,7 +57,7 @@ module.exports = function(app, projectModel) {
                 function (err) {
                     res.status(400).send(err);
                 }
-            )
+            );
     }
 
     function Delete(req, res) {

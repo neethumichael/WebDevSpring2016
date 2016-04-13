@@ -36,6 +36,7 @@ module.exports = function (db, mongoose) {
 
     function Update(Id, project) {
         var deferred = q.defer();
+        console.log("ghh "+project.accessEmail);
         var Project ={
             title: project.title,
             commits: project.commits,
@@ -43,7 +44,10 @@ module.exports = function (db, mongoose) {
             repos: project.repos,
             userId: project.userId,
             description: project.description,
-            status: project.status
+            status: project.status,
+            accessEmail: project.accessEmail,
+            endDate: project.endDate,
+            startDate: project.startDate
         };
         ProjectModel
             .update (
@@ -51,6 +55,7 @@ module.exports = function (db, mongoose) {
                 {$set: Project},
                 function (err, doc) {
                     if (!err) {
+                        console.log("doc "+doc.accessEmail);
                         deferred.resolve(doc);
                     } else {
                         deferred.reject(err);
@@ -118,33 +123,80 @@ module.exports = function (db, mongoose) {
         return deferred.promise;
     }
 
-    function searchProject(searchString) {
+    function searchProject(searchString, userId, roles, email) {
         var deferred = q.defer ();
-        console.log("seachString "+searchString);
-console.log("data.title "+searchString.title);
-        console.log("data.status "+searchString.status);
-        console.log("data.keywords "+searchString.keywords);
-    ProjectModel
-        .find(
-            {
-                $or: [{title: searchString.title},
-                    {status: searchString.status},
-                    {description: searchString.keywords}]
-            },
-            function (err, doc) {
-                if (!err) {
-                    deferred.resolve(doc);
-                    console.log("dshjsd " + doc.title);
-                } else {
-                    console.log("error " + err);
-                    deferred.reject(err);
-                }
+
+       // for(var u in roles) {
+            if(roles == "Admin") {
+                ProjectModel
+                    .find(
+                        {
+                            $or: [{title: searchString.title},
+                                {status: searchString.status},
+                                {description: searchString.keywords}]
+                        },
+                        function (err, doc) {
+                            if (!err) {
+                                deferred.resolve(doc);
+                                console.log("dshjsd " + doc.title);
+                            } else {
+                                console.log("error " + err);
+                                deferred.reject(err);
+                            }
+                        }
+                    );
+                return deferred.promise;
             }
-        );
-    return deferred.promise;
+            else if(roles == "Faculty" || roles == "Team Lead") {
+                ProjectModel
+                    .find(
+                        {
+                            $or: [{title: searchString.title},
+                                {status: searchString.status},
+                                {description: searchString.keywords}],
+
+                            $and: [ {accessEmail: email}]
+                        },
+                        function (err, doc) {
+                            if (!err) {
+                                deferred.resolve(doc);
+                                console.log("dshjsd " + doc.title);
+                            } else {
+                                console.log("error " + err);
+                                deferred.reject(err);
+                            }
+                        }
+                    );
+                return deferred.promise;
+
+            }
+            else {
+                ProjectModel
+                    .find(
+                        {
+                            $or: [{title: searchString.title},
+                                {status: searchString.status},
+                                {description: searchString.keywords}],
+
+                            $and: [ {userId: userId}]
+                        },
+                        function (err, doc) {
+                            if (!err) {
+                                deferred.resolve(doc);
+                                console.log("dshjsd " + doc.title);
+                            } else {
+                                console.log("error " + err);
+                                deferred.reject(err);
+                            }
+                        }
+                    );
+                return deferred.promise;
+            }
+       // }
+
 
 
 
 
     }
-}
+};

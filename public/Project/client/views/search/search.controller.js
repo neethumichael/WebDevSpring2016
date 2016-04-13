@@ -9,14 +9,15 @@
     function SearchController($rootScope, ProjectService) {
         var vm = this;
        vm.search = search;
+        var user = $rootScope.currentUser;
+        console.log("usr "+user.username);
         function search(data) {
             if(!data.title && !data.keywords && !data.status) {
                 vm.message = "Enter one of the search criteria";
                 return;
             }
-            ProjectService.searchProject(data)
+            ProjectService.searchProject(data, user)
                 .then( function(response) {
-                    console.log("test"+response.data);
                     vm.currentSearchProject = response.data;
                 });
         }
