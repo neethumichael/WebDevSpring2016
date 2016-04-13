@@ -47,25 +47,23 @@
             }
 
             UserService.findUserByUsername(user.username).then(
-            function(response) {
-                if (response.data!= null || (typeof response.data) == "undefined") {
-                    console.log("inside if");
-                    vm.message = "User already exists";
-                    return;
-                }
-                else {
-                    console.log("inside else");
-                    UserService.createUser(user)
-                        .then(function(response){
-                            var currentUser = response.data;
-                            UserService.setCurrentUser(currentUser);
-                            $location.url('/profile');
-                        }),
-                        function (error) {
-                            vm.message = error;
-                        };
-                }
-            }),
+                function(response) {
+                    if (response.data!= null || (typeof response.data) == "undefined") {
+                        vm.message = "User already exists";
+                        return;
+                    }
+                    else {
+                        UserService.createUser(user)
+                            .then(function(response){
+                                var currentUser = response.data;
+                                UserService.setCurrentUser(currentUser);
+                                $location.url('/profile');
+                            }),
+                            function (error) {
+                                vm.message = error;
+                            };
+                    }
+                }),
                 function (error) {
                     vm.message = error;
                 };

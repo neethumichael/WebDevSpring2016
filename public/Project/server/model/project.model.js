@@ -13,7 +13,8 @@ module.exports = function (db, mongoose) {
         FindById: FindById,
         Update: Update,
         Delete: Delete,
-        findProjectByTitle: findProjectByTitle
+        findProjectByTitle: findProjectByTitle,
+        searchProject: searchProject
     };
     return api;
 
@@ -66,7 +67,6 @@ module.exports = function (db, mongoose) {
             },
             function (err, forms) {
                 if (!err) {
-                    console.log("here "+forms);
                     deferred.resolve (forms);
                 } else {
                     deferred.reject (err);
@@ -116,5 +116,35 @@ module.exports = function (db, mongoose) {
                 }
             );
         return deferred.promise;
+    }
+
+    function searchProject(searchString) {
+        var deferred = q.defer ();
+        console.log("seachString "+searchString);
+console.log("data.title "+searchString.title);
+        console.log("data.status "+searchString.status);
+        console.log("data.keywords "+searchString.keywords);
+    ProjectModel
+        .find(
+            {
+                $or: [{title: searchString.title},
+                    {status: searchString.status},
+                    {description: searchString.keywords}]
+            },
+            function (err, doc) {
+                if (!err) {
+                    deferred.resolve(doc);
+                    console.log("dshjsd " + doc.title);
+                } else {
+                    console.log("error " + err);
+                    deferred.reject(err);
+                }
+            }
+        );
+    return deferred.promise;
+
+
+
+
     }
 }

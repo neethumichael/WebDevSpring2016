@@ -20,9 +20,34 @@
             findUserByCredentials: findUserByCredentials,
             deleteUserById: deleteUserById,
             findAllUsers: findAllUsers,
-            logout: logout
+            logout: logout,
+            createUserByAdmin: createUserByAdmin,
+            findAllUsersAdmin: findAllUsersAdmin,
+            findByIdAdmin: findByIdAdmin,
+            deleteUserByIdAdmin : deleteUserByIdAdmin,
+            updateUserByAdmin: updateUserByAdmin
         };
         return model;
+
+        function createUserByAdmin(user) {
+            return $http.post("/api/assignment/admin/user" , user);
+        }
+
+        function findAllUsersAdmin() {
+            return $http.get("/api/assignment/admin/user");
+        }
+
+        function findByIdAdmin(userId) {
+            return $http.get("/api/assignment/admin/user/" + userId);
+        }
+
+        function deleteUserByIdAdmin(userId) {
+            return $http.delete("/api/assignment/admin/user/" + userId);
+        }
+
+        function updateUserByAdmin(userId,user) {
+            return $http.put("/api/assignment/admin/user/" + userId,user);
+        }
 
         function findUserByUsername(username) {
             return $http.get("/api/assignment/user?username=" + username);
@@ -30,7 +55,7 @@
         function findUserByCredentials(credentials) {
             var userName = credentials.username;
             var passWord = credentials.password;
-            return $http.get("/api/assignment/user?username=" + userName + "&password=" + passWord);
+            return $http.get("/api/assignment/login?username=" + userName + "&password=" + passWord);
         }
 
         function findAllUsers() {
@@ -38,7 +63,7 @@
         }
 
         function createUser(user) {
-            return $http.post("/api/assignment/user" , user);
+            return $http.post("/api/assignment/register" , user);
         }
 
         function deleteUserById(userId) {
@@ -58,6 +83,7 @@
         }
 
         function logout() {
+            console.log("calling server logout");
             return $http.post("/api/assignment/logout");
         }
     }

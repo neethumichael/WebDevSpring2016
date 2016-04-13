@@ -25,8 +25,6 @@ module.exports = function () {
         return mock;
     }
 
-
-
     function getIndex(Project) {
         for(var p in mock) {
             if(mock[p].title===Project.title)

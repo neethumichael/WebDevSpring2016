@@ -19,13 +19,23 @@
             setCurrentProject: setCurrentProject,
             getCurrentProject: getCurrentProject,
             resetProject: resetProject,
-            findAllProjectsForUser: findAllProjectsForUser
+            findAllProjectsForUser: findAllProjectsForUser,
+            searchProject: searchProject
         };
         return model;
         $rootScope.projects = projects;
 
         function resetProject() {
             $rootScope.project = null;
+        }
+
+        function searchProject(searchString) {
+            console.log("data.title "+searchString.title);
+            console.log("data.status "+searchString.status);
+            console.log("data.keywords "+searchString.keywords);
+            //return $http.get("/api/projecttracker/project/search?title=" + searchString.title + "&status=" + searchString.status
+           // +"&keywords=" +searchString.keywords);
+            return $http.get("/api/projecttracker/project/search/"+searchString.title+"/"+searchString.status+"/"+searchString.keywords);
         }
 
         function updateProject(project) {

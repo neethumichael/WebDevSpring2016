@@ -2,6 +2,7 @@
  * Created by neethu on 3/17/2016.
  */
 var q = require("q");
+var bcrypt = require("bcrypt-nodejs");
 module.exports = function (db, mongoose) {
 
     var UserSchema = require("./user.schema.server.js")(mongoose);
@@ -102,6 +103,7 @@ module.exports = function (db, mongoose) {
     }
 
     function Create(user) {
+        user.password = bcrypt.hashSync(user.password);
         var deferred = q.defer();
         UserModel.create(user, function (err,doc) {
             if(err) {

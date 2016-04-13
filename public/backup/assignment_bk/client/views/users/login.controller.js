@@ -29,13 +29,12 @@
                             $location.url("/profile");
                         }
                         else {
-                            vm.error = err;
                             vm.message = "Invalid credentials";
                         }
                     });
             }
             else {
-               vm.message = "Username/password field is empty";
+                vm.message = "Username/password field is empty";
             }
         }
     }

@@ -49,14 +49,14 @@
                 templateUrl:"views/home/home.view.html",
                 controller: "HomeController"
             })
+            .when("/search", {
+                templateUrl:"views/search/search.view.html",
+                controller: "SearchController",
+                controllerAs: "model"
+        })
             .when("/profile", {
                 templateUrl: "views/user/profile/profile.view.html",
                 controller: "ProfileController",
-                controllerAs: "model"
-            })
-            .when("/search", {
-                templateUrl: "views/search/searchRepositories.view.html",
-                controller: "SearchController",
                 controllerAs: "model"
             })
             .when("/register", {

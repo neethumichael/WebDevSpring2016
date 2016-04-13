@@ -5,6 +5,36 @@ module.exports = function(app, projectModel) {
     app.put("/api/projecttracker/project", Update);
     app.delete("/api/projecttracker/project/:id", Delete);
     app.get("/api/assignment/project/:userId/user", findAllProjectsForUser);
+   // app.get("/api/projecttracker/project/search",searchProject);
+    app.get("/api/projecttracker/project/search/:title/:status/:keywords",searchProject);
+   // return $http.get("/api/projecttracker/project/search?title=" + searchString.title + "&status=" + searchString.status
+    //    +"&keywords=" +searchString.keywords);
+   // return $http.get("/api/projecttracker/user?username="+userName+"&password="+passWord);
+   // app.get("/api/projecttracker/project/search/:searchString",searchProject);
+
+    function searchProject(req, res) {
+        var title = req.params.title;
+        var status = req.params.status;
+        var keywords = req.params.keywords;
+        console.log("ygjh");
+        var searchString =  {
+            title: title,
+             status: status,
+            keywords: keywords
+        }
+        console.log("data.title "+searchString.title);
+        console.log("data.status "+searchString.status);
+        console.log("data.keywords "+searchString.keywords);
+        projectModel.searchProject(searchString)
+            .then(
+                function (projects) {
+                    res.json(projects);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            )
+    }
 
     function Delete(req, res) {
         var id = req.params.id;

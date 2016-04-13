@@ -2,6 +2,7 @@
  * Created by neethu on 3/17/2016.
  */
 var q = require("q");
+var bcrypt = require("bcrypt-nodejs");
 module.exports = function (db, mongoose) {
 
     var UserSchema = require("./user.schema.server.js")(mongoose);
@@ -13,7 +14,7 @@ module.exports = function (db, mongoose) {
         Update: Update,
         Delete: Delete,
         findUserByUsername: findUserByUsername,
-        findUserByCredentials: findUserByCredentials
+        findUserByCredentials: findUserByCredentials,
     };
     return api;
 
@@ -64,7 +65,7 @@ module.exports = function (db, mongoose) {
         return deferred.promise;
     }
 
-    function Update(user) {
+    function Update(user, userId) {
         var deferred = q.defer();
         var newUser ={
             username: user.username,
@@ -72,11 +73,12 @@ module.exports = function (db, mongoose) {
             firstName: user.firstName,
             lastName: user.lastName,
             emails: user.emails,
-            phones: user.phones
+            phones: user.phones,
+            roles: user.roles
         };
         UserModel
             .update (
-                {username: user.username},
+                {_id: userId},
                 {$set: newUser},
                 function (err, doc) {
                     if (!err) {
@@ -103,6 +105,7 @@ module.exports = function (db, mongoose) {
 
     function Create(user) {
         var deferred = q.defer();
+        user.password = bcrypt.hashSync(user.password);
         UserModel.create(user, function (err,doc) {
             if(err) {
                 deferred.reject(err);
@@ -115,13 +118,24 @@ module.exports = function (db, mongoose) {
 
     function findUserByCredentials(credentials) {
         var deferred = q.defer();
-        UserModel.findOne(credentials, function(err, doc) {
+        /*UserModel.findOne(credentials, function(err, doc) {
             if(err) {
                 deferred.reject(err);
             } else {
                 deferred.resolve(doc);
             }
         });
-        return deferred.promise;
+        return deferred.promise;*/
+        findUserByUsername(credentials.username)
+            .then(
+                function (user) {
+                    if (user  && bcrypt.compareSync(credentials.password, user.password)) {
+                        console.log("verified");
+                        return done(null,user);
+                    } else {
+                        return done(null,false);
+                    }
+                }
+            );
     }
 }
