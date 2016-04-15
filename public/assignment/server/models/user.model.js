@@ -67,29 +67,34 @@ module.exports = function (db, mongoose) {
 
     function Update(user, userId) {
         var deferred = q.defer();
-        var newUser ={
-            username: user.username,
-            password: user.password,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            emails: user.emails,
-            phones: user.phones,
-            roles: user.roles
-        };
-        UserModel
-            .update (
-                {_id: userId},
-                {$set: newUser},
-                function (err, doc) {
-                    if (!err) {
-                        deferred.resolve(user);
-                    } else {
-                        deferred.reject(err);
+
+                        var newUser = {
+                            username: user.username,
+                            password: user.password,
+                            firstName: user.firstName,
+                            lastName: user.lastName,
+                            emails: user.emails,
+                            phones: user.phones,
+                            roles: user.roles
+                        };
+                        UserModel
+                            .update(
+                                {_id: userId},
+                                {$set: newUser},
+                                function (err, doc) {
+                                    if (!err) {
+                                        deferred.resolve(user);
+                                    } else {
+                                        deferred.reject(err);
+                                    }
+                                }
+                            );
+                        console.log("before returning");
+                        return deferred.promise;
                     }
-                }
-            );
-        return deferred.promise;
-    }
+
+
+
 
     function FindById(userId) {
         var deferred = q.defer();
@@ -130,7 +135,6 @@ module.exports = function (db, mongoose) {
             .then(
                 function (user) {
                     if (user  && bcrypt.compareSync(credentials.password, user.password)) {
-                        console.log("verified");
                         return done(null,user);
                     } else {
                         return done(null,false);

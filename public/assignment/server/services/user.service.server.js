@@ -24,21 +24,6 @@ module.exports = function(app, formModel, userModel) {
     passport.deserializeUser(deserializeUser);
 
     function localStrategy(username, password, done) {
-         /* userModel.findUserByCredentials({username: username, password: password})
-              .then(
-                  function (user) {
-                      console.log(user.username);
-                      if (!user) {
-                          return done(null, false);
-                      }
-                      return done(null, user);
-                  },
-                  function (err) {
-                      if (err) {
-                          return done(err);
-                      }
-                  }
-              );*/
         userModel.findUserByUsername(username)
             .then(
                 function (user) {
@@ -132,13 +117,30 @@ module.exports = function(app, formModel, userModel) {
         if(typeof user.phones == "String") {
             user.phones = user.phones.split(",");
         }
-        userModel.Update(user,userId)
-            .then(function (doc) {
-                res.json(doc);
-            },
-                function (err) {
-                    res.status(400).send(err);
+
+        userModel.FindById(user._id)
+            .then(
+                function (oldUser) {
+                    if (oldUser && !bcrypt.compareSync(user.password, oldUser.password)) {
+                        console.log("not equal");
+                        user.password = bcrypt.hashSync(user.password);
+                    }
+                    else {
+                        console.log("equal");
+                        console.log("oldUser.passWord "+oldUser.password);
+                        user.password = oldUser.password;
+                    }
+                    userModel.Update(user,userId)
+                        .then(function (doc) {
+                            console.log("doc "+doc.username);
+                                res.json(doc);
+                            },
+                            function (err) {
+                                console.log("error "+err);
+                                res.status(400).send(err);
+                            });
                 });
+
     }
 
     function findAll(req , res) {
@@ -168,11 +170,13 @@ module.exports = function(app, formModel, userModel) {
 
     function create(req, res) {
         var user = req.body;
+        console.log("user "+user.username);
         if(user.roles && user.roles.length > 1) {
             user.roles = user.roles.split(",");
-        } else if(!isAdmin(user)){
-            user.roles = ["student"];
+        } else {
+            user.roles = ["admin"];
         }
+
         userModel.Create(user)
             .then(
                 function (user) {
@@ -208,7 +212,7 @@ module.exports = function(app, formModel, userModel) {
 
     function isAdmin(user) {
         if(user.roles.indexOf("admin") > 0) {
-            return true
+            return true;
         }
         return false;
     }

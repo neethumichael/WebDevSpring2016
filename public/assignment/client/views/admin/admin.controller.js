@@ -7,7 +7,7 @@
         .module("FormBuilderApp")
         .controller("AdminController",AdminController);
 
-    function AdminController(UserService, $location) {
+    function AdminController(UserService, $location, $scope) {
 
         var vm = this;
 
@@ -19,6 +19,8 @@
         vm.sortTable = sortTable;
         vm.user = null;
         vm.message = null;
+        $scope.sortType     = 'model.user.username';
+        $scope.sortReverse  = true;
 
         function init() {
             vm.users = findAllUsers();
@@ -107,9 +109,9 @@
 
         }
 
-        function deleteUser(index) {
-            vm.user = vm.users[index];
-            UserService.deleteUserByIdAdmin(vm.user._id)
+        function deleteUser(user) {
+
+            UserService.deleteUserByIdAdmin(user._id)
                 .then(function(response) {
                     vm.users = findAllUsers();
                     vm.user = null;
@@ -117,16 +119,22 @@
             vm.user = null;
         }
 
-        function selectUser(index) {
+        function selectUser(user) {
             vm.track = 1;
-            vm.user = {
-                _id: vm.users[index]._id,
-                username: vm.users[index].username,
-                firstName: vm.users[index].firstName,
-                lastName: vm.users[index].lastName,
-                roles: vm.users[index].roles,
-                password: vm.users[index].password
-            };
+           for(var index in vm.users) {
+               if(vm.users[index]._id == user._id) {
+                   vm.user = {
+                       _id: vm.users[index]._id,
+                       username: vm.users[index].username,
+                       firstName: vm.users[index].firstName,
+                       lastName: vm.users[index].lastName,
+                       roles: vm.users[index].roles,
+                       password: vm.users[index].password
+                   };
+                   break;
+               }
+           }
+
         }
 
         function updateUser(newUser) {
@@ -135,6 +143,7 @@
                 if(newUser) {
                     UserService.updateUserByAdmin(vm.user._id,newUser)
                         .then(function(response) {
+                            console.log("user status "+response.data.password);
                             vm.user = null;
                             vm.users = findAllUsers();
                         });

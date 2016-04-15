@@ -63,7 +63,7 @@
                 return;
             }
 
-            UserService.updateUser(user.username, user)
+            UserService.updateUser(user._id, user)
                 .then(
                     function(response) {
                         if (response.data) {

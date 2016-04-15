@@ -40,6 +40,8 @@
                             Search</button>
                         <button  ng-click = "model.clear()" type="submit" class ="btn btn-primary btn-success">
                             Clear</button>
+
+
                     </div>
                 </div>
 
@@ -64,6 +66,21 @@
                     <td> {{project.status}} </td>
                     <td> {{project.commits[commits.length-1].commit.message}} </td>
                     <td> {{project.commits[commits.length-1].commit.committer.name}} </td>
+
+<td>
+    <div ng-if="model.currentUser.roles == 'Faculty' ||
+    model.currentUser.roles == 'Team Lead'">
+
+        <input  ng-model="project.grade" type="text" class="form-control gradeClass" id="projectGrade">/
+        <input  ng-model="project.gradeTotal" type="text" class="form-control gradeClass" id="projectGradeTotal">
+        <textarea  ng-model="project.gradeComments" class="form-control" id="projectComments"></textarea>
+        <br>
+        <button  ng-click = "model.submitGrade(project, model.project)" type="submit" class ="btn btn-primary btn-success">
+            Submit Grade</button>
+    </div>
+
+</td>
+
                 </tr>
                 </tbody>
             </table>

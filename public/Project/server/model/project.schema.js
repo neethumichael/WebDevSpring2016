@@ -17,7 +17,10 @@ module.exports = function(mongoose) {
         status: String,
         endDate: Date,
         startDate: Date,
-        accessEmail: String
+        accessEmail: String,
+        grade: Number,
+        gradeTotal: Number,
+        gradeComments: String
     }, {collection: 'projectData'});
     return ProjectSchema;
 };

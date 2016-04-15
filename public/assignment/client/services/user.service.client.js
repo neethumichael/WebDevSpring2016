@@ -63,6 +63,7 @@
         }
 
         function createUser(user) {
+            console.log("inside service "+user.username);
             return $http.post("/api/assignment/register" , user);
         }
 

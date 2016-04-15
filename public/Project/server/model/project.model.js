@@ -47,7 +47,10 @@ module.exports = function (db, mongoose) {
             status: project.status,
             accessEmail: project.accessEmail,
             endDate: project.endDate,
-            startDate: project.startDate
+            startDate: project.startDate,
+            grade: project.grade,
+            gradeTotal: project.gradeTotal,
+            gradeComments: project.gradeComments
         };
         ProjectModel
             .update (
@@ -93,7 +96,9 @@ module.exports = function (db, mongoose) {
             gusername: project.gusername,
             repos: project.repos,
             description: project.description,
-            status: project.status
+            status: project.status,
+            startDate: project.startDate,
+            endDate: project.endDate
         };
 
         var deferred = q.defer();
@@ -111,7 +116,7 @@ module.exports = function (db, mongoose) {
         var deferred = q.defer ();
         ProjectModel
             .findOne (
-                {title: title.toString()},
+                {title: title},
                 function (err, doc) {
                     if (!err) {
                         deferred.resolve(doc);

@@ -5,7 +5,6 @@ module.exports = function(app, projectModel) {
     app.put("/api/projecttracker/project", Update);
     app.delete("/api/projecttracker/project/:id", Delete);
     app.get("/api/assignment/project/:userId/user", findAllProjectsForUser);
-   // app.get("/api/projecttracker/project/search",searchProject);
     app.get("/api/projecttracker/project/search/:title/:status/:keywords/user/:userId/:roles/:email",searchProject);
     app.put("/api/projecttracker/project/editAccess/:projectId/:email",updateProjectAccess);
 
