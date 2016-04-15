@@ -174,7 +174,7 @@ module.exports = function(app, formModel, userModel) {
         if(user.roles && user.roles.length > 1) {
             user.roles = user.roles.split(",");
         } else {
-            user.roles = ["admin"];
+            user.roles = ["student"];
         }
 
         userModel.Create(user)
