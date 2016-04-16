@@ -8,16 +8,16 @@ module.exports = function(app, formModel, userModel) {
     app.get("/api/assignment/login",passport.authenticate('local'),login);
     app.get("/api/assignment/user",forAllUsers);
     app.get("/api/assignment/user/:id", findById);
-    app.put("/api/assignment/user/:id", auth,  Update);
+    app.put("/api/assignment/user/:userId", auth,  Update);
     app.delete("/api/assignment/user/:id",auth, Delete);
     app.get("/api/assignment/loggedin", loggedin);
     app.post("/api/assignment/logout", logout);
     // admin end points
     app.post("/api/assignment/admin/user", create);
     app.get("/api/assignment/admin/user",findAll);
-    app.get("/api/assignment/admin/user/",findById);
+    app.get("/api/assignment/admin/user/:userId",findById);
     app.delete("/api/assignment/admin/user/:userId",Delete);
-    app.put("/api/assignment/admin/user/:id",Update);
+    app.put("/api/assignment/admin/user/:userId",Update);
 
     passport.use(new LocalStrategy(localStrategy ));
     passport.serializeUser(serializeUser);
@@ -109,7 +109,7 @@ module.exports = function(app, formModel, userModel) {
     }
 
     function Update(req,res) {
-        var userId = req.params.id;
+        var userId = req.params.userId;
         var user = req.body;
         if(typeof user.emails == "String") {
             user.emails = user.emails.split(",");

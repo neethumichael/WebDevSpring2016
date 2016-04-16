@@ -14,11 +14,6 @@
         vm.register = register;
         vm.message = null;
 
-        function init() {
-
-        }
-        init();
-
         function register(user) {
             vm.message = null;
             if(typeof user === "undefined") {
