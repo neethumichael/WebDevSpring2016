@@ -32,7 +32,7 @@
                         .error (function(err){
 
                             vm.error = err;
-                            vm.message = "Invalid Credentials";
+                            vm.message = " Invalid Credentials";
                         });
                     }
 
