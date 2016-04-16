@@ -16,7 +16,6 @@
         vm.deleteUser = deleteUser;
         vm.selectUser = selectUser;
         vm.findAllUsers = findAllUsers;
-        vm.sortTable = sortTable;
         vm.user = null;
         vm.message = null;
         $scope.sortType     = 'model.user.username';
@@ -24,6 +23,9 @@
 
         function init() {
             vm.users = findAllUsers();
+            for(var i in vm.users) {
+                vm.users[i].roles = vm.users[i].roles.toString();
+            }
         }
         init();
 
@@ -53,6 +55,9 @@
                         UserService.createUser(user)
                             .then(function(response){
                                 vm.users = findAllUsers();
+                                for(var i in vm.users) {
+                                    vm.users[i].roles = vm.users[i].roles.toString();
+                                }
                                 vm.user = null;
                             }),
                             function (error) {
@@ -71,6 +76,9 @@
             UserService.deleteUserByIdAdmin(user._id)
                 .then(function(response) {
                     vm.users = findAllUsers();
+                    for(var i in vm.users) {
+                        vm.users[i].roles = vm.users[i].roles.toString();
+                    }
                     vm.user = null;
                 });
             vm.user = null;
@@ -102,6 +110,9 @@
                         .then(function(response) {
                             vm.user = null;
                             vm.users = findAllUsers();
+                            for(var i in vm.users) {
+                                vm.users[i].roles = vm.users[i].roles.toString();
+                            }
                         });
                 }
                 else {
@@ -118,6 +129,9 @@
                     UserService.findAllUsersAdmin()
                         .then(function(response) {
                             vm.users = response.data;
+                            for(var i in vm.users) {
+                                vm.users[i].roles = vm.users[i].roles.toString();
+                            }
                         });
 
             return vm.users;

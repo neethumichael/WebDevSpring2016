@@ -7,38 +7,32 @@
         <thead>
         <tr>
             <th>
-                <button type="submit" ng-click="sortType = 'username'; sortReverse = !sortReverse" class="btn btn-primary">
-                    <span ng-show="!sortReverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
-                    <span ng-show="sortReverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
-                </button> Username <br> <br>
-                <input class ="form-control" type="text" ng-model = "model.user.username" placeholder="username"/></th>
+                    <span ng-click="sortType = 'username'; sortReverse = !sortReverse" ng-show="!sortReverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                    <span ng-click="sortType = 'username'; sortReverse = !sortReverse" ng-show="sortReverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+                Username <br> <br>
+                <input class ="form-control" type="text" ng-model = "model.user.username" placeholder="Username"/></th>
 
             <th>  Password <br> <br>
-                <input class ="form-control" type="password" ng-model = "model.user.password" placeholder="password"/></th>
+                <input class ="form-control" type="password" ng-model = "model.user.password" placeholder="Password"/></th>
 
-            <th> <button type="submit" ng-click="sortType = 'firstName'; sortReverse = !sortReverse" class="btn btn-primary">
-                <span ng-show="!sortReverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
-                <span ng-show="sortReverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
-            </button> First Name<br> <br>
+            <th>
+                <span ng-click="sortType = 'firstName'; sortReverse = !sortReverse" ng-show="!sortReverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                <span ng-click="sortType = 'firstName'; sortReverse = !sortReverse" ng-show="sortReverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+             First Name<br> <br>
 
                 <input class ="form-control" type="text" ng-model = "model.user.firstName" placeholder="First Name"/></th>
 
-            <th> <button type="submit" ng-click="sortType = 'lastName'; sortReverse = !sortReverse" class="btn btn-primary">
-                <span ng-show="!sortReverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
-                <span ng-show="sortReverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
-            </button> Last Name <br> <br>
+            <th>
+                <span ng-click="sortType = 'lastName'; sortReverse = !sortReverse"  ng-show="!sortReverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                <span ng-click="sortType = 'lastName'; sortReverse = !sortReverse"  ng-show="sortReverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+           Last Name <br> <br>
                 <input class ="form-control" type="text" ng-model = "model.user.lastName" placeholder="Last Name"/></th>
 
             <th> Roles <br> <br>
                 <input class ="form-control" type="text" ng-model = "model.user.roles" placeholder="role1 , role2"/></th>
-            <th> </span> Actions <br>
-
-                <button type="submit" ng-click="model.addUser(model.user)" class="form-control btn btn-primary btn-block">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                </button>
-                <button type="submit" ng-click="model.updateUser(model.user)" class="form-control btn btn-info btn-block">
-                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                </button>
+            <th> Actions <br><br>
+                    <span ng-click="model.addUser(model.user)" class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    <span ng-click="model.updateUser(model.user)" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
             </th>
         </tr>
         </thead>
@@ -50,61 +44,14 @@
             <td> {{user.lastName}}</td>
             <td> {{user.roles}}</td>
             <td class = "nowrap">
-                <button type="submit" ng-click="model.deleteUser(user)" class="form-control btn btn-danger btn-block">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                </button>
-                <button type="submit" ng-click="model.selectUser(user)" class="form-control btn btn-info btn-block">
-                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                </button>
+                    <span ng-click="model.deleteUser(user)" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    <span ng-click="model.selectUser(user)" class="glyphicon glyphicon-cog" aria-hidden="true"></span>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
-<script>
-    function sortTable(f,n){
-        console.log("invoked");
-        var rows = $('#mytable tbody  tr').get();
 
-        rows.sort(function(a, b) {
-
-            var A = getVal(a);
-            var B = getVal(b);
-
-            if(A < B) {
-                return -1*f;
-            }
-            if(A > B) {
-                return 1*f;
-            }
-            return 0;
-        });
-
-        function getVal(elm){
-            var v = $(elm).children('td').eq(n).text().toUpperCase();
-            if($.isNumeric(v)){
-                v = parseInt(v,10);
-            }
-            return v;
-        }
-
-        $.each(rows, function(index, row) {
-            $('#mytable').children('tbody').append(row);
-        });
-    }
-    var f_sl = 1; // flag to toggle the sorting order
-    var f_nm = 1; // flag to toggle the sorting order
-    $("#sl").click(function(){
-        f_sl *= -1; // toggle the sorting order
-        var n = $(this).prevAll().length;
-        sortTable(f_sl,n);
-    });
-    $("#nm").click(function(){
-        f_nm *= -1; // toggle the sorting order
-        var n = $(this).prevAll().length;
-        sortTable(f_nm,n);
-    });
-</script>
 
 
 
