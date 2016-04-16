@@ -15,8 +15,9 @@
     color: #555555;
 }
 
-.table>thead>tr>th {
-    vertical-align: top;
+
+.table>thead>tr>.actionAlign {
+    vertical-align: top;!important;
 }
 
 .table-row {
