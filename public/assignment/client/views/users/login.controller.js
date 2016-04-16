@@ -23,7 +23,8 @@
                 UserService.findUserByCredentials(user_cred)
                     .success(function(response) {
                         var user = response.data;
-                        if(response.data) {
+                        console.log("her");
+                        if(response) {
                             console.log("her");
                             $rootScope.currentUser = user;
                             UserService.setCurrentUser(user);
