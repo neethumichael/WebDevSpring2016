@@ -21,19 +21,21 @@
 
             if(typeof user_cred!== "undefined") {
                 UserService.findUserByCredentials(user_cred)
-                    .then(function(response) {
+                    .success(function(response) {
                         var user = response.data;
                         if(response.data) {
+                            console.log("her");
                             $rootScope.currentUser = user;
                             UserService.setCurrentUser(user);
                             $location.url("/profile");
-                        }
-                        else {
+                        }})
+                        .error (function(err){
+
                             vm.error = err;
-                            vm.message = "Invalid credentials";
-                        }
-                    });
-            }
+                            vm.message = "Invalid Credentials";
+                        });
+                    }
+
             else {
                vm.message = "Username/password field is empty";
             }

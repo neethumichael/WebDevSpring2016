@@ -41,7 +41,6 @@ module.exports = function (db, mongoose) {
                 {username: userName.toString()},
                 function (err, doc) {
                     if (!err) {
-                        console.log(typeof doc);
                             deferred.resolve(doc);
                     } else {
                         deferred.reject(err);
@@ -89,7 +88,6 @@ module.exports = function (db, mongoose) {
                                     }
                                 }
                             );
-                        console.log("before returning");
                         return deferred.promise;
                     }
 

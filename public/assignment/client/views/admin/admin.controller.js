@@ -27,49 +27,6 @@
         }
         init();
 
-        function sortTable(f,n){
-            console.log("invoked");
-            var rows = $('#mytable tbody  tr').get();
-
-            rows.sort(function(a, b) {
-
-                var A = getVal(a);
-                var B = getVal(b);
-
-                if(A < B) {
-                    return -1*f;
-                }
-                if(A > B) {
-                    return 1*f;
-                }
-                return 0;
-            });
-
-            function getVal(elm){
-                var v = $(elm).children('td').eq(n).text().toUpperCase();
-                if($.isNumeric(v)){
-                    v = parseInt(v,10);
-                }
-                return v;
-            }
-
-            $.each(rows, function(index, row) {
-                $('#mytable').children('tbody').append(row);
-            });
-        }
-        var f_sl = 1; // flag to toggle the sorting order
-        var f_nm = 1; // flag to toggle the sorting order
-        $("#sl").click(function(){
-            f_sl *= -1; // toggle the sorting order
-            var n = $(this).prevAll().length;
-            sortTable(f_sl,n);
-        });
-        $("#nm").click(function(){
-            f_nm *= -1; // toggle the sorting order
-            var n = $(this).prevAll().length;
-            sortTable(f_nm,n);
-        });
-
         function addUser(user) {
             vm.message = null;
             if(typeof user === "undefined") {
@@ -143,7 +100,6 @@
                 if(newUser) {
                     UserService.updateUserByAdmin(vm.user._id,newUser)
                         .then(function(response) {
-                            console.log("user status "+response.data.password);
                             vm.user = null;
                             vm.users = findAllUsers();
                         });

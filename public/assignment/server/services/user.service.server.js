@@ -104,7 +104,7 @@ module.exports = function(app, formModel, userModel) {
             return res.json(doc);
         },
             function (err) {
-                return res.status(400).send(err);
+                return res.status(401).send(err);
             });
     }
 
@@ -122,21 +122,16 @@ module.exports = function(app, formModel, userModel) {
             .then(
                 function (oldUser) {
                     if (oldUser && !bcrypt.compareSync(user.password, oldUser.password)) {
-                        console.log("not equal");
                         user.password = bcrypt.hashSync(user.password);
                     }
                     else {
-                        console.log("equal");
-                        console.log("oldUser.passWord "+oldUser.password);
                         user.password = oldUser.password;
                     }
                     userModel.Update(user,userId)
                         .then(function (doc) {
-                            console.log("doc "+doc.username);
                                 res.json(doc);
                             },
                             function (err) {
-                                console.log("error "+err);
                                 res.status(400).send(err);
                             });
                 });
@@ -170,7 +165,6 @@ module.exports = function(app, formModel, userModel) {
 
     function create(req, res) {
         var user = req.body;
-        console.log("user "+user.username);
         if(user.roles && user.roles.length > 1) {
             user.roles = user.roles.split(",");
         } else {
