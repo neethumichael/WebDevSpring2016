@@ -4,8 +4,10 @@
 var q = require("q");
 module.exports = function (db, mongoose) {
 
-    var UserSchema = require("./user.schema.server.js")(mongoose);
-    var UserModel = mongoose.model('ProjectUser', UserSchema, 'ProjectUser');
+    var ProjectUserSchema = require("./user.schema.server.js")(mongoose);
+    var UserModel = mongoose.model('ProjectUser', ProjectUserSchema, 'ProjectUser');
+    var ContactSchema = require("./contact.schema.server.js")(mongoose);
+    var ContactModel = mongoose.model('ProjectContact', ContactSchema, 'ProjectContact');
     var api = {
         Create: Create,
         FindAll: FindAll,
@@ -13,9 +15,39 @@ module.exports = function (db, mongoose) {
         Update: Update,
         Delete: Delete,
         findUserByUsername: findUserByUsername,
-        findUserByCredentials: findUserByCredentials
+        findUserByCredentials: findUserByCredentials,
+        addMessage: addMessage,
+        viewAllMessage: viewAllMessage
     };
     return api;
+
+    function addMessage(message) {
+        var deferred = q.defer();
+        ContactModel.create(message, function (err,doc) {
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
+            }
+        });
+        return deferred.promise;
+    }
+
+    function viewAllMessage() {
+        console.log("inside find all");
+        var deferred = q.defer ();
+        ContactModel.find (
+            function (err, messages) {
+                if (!err) {
+                    deferred.resolve (messages);
+                } else {
+                    deferred.reject (err);
+                }
+            }
+        );
+        return deferred.promise;
+    }
+
 
     function Delete(userId) {
         var deferred = q.defer ();
@@ -51,6 +83,7 @@ module.exports = function (db, mongoose) {
     }
 
     function FindAll() {
+        console.log("inside find all");
         var deferred = q.defer ();
         UserModel.find (
             function (err, users) {
@@ -71,12 +104,12 @@ module.exports = function (db, mongoose) {
             password: user.password,
             firstName: user.firstName,
             lastName: user.lastName,
-            emails: user.emails,
-            phones: user.phones
+            email: user.email,
+            roles: user.roles
         };
         UserModel
             .update (
-                {username: user.username},
+                {_id: user._id},
                 {$set: newUser},
                 function (err, doc) {
                     if (!err) {

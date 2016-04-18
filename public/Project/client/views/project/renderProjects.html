@@ -5,19 +5,13 @@
         <li><a href="#/renderProjects">View All Projects</a></li>
     </ul>
     <table class="table">
-        </thead>
         <tbody>
         <tr ng-repeat="project in model.projects">
             <td>{{project.title}}</td>
-            <td ng-click = "model.gitprojectCommits($index)"><a href="#/projectCommits">{{project.commits[project.commits.length-1].commit.message}}</a></td>
-            <td ng-click = "model.gitUserProfile($index)"><a href="#/userGitProfile">{{project.commits[project.commits.length-1].commit.committer.name}}</a></td>
+            <td ng-click = "model.gitprojectCommits(project)"><a href="#/projectCommits">Click to view commits</a></td>
+            <td ng-click = "model.gitUserProfile(project)"><a href="#/userGitProfile">{{project.gusername}}</a></td>
             <td>
-                <button ng-show="model.normalRender"ng-click = "model.updateProjectManagerVisibilty($index)" class="btn btn-danger">Edit Access</button>
-                <div ng-if = "model.cond == $index">
-                <input  ng-hide="model.normalRender" ng-model="model.accessEmail" type="text" class="form-control" id="inputProjectManager" placeholder="Manager/Faculty email id">
-
-                <button ng-hide="model.normalRender" ng-click = "model.updateProjectManager($index,model.accessEmail)" class="btn btn-danger">Update Access</button>
-                </div>
+                <button ng-click="model.accessControl(project)" class="btn btn-danger">Modify Access</button>
             </td>
             <td>
                 <button ng-click="model.removeProject($index)" class="btn btn-danger">Remove</button>
@@ -27,3 +21,12 @@
         </tbody>
     </table>
 </div>
+           <!-- <td>
+                <button ng-show="model.normalRender"ng-click = "model.updateProjectManagerVisibilty($index)" class="btn btn-danger">Edit Access</button>
+                <div ng-if = "model.cond == $index">
+                <input  ng-hide="model.normalRender" ng-model="model.accessEmail" type="text" class="form-control" id="inputProjectManager" placeholder="Manager/Faculty email id">
+
+                <button ng-hide="model.normalRender" ng-click = "model.updateProjectManager($index,model.accessEmail)" class="btn btn-danger">Update Access</button>
+                </div>
+            </td> !>
+

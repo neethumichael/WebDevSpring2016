@@ -7,13 +7,13 @@
         .module("ProjectTrackerApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($location, UserService) {
+    function ProfileController($location, ProjectUserService) {
 
         var vm = this;
         vm.error = null;
         vm.message = null;
         vm.update = update;
-        var temp_user = UserService.getCurrentUser();
+        var temp_user = ProjectUserService.getCurrentUser();
         vm.currentUser = {
             firstName: temp_user.firstName,
             lastName: temp_user.lastName,
@@ -63,12 +63,12 @@
                 return;
             }
 
-            UserService.updateUser(user.username, user)
+            ProjectUserService.updateUser(user.username, user)
                 .then(
             function(response) {
                 if (response.data) {
                     vm.message = "User updated successfully";
-                    UserService.setCurrentUser(response.data);
+                    ProjectUserService.setCurrentUser(response.data);
                 } else {
                     vm.message = "Unable to update the user";
                 }

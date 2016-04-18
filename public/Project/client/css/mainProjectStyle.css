@@ -17,6 +17,15 @@
     color: darkcyan !important;
     background-color: #fff !important;
 }
+.navbar-brand {
+    padding-left: 30px;
+}
+.panel-right-align {
+    margin-right: 10px;
+}
+.navbar-default .navbar-nav>li>a {
+    padding-right: 20px;
+}
 
 .homePanel { height: 200px; }
 
@@ -27,19 +36,75 @@
 
 .panel-default {
     opacity: 0.9;
-    margin-top: 80px;
+    margin-top: 40px;
+    margin-left:40px;
+    margin-right:40px;
+    margin-bottom:40px;
+}
+.panel {
+    margin-bottom:40px;!important
 }
 
-.panel-primary>.panel-heading  {
-    background-color: darkcyan;
+.glyphicon:before {
+    margin-right: 5px;
 }
+.input-group {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+@media (max-width: 480px) {
+    .content-last {
+    margin-bottom: 40px;
+    }
+    .page-left-right-margin {
+        margin-left:15px;
+        margin-right:15px;
+    }
+
+
+}
+.left-align {
+    margin-left: -10px;
+}
+
+
+.panel-default>.panel-heading {
+    background-color: darkcyan
+}
+
+@media (min-width: 992px) {
+    .col-md-offset-4 {
+        width: 50%;
+    }
+}
+
+    @media (min-width: 992px) {
+        .col-md-offset-4 {
+            margin-left: 25%;
+        }
+    }
+
+
+.last {
+    margin-bottom: 70px;
+}
+
+
+.panel-default>.panel-heading  {
+    background-color: darkcyan;
+    opacity: 0.99;
+    color: white;!important
+
+}
+
 
 .panelPadding { padding: 25px; }
 
 .login-register {
     opacity: 0.8;
     filter: alpha(opacity=10);
-    background-image: url("http://thenextweb.com/wp-content/blogs.dir/1/files/2014/05/laptop-on-work-desk.jpg");
+    /*background-image: url("http://thenextweb.com/wp-content/blogs.dir/1/files/2014/05/laptop-on-work-desk.jpg");*/
     width: 100%;
     background-size: cover;
 }
@@ -53,15 +118,26 @@
     color: white;
 }
 
-.form-group.last { margin-bottom:0px; }
+.form-group.last { margin-bottom:20px; }
 
 .mainPageSection1 {
     filter: alpha(opacity=10);
-    background-image: url("https://aragonresearch.com/wp-content/uploads/2014/08/research-topics.jpg");
+   /*background-image: url("https://aragonresearch.com/wp-content/uploads/2014/08/research-topics.jpg");*/
+    background-color: transparent;
     width: 100%;
-    height: 650px;
+    height: 200px;
     background-size: cover;
     color: #ffffff;
+}
+hr {
+
+    margin-top: 0.5em;
+    margin-bottom: 5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    width: 80%;
+    align: center;
 }
 
 .listSpace { margin-left: 3px; }
@@ -92,6 +168,11 @@
 .textRight {
     float:right;
     color: white;
+    padding-right: 5px;
+}
+
+.panel-primary {
+    border-color: darkcyan;
 }
 
 .textBackground {
@@ -107,8 +188,64 @@
 
 }
 
+.panel-primary>.panel-heading {
+    background-color: darkcyan;
+
+}
+.panel-primary {
+    border-radius: 25px;
+    background-color: whitesmoke;
+}
+
+.table-header-align {
+    margin-bottom: -13px;
+}
+
+.panel-align {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.fa-envelope-o {
+    margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+    .btn-responsive {
+        padding:2px 4px;
+        font-size:80%;
+        line-height: 1;
+    }
+    .mobile-font {
+        font-size: 50%;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+    .btn-responsive {
+        padding:4px 9px;
+        font-size:90%;
+        line-height: 1.2;
+    }
+}
+
+
+.modal-margin {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.alterBlock {
+    display: initial;
+}
+
+.modal-left {
+    margin-left: 10px;
+}
+
 .textLeft {
     color: white;
+    padding-left: 5px;
 }
 
 .footerClass {
@@ -137,7 +274,7 @@
     width: 100%; /* Set width to 100% */
     margin: 0 auto;
     height:100%;
-    max-height: 650px;
+    max-height: 400px;
     overflow: hidden;
     padding: 0;
     object-fit: cover;

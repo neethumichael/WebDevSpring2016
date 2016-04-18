@@ -5,9 +5,9 @@
     'use strict';
     angular
         .module("ProjectTrackerApp")
-        .factory("UserService", UserService);
+        .factory("ProjectUserService", ProjectUserService);
 
-    function UserService($rootScope, $http) {
+    function ProjectUserService($rootScope, $http) {
 
         $rootScope.currentUser = null;
 
@@ -20,9 +20,46 @@
             findUserByCredentials: findUserByCredentials,
             deleteUserById: deleteUserById,
             findAllUsers: findAllUsers,
-            logout: logout
+            logout: logout,
+            createUserByAdmin: createUserByAdmin,
+            findAllUsersAdmin: findAllUsersAdmin,
+            findByIdAdmin: findByIdAdmin,
+            deleteUserByIdAdmin : deleteUserByIdAdmin,
+            updateUserByAdmin: updateUserByAdmin,
+            addMessage: addMessage,
+            findAllMessage: findAllMessage
         };
         return model;
+
+        function addMessage(message) {
+            return $http.put("/api/projecttracker/contact",message);
+        }
+        function findAllMessage() {
+            return $http.get("/api/projecttracker/contact");
+        }
+
+        function createUserByAdmin(user) {
+
+
+            return $http.post("/api/projecttracker/admin/user" , user);
+        }
+
+        function findAllUsersAdmin() {
+            console.log("inside create user for project");
+            return $http.get("/api/projecttracker/admin/user");
+        }
+
+        function findByIdAdmin(userId) {
+            return $http.get("/api/projecttracker/admin/user/" + userId);
+        }
+
+        function deleteUserByIdAdmin(userId) {
+            return $http.delete("/api/projecttracker/admin/user/" + userId);
+        }
+
+        function updateUserByAdmin(userId,user) {
+            return $http.put("/api/projecttracker/admin/user/" + userId,user);
+        }
 
         function findUserByUsername(username) {
             return $http.get("/api/projecttracker/user?username="+username);

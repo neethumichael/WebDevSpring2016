@@ -7,7 +7,7 @@
         .module("ProjectTrackerApp")
         .controller("HeaderController",HeaderController);
 
-    function HeaderController(UserService, $location) {
+    function HeaderController(ProjectUserService, $location) {
         var vm = this;
 
         vm.logout = logout;
@@ -16,10 +16,10 @@
         }
         init();
         function logout() {
-            UserService
+            ProjectUserService
                 .logout()
                 .then(function(){
-                    UserService.setCurrentUser(null);
+                    ProjectUserService.setCurrentUser(null);
                     $location.url("/home");
                 });
         }

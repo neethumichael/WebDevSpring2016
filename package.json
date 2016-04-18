@@ -34,6 +34,7 @@
     "mongoose": "^4.4.10",
     "multer": "^1.1.0",
     "node-uuid": "^1.4.7",
+    "parse-link-header": "^0.4.1",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.0",
     "passport-google-oauth": "^1.0.0",

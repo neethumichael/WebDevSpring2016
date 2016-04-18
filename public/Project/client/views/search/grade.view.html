@@ -1,0 +1,31 @@
+<div ng-controller = 'SearchController'>
+    <div class="modal-header">
+        <h3 class="modal-title">Add/Update Grade</h3>
+    </div>
+    <div class="modal-body modal-margin">
+        <div class="container-fluid">
+            <form class="form-horizontal" role="form">
+                <div class="form-group" >
+                    <div class="row">
+                        <label for="projectGrade">Grade:</label>
+                        <br>
+                        <input  ng-model="project.grade" type="text" class="form-control gradeClass alterBlock " id="projectGrade">/
+
+                        <input  ng-model="project.gradeTotal" type="text" class="form-control gradeClass alterBlock" id="projectGradeTotal">
+                       <br>
+                        <label for="projectComments">Comments:</label>
+                        <br>
+                        <textarea  ng-model="project.gradeComments" class="form-control alterBlock" id="projectComments"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer ">
+        <div class="col-sm-6">
+            <button  ng-click = "updateGrade(project, model.project);ok()" type="submit" class ="btn btn-primary btn-success">
+            Submit Grade</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </div>
+</div>

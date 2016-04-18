@@ -1,3 +1,4 @@
+
 module.exports = function(app, userModel) {
 
     app.post("/api/projecttracker/user", create);
@@ -7,6 +8,39 @@ module.exports = function(app, userModel) {
     app.delete("/api/projecttracker/user/:id", Delete);
     app.get("/api/projecttracker/loggedin", loggedin);
     app.post("/api/projecttracker/logout", logout);
+    //admin
+    app.post("/api/projecttracker/admin/user", create);
+    app.get("/api/projecttracker/admin/user",findAll);
+    app.get("/api/projecttracker/admin/user/:userId",findById);
+    app.delete("/api/projecttracker/admin/user/:userId",Delete);
+    app.put("/api/projecttracker/admin/user/:userId",Update);
+    app.put("/api/projecttracker/contact",addMessage);
+    app.get("/api/projecttracker/contact",findAllMessage);
+
+    function addMessage(req,res) {
+        var contact = req.body;
+        userModel.addMessage(contact)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function findAllMessage(req, res) {
+        userModel.viewAllMessage()
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
 
     function forAllUsers(req,res) {
         if(req.query.username && req.query.password) {
@@ -32,8 +66,8 @@ module.exports = function(app, userModel) {
     }
 
     function Delete(req,res) {
-        var user = req.body;
-        userModel.Delete(user)
+        var userId = req.params.userId;
+        userModel.Delete(userId )
             .then(function (doc) {
                     res.json(doc);
                 },
@@ -54,13 +88,13 @@ module.exports = function(app, userModel) {
     }
 
     function Update(req,res) {
+        console.log("here");
         var userId = req.params.id;
         var user = req.body;
 
 
         userModel.Update(user)
             .then(function (doc) {
-                    req.session.currentUser = doc;
                     res.json(doc);
                 },
                 function (err) {

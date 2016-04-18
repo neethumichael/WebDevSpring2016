@@ -1,6 +1,7 @@
 <div ng-controller='ProfileController as model'>
     <h1 class="header"><span class="glyphicon glyphicon-user">Profile</span></h1>
     <div ng-show="model.message" class="alert alert-danger" role="alert">{{model.message}}</div>
+    <div class="panelPadding panel panel-primary">
     <form class="form-horizontal">
         <div class="form-group">
             <label for="inputText" class="col-sm-2 control-label">Username:</label>
@@ -44,4 +45,5 @@
             </div>
         </div>
     </form>
+</div>
 </div>

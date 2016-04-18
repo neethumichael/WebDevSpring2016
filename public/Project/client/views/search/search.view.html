@@ -1,11 +1,13 @@
 <div ng-controller="SearchController as model">
-    <h1>Search Projects</h1>
+    <div ng-controller="ProjectController as model2">
+    <h1><i class="fa fa-search" aria-hidden="true"></i> Search Projects</h1>
     <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <div class="panelPadding panel panel-primary">
             <form class="form-horizontal" role="form">
                 <div class="form-group">
                     <br>
+                    <div ng-show="model.message" class="alert alert-danger" role="alert">{{model.message}}</div>
                     <label for="inputProjectTitle" class="col-sm-3 control-label">
                         Project title</label>
                     <div class="col-sm-9">
@@ -45,49 +47,75 @@
                     </div>
                 </div>
 
+
             </form>
-        </div>
-    </div>
-        <div class="col-sm-12 col-md-12 col-lg-12">
-            <h4> Search Results </h4>
-            <table class="table table-striped table-responsive">
-                <thead>
-                <tr>
-                    <th>Project Title</th>
-                    <th>project Status</th>
-                    <th>Project Commits</th>
-                    <th>Project last committer</th>
-                </tr>
-                </thead>
-                <tbody>
+            <div ng-show="model.currentSearchProject">
+                <h3> Search Results </h3>
+                <table class="table table-striped table-responsive table-bordered">
+                    <thead>
+                    <tr>
+                        <th>
+                            <button class = "btn btn-success" ng-click="model.sortType = 'title'; model.sortReverse = !model.sortReverse" ng-show="!model.sortReverse">
+                                <span  class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                                </button>
+                            <button class = "btn btn-success" ng-click="model.sortType = 'title'; model.sortReverse = !model.sortReverse" ng-show="model.sortReverse">
+                            <span  class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+                            </button>
+                            Project Title
+                        </th>
+                        <th>Project Status</th>
+                        <th>Project Commits</th>
+                        <th>Github Owner</th>
+                        <th>
+                            <button class = "btn btn-success" ng-show="!model.sortReverse" ng-click="model.sortType = 'grade'; model.sortReverse = !model.sortReverse"><span   class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></button>
+                            <button class = "btn btn-success" ng-show="model.sortReverse" ng-click="model.sortType = 'grade'; model.sortReverse = !model.sortReverse"><span   class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></button>
+                            Project Grade
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-                <tr  ng-repeat="project in model.currentSearchProject">
-                    <td> {{project.title}} </td>
-                    <td> {{project.status}} </td>
-                    <td> {{project.commits[commits.length-1].commit.message}} </td>
-                    <td> {{project.commits[commits.length-1].commit.committer.name}} </td>
+                    <tr  ng-repeat="project in model.currentSearchProject| orderBy:model.sortType:model.sortReverse">
+                        <td> {{project.title}} </td>
+                        <td> {{project.status}} </td>
+                        <td ng-click = "model2.gitprojectCommits(project)"><a href="#/projectCommits">Click to view commits</a></td>
+                        <td ng-click = "model2.gitUserProfile(project)"><a href="#/userGitProfile">{{project.gusername}}</a></td>
+                        <td>
+                            <div ng-if = "project.grade && (currentUser.roles == 'Faculty'
+                            || currentUser.roles == 'Team Lead')">
+                            <span>{{project.grade}}</span>
+                                <button ng-click="model.submitGrade(project)" style="float:right" type="submit" class ="btn btn-primary btn-success">
+                                    <i class="fa fa-expand" aria-hidden="true"></i>
+                                </button>
+                            </div>
 
-<td>
-    <div ng-if="model.currentUser.roles == 'Faculty' ||
-    model.currentUser.roles == 'Team Lead'">
+                            <div ng-if = "currentUser.roles == 'Team Member'">
+                                <span>{{project.grade}}</span>
 
-        <input  ng-model="project.grade" type="text" class="form-control gradeClass" id="projectGrade">/
-        <input  ng-model="project.gradeTotal" type="text" class="form-control gradeClass" id="projectGradeTotal">
-        <textarea  ng-model="project.gradeComments" class="form-control" id="projectComments"></textarea>
-        <br>
-        <button  ng-click = "model.submitGrade(project, model.project)" type="submit" class ="btn btn-primary btn-success">
-            Submit Grade</button>
-    </div>
+                            </div>
 
-</td>
+                            <div ng-if = "!project.grade && (currentUser.roles == 'Faculty'
+                            || currentUser.roles == 'Team Lead')">
+                                <span>--</span>
+                                <button ng-click="model.submitGrade(project)" style="float:right" type="submit" class ="btn btn-primary btn-success">
+                                    <i class="fa fa-expand" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </td>
 
-                </tr>
-                </tbody>
-            </table>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
+
+        </div>
+
+
+
     </div>
 </div>
-
+</div>
+    </div>
 
 
 

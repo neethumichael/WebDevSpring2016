@@ -7,7 +7,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var cookieParser  = require('cookie-parser');
 var session       = require('express-session');
 var mongoose      = require('mongoose');
-
+var parse = require('parse-link-header');
 var connectionString = 'mongodb://127.0.0.1:27017/cs5610spring2016';
 
 if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {

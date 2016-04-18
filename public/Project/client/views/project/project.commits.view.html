@@ -1,6 +1,5 @@
 <div ng-controller="ProjectController">
     <div>
-        {{gitProject}}
         <h4> Repository Full Name </h4>
         <p> {{gitProject.repos.full_name}} </p>
         <h4> Created on </h4>
@@ -16,7 +15,7 @@
             </thead>
             <tbody>
 
-            <tr  ng-repeat="commit in gitProject.commits">
+            <tr  ng-repeat="commit in gitProject.commits | startFrom:(model.currentPage-1)* model.pageSize | limitTo: model.pageSize">
                 <td> {{commit.sha.substring(0,6)}} </td>
                 <td> {{commit.commit.committer.name}} </td>
                 <td> {{commit.commit.committer.date | date}} </td>
@@ -24,4 +23,6 @@
             </tbody>
         </table>
     </div>
+{{header}}
+    <uib-pagination total-items="gitProject.commits.length" ng-model="model.currentPage" items-per-page="model.pageSize"></uib-pagination>
 </div>

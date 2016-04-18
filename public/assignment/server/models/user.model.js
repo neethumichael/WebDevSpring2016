@@ -51,6 +51,7 @@ module.exports = function (db, mongoose) {
     }
 
     function FindAll() {
+        console.log("inside find all fro assign");
         var deferred = q.defer ();
         UserModel.find (
             function (err, users) {

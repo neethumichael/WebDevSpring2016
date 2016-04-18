@@ -8,7 +8,7 @@ module.exports = function(mongoose) {
     var ProjectSchema = mongoose.Schema({
         userId: String,
         title: String,
-        commits: Object,
+        //commits: Object,
         gusername: String,
         repos: Object,
         repId: String,
@@ -17,7 +17,7 @@ module.exports = function(mongoose) {
         status: String,
         endDate: Date,
         startDate: Date,
-        accessEmail: String,
+        accessEmail: [String],
         grade: Number,
         gradeTotal: Number,
         gradeComments: String

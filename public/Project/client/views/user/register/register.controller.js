@@ -7,7 +7,7 @@
         .module("ProjectTrackerApp")
         .controller("RegisterController", RegisterController);
 
-    function RegisterController($location, $routeParams, UserService) {
+    function RegisterController($location, $routeParams, ProjectUserService) {
 
         var vm = this;
 
@@ -50,17 +50,17 @@
                 vm.message = "Passwords must match";
                 return;
             }
-            UserService.findUserByUsername(user.username).then(
+            ProjectUserService.findUserByUsername(user.username).then(
             function(response) {
                 if (response.data !== null) {
                     vm.message = "User already exists";
                     return;
                 }
                 else {
-                    UserService.createUser(user)
+                    ProjectUserService.createUser(user)
                         .then(function(response){
                             var currentUser = response.data;
-                            UserService.setCurrentUser(currentUser);
+                            ProjectUserService.setCurrentUser(currentUser);
                             $location.url('/dashboard');
                         });
                 }

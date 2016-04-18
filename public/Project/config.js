@@ -5,7 +5,12 @@
     'use strict';
     angular
         .module("ProjectTrackerApp")
-        .config(configuration);
+        .config(configuration)
+    .filter('startFrom', function() {
+        return function(data, start) {
+            return data.slice(start);
+        }
+    });
 
     function configuration($routeProvider) {
         $routeProvider
@@ -17,8 +22,13 @@
             })
             .when("/userGitProfile", {
                 templateUrl: "views/user/user.gitprofile.view.html",
-                controller: "SearchController",
+                controller: "ProjectController",
                 controllerAs: "model"
+            })
+            .when("/admin", {
+                templateUrl: "views/admin/admin.view.html",
+                controller: "AdminController",
+                controllerAs: "model",
             })
             .when("/project", {
                 templateUrl: "views/project/project.view.html",
@@ -26,9 +36,19 @@
                 controllerAs: "model"
             })
             .when("/dashboard", {
-                 templateUrl: "views/dashboard/dashboard.view.html",
+                 templateUrl: "views/dashboard/dashboard.view.html"
 
         })
+            .when("/contact", {
+                templateUrl: "views/contact/contact.view.html",
+                controller: "ContactController",
+                controllerAs: "model"
+            })
+            .when("/access", {
+                templateUrl: "views/projects/access.view.html",
+                controller: "ProjectController",
+                controllerAs: "model"
+            })
             .when("/login", {
                 templateUrl: "views/user/login/login.view.html",
                 controller: "LoginController",
@@ -52,7 +72,7 @@
             .when("/search", {
                 templateUrl:"views/search/search.view.html",
                 controller: "SearchController",
-                controllerAs: "model"
+                controllerAs: "model",
         })
             .when("/profile", {
                 templateUrl: "views/user/profile/profile.view.html",

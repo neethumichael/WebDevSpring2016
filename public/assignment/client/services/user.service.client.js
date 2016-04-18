@@ -30,10 +30,12 @@
         return model;
 
         function createUserByAdmin(user) {
+
             return $http.post("/api/assignment/admin/user" , user);
         }
 
         function findAllUsersAdmin() {
+            console.log("inside create user for assignment");
             return $http.get("/api/assignment/admin/user");
         }
 

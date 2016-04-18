@@ -7,7 +7,7 @@
         .module("ProjectTrackerApp")
         .controller("LoginController", LoginController);
 
-    function LoginController($location, UserService, $rootScope) {
+    function LoginController($location, ProjectUserService, $rootScope) {
         var vm = this;
 
         vm.login = login;
@@ -19,13 +19,13 @@
 
         function login(user_cred) {
             if(typeof user_cred!== "undefined") {
-                UserService.findUserByCredentials(user_cred)
+                ProjectUserService.findUserByCredentials(user_cred)
                     .then(function(response)
                     {
                         var user = response.data;
                         if(response.data) {
                             $rootScope.currentUser = user;
-                            UserService.setCurrentUser(user);
+                            ProjectUserService.setCurrentUser(user);
                             $location.url("/dashboard");
                         }
                         else {

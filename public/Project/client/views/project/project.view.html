@@ -25,7 +25,7 @@
         <div class="form-group">
             <label  class="col-sm-3 control-label">
                 Status</label>
-            <div class="col-sm-9">
+            <div ng-if="currentProject.status" class="col-sm-9">
                 {{currentProject.status}}
             </div>
         </div>
@@ -34,6 +34,7 @@
                 Github username</label>
             <div class="col-sm-9">
                 <input  ng-disabled="profile" ng-model="currentProject.gusername" ng-change ="model.getGitInfo(currentProject.gusername)" ng-model-options="{debounce:2000}" type="text" class="form-control" id="githubusername"  placeholder="Github username" required>
+            {{header}}
             </div>
         </div>
         <div class="form-group">

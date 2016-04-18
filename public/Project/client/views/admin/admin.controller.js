@@ -4,10 +4,10 @@
 (function(){
     'use strict';
     angular
-        .module("FormBuilderApp")
+        .module("ProjectTrackerApp")
         .controller("AdminController",AdminController);
 
-    function AdminController(UserService, $location, $scope) {
+    function AdminController(ProjectUserService, $location, $scope) {
 
         var vm = this;
 
@@ -45,14 +45,14 @@
             }
 
 
-            UserService.findUserByUsername(user.username).then(
+            ProjectUserService.findUserByUsername(user.username).then(
                 function(response) {
                     if (response.data!= null || (typeof response.data) == "undefined") {
                         vm.message = "User already exists";
                         return;
                     }
                     else {
-                        UserService.createUser(user)
+                        ProjectUserService.createUser(user)
                             .then(function(response){
                                 vm.users = findAllUsers();
                                 for(var i in vm.users) {
@@ -73,12 +73,13 @@
 
         function deleteUser(user) {
 
-            UserService.deleteUserByIdAdmin(user._id)
+            ProjectUserService.deleteUserByIdAdmin(user._id)
                 .then(function(response) {
                     vm.users = findAllUsers();
                     for(var i in vm.users) {
                         vm.users[i].roles = vm.users[i].roles.toString();
                     }
+                    vm.users = findAllUsers();
                     vm.user = null;
                 });
             vm.user = null;
@@ -106,10 +107,10 @@
             vm.track = 0;
             if(vm.user) {
                 if(newUser) {
-                    UserService.updateUserByAdmin(vm.user._id,newUser)
+                    ProjectUserService.updateUserByAdmin(vm.user._id,newUser)
                         .then(function(response) {
                             vm.user = null;
-
+                            vm.users = findAllUsers();
                             for(var i in vm.users) {
                                 vm.users[i].roles = vm.users[i].roles.toString();
                             }
@@ -128,7 +129,7 @@
         function findAllUsers() {
             var cur_user =null;
             var user;
-                    UserService.findAllUsersAdmin()
+            ProjectUserService.findAllUsersAdmin()
                         .then(function(response) {
                             vm.users = response.data;
                             for(var i in vm.users) {

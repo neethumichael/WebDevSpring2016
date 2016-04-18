@@ -8,5 +8,8 @@
         <li  ng-show="currentUser.roles.indexOf('Admin') >= 0" ng-class="{'active': model.$location.url() === '/user'}"><a href="#/user">Manage User</a></li>
         <li ng-show="currentUser.roles.indexOf('Team Member') >= 0 ||
         currentUser.roles.indexOf('Student') >= 0" ng-class="{'active': model.$location.url() === '/project'}"><a href="#/project">Projects</a></li>
+        <li ng-show="currentUser.roles.indexOf('admin') >= 0"
+            ng-class="{'active': model.$location.url() === '/admin'}">
+            <a href="#/admin">   Manage Users  </a></li>
     </ul>
 </div>
