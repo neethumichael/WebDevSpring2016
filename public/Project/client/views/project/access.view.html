@@ -1,35 +1,44 @@
-<div ng-controller='ProjectController as model'>
-    <h1 class="header">Admin</h1>
-    <h2 class="sub-header">Users</h2>
+<div ng-controller='ProjectController as model' class="access-margin-fix">
+    <h4 class="sub-header">Modify Project Access</h4>
     <div ng-show="model.message" class="alert alert-danger" role="alert">{{model.message}}</div>
 
     <table name="mytable" id="mytable" class="table table-striped table-bordered table-responsive">
         <thead>
         <tr>
-            <th>
-                Access Id<br> <br>
-                <input class ="form-control" type="text" ng-model = "access.userId" placeholder="Username"/></th>
 <th>
     Email Id
+            <input class ="form-control" type="text" ng-model = "access.userId" placeholder="Email id"/></th>
 </th>
             <th  class = "actionAlign"> Actions <br><br>
-                <span ng-click="addAccess(access)" class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                <span ng-click="updateAccess(access)" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                <button ng-click="addAccess(access)" class="btn btn-success" aria-hidden="true">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                </button>
+                <button ng-click="updateAccess(access)" class="btn btn-success" aria-hidden="true">
+                    <i class="fa fa-check-circle" aria-hidden="true"></i>
+                </button>
             </th>
         </tr>
         </thead>
         <tbody>
 
         <tr ng-repeat="access1 in accesses">
-            <td> {{access1._id}}</td>
             <td> {{access1.userId}}</td>
             <td class = "nowrap">
-                <span ng-click="deleteAccess(access1)" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                <span ng-click="selectAccess($index)" class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                <button ng-click="deleteAccess(access1)" class="btn btn-success" aria-hidden="true">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+                <button ng-click="selectAccess($index)" class="btn btn-success" aria-hidden="true">
+                    <i class="fa fa-cog" aria-hidden="true"></i>
+                </button>
             </td>
         </tr>
         </tbody>
     </table>
+    <div class="modal-footer ">
+        <div class="col-sm-6">
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+        </div>
+    </div>
 </div>
 
 

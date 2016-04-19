@@ -2,6 +2,7 @@
  * Created by neethu on 3/17/2016.
  */
 var q = require("q");
+var bcrypt = require("bcrypt-nodejs");
 module.exports = function (db, mongoose) {
 
     var ProjectUserSchema = require("./user.schema.server.js")(mongoose);
@@ -17,10 +18,28 @@ module.exports = function (db, mongoose) {
         findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials,
         addMessage: addMessage,
-        viewAllMessage: viewAllMessage
+        viewAllMessage: viewAllMessage,
+        deleteContact: deleteContact
     };
     return api;
 
+    function deleteContact(messageId) {
+        var deferred = q.defer ();
+        console.log("message id"+messageId);
+        ContactModel
+            .remove (
+                {_id: messageId},
+                function (err, stats) {
+                    if (!err) {
+                        console.log("stats "+stats);
+                        deferred.resolve(stats);
+                    } else {
+                        deferred.reject(err);
+                    }
+                }
+            );
+        return deferred.promise;
+    }
     function addMessage(message) {
         var deferred = q.defer();
         ContactModel.create(message, function (err,doc) {
@@ -39,6 +58,7 @@ module.exports = function (db, mongoose) {
         ContactModel.find (
             function (err, messages) {
                 if (!err) {
+                    //console.log("messages "+messages);
                     deferred.resolve (messages);
                 } else {
                     deferred.reject (err);

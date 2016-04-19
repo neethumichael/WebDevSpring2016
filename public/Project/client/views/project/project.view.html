@@ -3,7 +3,8 @@
         <div class="col-sm-12 col-md-12 col-lg-12">
         <div class="panelPadding panel panel-primary">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="#">Add/Update Project</a></li>
+        <li ng-if="profile" class="active"><a href="#">Update Project</a></li>
+        <li ng-if="!profile" class="active"><a href="#">Add Project</a></li>
         <li><a href="#/renderProjects">View All Projects</a></li>
     </ul>
     <form class="form-horizontal" role="form">
@@ -34,7 +35,6 @@
                 Github username</label>
             <div class="col-sm-9">
                 <input  ng-disabled="profile" ng-model="currentProject.gusername" ng-change ="model.getGitInfo(currentProject.gusername)" ng-model-options="{debounce:2000}" type="text" class="form-control" id="githubusername"  placeholder="Github username" required>
-            {{header}}
             </div>
         </div>
         <div class="form-group">
@@ -63,9 +63,9 @@
         </div>
         <div class="form-group last">
             <div class="col-sm-offset-2 col-sm-9">
-                <button  ng-click="model.addProject(currentProject)" type="submit" class ="btn btn-primary btn-success">
+                <button  ng-if="!profile" ng-click="model.addProject(currentProject)" type="submit" class ="btn btn-primary btn-success">
                     Add Project</button>
-                <button  ng-click = "model.updateProject(currentProject)" type="submit" class ="btn btn-primary btn-success">
+                <button  ng-if="profile" ng-click = "model.updateProject(currentProject)" type="submit" class ="btn btn-primary btn-success">
                     Update Project</button>
                 <button  ng-click="model.cancel(currentProject)" type="submit" class ="btn btn-primary">
                     Cancel</button>

@@ -35,8 +35,8 @@
             <th> <div class="text-center table-header-align">Roles</div> <br> <br>
                 <input class ="form-control" type="text" ng-model = "model.user.roles" placeholder="role1 , role2"/></th>
             <th  class = "actionAlign nowrap"> <div class="text-center table-header-align">Actions </div><br><br>
-                <button ng-click="model.addUser(model.user)" class = "btn btn-success"> <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
-                    <button ng-click="model.updateUser(model.user)" class = "btn btn-success"><i class="fa fa-check-circle" aria-hidden="true"></i> </button>
+                <button ng-click="model.addUser(model.user)" class = "btn btn-success btn-responsive"> <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                    <button ng-click="model.updateUser(model.user)" class = "btn btn-success btn-responsive"><i class="fa fa-check-circle" aria-hidden="true"></i> </button>
             </th>
         </tr>
         </thead>
@@ -48,8 +48,8 @@
             <td> {{user.lastName}}</td>
             <td> {{user.roles}}</td>
             <td class = "nowrap">
-                    <button ng-click="model.deleteUser(user)" class="btn btn-success"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                    <button ng-click="model.selectUser(user)" class="btn btn-success"><i class="fa fa-cog" aria-hidden="true"></i></button>
+                    <button ng-click="model.deleteUser(user)" class="btn btn-success btn-responsive"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    <button ng-click="model.selectUser(user)" class="btn btn-success btn-responsive"><i class="fa fa-cog" aria-hidden="true"></i></button>
             </td>
         </tr>
         </tbody>

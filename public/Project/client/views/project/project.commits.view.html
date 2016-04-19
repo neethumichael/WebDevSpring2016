@@ -1,16 +1,14 @@
 <div ng-controller="ProjectController">
-    <div>
-        <h4> Repository Full Name </h4>
-        <p> {{gitProject.repos.full_name}} </p>
-        <h4> Created on </h4>
-        <p> {{gitProject.repos.created_at}} </p>
-        <h4> Commits </h4>
-        <table class="table table-striped table-responsive">
+    <div class="panelPadding panel panel-primary">
+        <h3 ng-if="gitProject.commitsFound"> Commits </h3>
+        <h3 ng-if="!gitProject.commitsFound">No Commits Found / Not Authorized</h3>
+        <table  ng-if="gitProject.commitsFound" class="table table-striped table-responsive">
             <thead>
             <tr>
                 <th>SHA</th>
                 <th>Committer Name</th>
                 <th>Committer Date</th>
+                {{gitProject.commits}}
             </tr>
             </thead>
             <tbody>
@@ -22,7 +20,9 @@
             </tr>
             </tbody>
         </table>
+        <uib-pagination ng-if="gitProject.commitsFound"
+                        total-items="gitProject.commits.length" ng-model="model.currentPage" items-per-page="model.pageSize">
+        </uib-pagination>
     </div>
-{{header}}
-    <uib-pagination total-items="gitProject.commits.length" ng-model="model.currentPage" items-per-page="model.pageSize"></uib-pagination>
+
 </div>

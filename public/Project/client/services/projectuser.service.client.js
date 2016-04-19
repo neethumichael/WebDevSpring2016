@@ -27,10 +27,14 @@
             deleteUserByIdAdmin : deleteUserByIdAdmin,
             updateUserByAdmin: updateUserByAdmin,
             addMessage: addMessage,
-            findAllMessage: findAllMessage
+            findAllMessage: findAllMessage,
+            deleteContact: deleteContact
         };
         return model;
 
+        function deleteContact(messageId) {
+            return $http.delete("/api/projecttracker/contact/"+messageId);
+        }
         function addMessage(message) {
             return $http.put("/api/projecttracker/contact",message);
         }

@@ -84,6 +84,11 @@
                 controller: "RegisterController",
                 controllerAs: "model"
             })
+            .when("/adminContact", {
+                templateUrl: "views/contact/admin.contact.view.html",
+                controller: "ContactController",
+                controllerAs: "model"
+        })
             .otherwise({
                 redirectTo: "views/home/home.view.html"
             });

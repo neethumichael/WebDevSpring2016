@@ -24,7 +24,9 @@
         var USER_URL = "https://api.github.com/users/";
 
         function init() {
-           vm.projects = findAllProjects();
+            if($location.url() == '/renderProjects') {
+                vm.projects = findAllProjects();
+            }
         }
         init();
 
@@ -39,8 +41,6 @@
         vm.gitUserProfile = gitUserProfile;
         vm.gitprojectCommits = gitprojectCommits;
         vm.cancel = cancel;
-        vm.updateProjectManagerVisibilty = updateProjectManagerVisibilty;
-        vm.updateProjectManager = updateProjectManager;
         vm.accessControl = accessControl;
 
 var remCommits = [];
@@ -76,7 +76,6 @@ var remCommits = [];
                     function findAllAccess(project) {
                         ProjectService.findAllAccess(project)
                             .then(function (response) {
-                                console.log("vm.accesses "+vm.accesses);
                             vm.accesses = response.data;
                                 $scope.accesses = response.data
                             return vm.accesses;
@@ -85,7 +84,6 @@ var remCommits = [];
                     }
 
                     $scope.updateAccess = function(access) {
-                        console.log("inside update project controller");
                         ProjectService.updateAccess(access)
                                     .then(function (reponse) {
                                        // vm.access = null;
@@ -97,7 +95,7 @@ var remCommits = [];
                         ProjectService.deleteAccess(access)
                                     .then(function (reponse) {
                                        // vm.access = null;
-                                        //vm.accesses = findAllAccess(project,$rootScope.currentUser);
+                                        $scope.accesses = findAllAccess(project,$rootScope.currentUser);
                                     });
 
                     }
@@ -114,21 +112,6 @@ var remCommits = [];
                     }
                 }
             });
-        }
-
-        function updateProjectManager(index,currentProjectemail) {
-            console.log("test in client "+currentProjectemail);
-            var project = vm.projects[index];
-            ProjectService.updateAccess(project,currentProjectemail)
-                .then(function (response){
-                    vm.normalRender = true;
-                    vm.projects = findAllProjects();
-                });
-        }
-
-        function updateProjectManagerVisibilty(index) {
-            vm.normalRender = false;
-            vm.cond = index;
         }
 
         function getGitInfo(username) {
@@ -167,12 +150,17 @@ var remCommits = [];
         }
 
         function searchRepository(Repository) {
-            return $http.get(REP_URL + Repository.id + "/commits").success(getSelectedRepCommitDetails);
+            return $http.get(REP_URL + Repository.id + "/commits")
+                .then(getSelectedRepCommitDetails,
+                function(err) {
+                            return err;
+                });
+
         }
 
         function getSelectedRepCommitDetails(data, status, header, xyz) {
             commits = data;
-
+            $rootScope.commitFound = data.length;
            // var linkHeader = header().link;
 
 
@@ -183,6 +171,39 @@ var remCommits = [];
                    // console.log("link Header "+linkHeader);
 
             return commits;
+        }
+
+        function gitUserProfile(project) {
+            //var project = selectGitProject(index);
+            console.log("dsfsd "+project.gusername);
+            getGitInfo(project.gusername).then(function (Result) {
+                console.log("vm.user "+vm.user);
+                $rootScope.gitUserProfile = vm.user;
+            });
+        }
+
+        function gitprojectCommits(project) {
+            console.log("inside commits"+project.repos);
+            //var project = selectGitProject(index);
+
+            searchRepository(project.repos).then(function (Result) {
+                    // project.repos = {repId: repId, repName: repName};
+
+                    project.commits = commits;
+                console.log("commits "+commits);
+                console.log("commits lengtj "+commits.length);
+                if(commits)
+                    project.commitsFound = true;
+                else
+                    project.commitsFound = false;
+                    console.log("commits lengtj "+project.commitsFound );
+                    $rootScope.gitProject = project;
+                },
+                function(err) {
+                    vm.message = err;
+                    console.log("inside error "+err);
+                });
+            return;
         }
 
         function findAllProjects() {
@@ -199,12 +220,29 @@ var remCommits = [];
                                 projects =response.data;
                                 for(var v in projects) {
                                     searchRepository(projects[v].repos).then(function (Result) {
-
-                                        // project.repos = {repId: repId, repName: repName};
                                         projects[v].commits = commits;
+                                        if (typeof projects[v].commits == "undefined" || projects[v].commits.length == 0)
+                                        {
+                                            projects[v].status = "Not Started";
+                                        }
+                                        else if (projects[v].commits.length>0) {
+                                            projects[v].status = "Started";
+                                            for(var u in projects[v].commits) {
+                                                var s = projects[v].commits[u].commit.message;
+                                                if (s.indexOf("finish")> -1) {
+                                                    projects[v].status = "Completed";
+                                                }
+                                                break;
+                                            }
+                                        }
+                                    },
+                                    function(err) {
+                                        projects[v].status = "Not Started";
                                     });
 
-                                }
+
+
+                                        }
                                 vm.projects = projects;
                             });
                 });
@@ -232,7 +270,7 @@ var remCommits = [];
                         count++; }
                 var test= "finish";
                 vm.size = count;
-                if (count > 0) {
+                if (!typeof commits == "undefined") {
                     for(var u in commits) {
                         var s = commits[u].commit.message;
                         if (s.indexOf(test)> -1) {
@@ -243,13 +281,11 @@ var remCommits = [];
                     if(!project.status)
                         project.status = "Started";
                 }
-                else if (count <= 0) {
+                else {
                     project.status = "Not Started";
                 }
-               // project.commits = commits;
-               // project.commitMessage = commits[count-1].commit.message;
-               // project.committer = commits[count-1].commit.committer.name;
-                UserService.getCurrentUser()
+
+                ProjectUserService.getCurrentUser()
                     .then ( function(response) {
                         user = response.data;
                         ProjectService.addProject(project,user._id)
@@ -258,41 +294,27 @@ var remCommits = [];
                                 $location.url('/renderProjects');
                             });
                     });
-            });
+            }),
+                (function (err) {
+                    console.log("errorrrrr");
+                });
         }
 
         function removeProject(projectIndex) {
             var project = vm.projects[projectIndex];
             ProjectService.deleteProject(project._id)
                 .then(function (response) {
-                    vm.projects = findAllProjects();
+                    //vm.projects = findAllProjects();
                 });
         }
 
-        function gitUserProfile(project) {
-           //var project = selectGitProject(index);
-            console.log("dsfsd "+project.gusername);
-            getGitInfo(project.gusername).then(function (Result) {
-                console.log("vm.user "+vm.user);
-                $rootScope.gitUserProfile = vm.user;
-            });
-        }
 
-        function gitprojectCommits(project) {
-             console.log("inside commits");
-            //var project = selectGitProject(index);
-
-            searchRepository(project.repos).then(function (Result) {
-                // project.repos = {repId: repId, repName: repName};
-
-                project.commits = commits;
-                $rootScope.gitProject = project;
-            });
-        }
 
         function selectGitProject(index) {
-            vm.projects = findAllProjects();
+
+           // vm.projects = findAllProjects();
             $rootScope.profile = true;
+            $rootScope.modify = true;
             var project = {
                 title: vm.projects[index].title,
                 description: vm.projects[index].description,

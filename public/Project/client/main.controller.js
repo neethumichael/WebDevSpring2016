@@ -15,7 +15,8 @@
             // If it isn't what you want, toggle showSideBar...
             if($location.url() == '/dashboard' || $location.url() == '/project' || $location.url() == '/profile'
             || $location.url() == '/search' || $location.url() == '/renderProjects' || $location.url() == '/projectCommits'
-            || $location.url() == '/userGitProfile' || $location.url() == '/admin')
+            || $location.url() == '/userGitProfile' || $location.url() == '/admin'
+            || $location.url() == '/adminContact')
             $rootScope.showSideBar = true;
             else
                 $rootScope.showSideBar = false;

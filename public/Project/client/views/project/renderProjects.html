@@ -1,25 +1,45 @@
 <div data-ng-controller="ProjectController as model">
     <h1>Projects</h1>
+    <div class="panelPadding panel panel-primary">
     <ul class="nav nav-tabs">
         <li><a href="#/project">Add Project</a></li>
-        <li><a href="#/renderProjects">View All Projects</a></li>
+        <li class="active"><a href="#/renderProjects">View All Projects</a></li>
     </ul>
-    <table class="table">
+        <br>
+    <table class="table table-responsive table-bordered table-striped">
+        <thead>
+        <th>Project Title</th>
+        <th>Project Status</th>
+        <th>Project Commits</th>
+        <th>Project Grade</th>
+        <th>Instructor Comments</th>
+        <th>Github Owner</th>
+        <th>Modify Access</th>
+        <th>Actions</th>
+        </thead>
         <tbody>
         <tr ng-repeat="project in model.projects">
             <td>{{project.title}}</td>
-            <td ng-click = "model.gitprojectCommits(project)"><a href="#/projectCommits">Click to view commits</a></td>
+            <td>{{project.status}}</td>
+            <td  ng-click = "model.gitprojectCommits(project)"><a href="#/projectCommits">Click to view commits</a></td>
+            <td ng-if="project.grade">{{project.grade}}/{{project.gradeTotal}}</td>
+            <td ng-if="!project.grade">&nbsp;</td>
+            <td ng-if="project.gradeComments">{{project.gradeComments}}</td>
+            <td ng-if="!project.gradeComments">&nbsp;</td>
             <td ng-click = "model.gitUserProfile(project)"><a href="#/userGitProfile">{{project.gusername}}</a></td>
+
             <td>
-                <button ng-click="model.accessControl(project)" class="btn btn-danger">Modify Access</button>
+
+                <button  ng-click="model.accessControl(project)" class="btn btn-danger"><i class="fa fa-link" aria-hidden="true"></i></button>
             </td>
             <td>
-                <button ng-click="model.removeProject($index)" class="btn btn-danger">Remove</button>
-                <button ng-click="model.selectProject($index)" class="btn btn-info">Select</button>
+                <button ng-click="model.removeProject($index)" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                <button ng-click="model.selectProject($index)" class="btn btn-info"><i class="fa fa-cog" aria-hidden="true"></i></button>
             </td>
         </tr>
         </tbody>
     </table>
+        </div>
 </div>
            <!-- <td>
                 <button ng-show="model.normalRender"ng-click = "model.updateProjectManagerVisibilty($index)" class="btn btn-danger">Edit Access</button>

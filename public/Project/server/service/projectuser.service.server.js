@@ -16,6 +16,19 @@ module.exports = function(app, userModel) {
     app.put("/api/projecttracker/admin/user/:userId",Update);
     app.put("/api/projecttracker/contact",addMessage);
     app.get("/api/projecttracker/contact",findAllMessage);
+    app.delete("/api/projecttracker/contact/:messageId",deleteContact);
+
+    function deleteContact(req, res) {
+        var messageId = req.params.messageId;
+        console.log("message id"+messageId);
+        userModel.deleteContact(messageId )
+            .then(function (doc) {
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                })
+    }
 
     function addMessage(req,res) {
         var contact = req.body;
@@ -34,6 +47,7 @@ module.exports = function(app, userModel) {
         userModel.viewAllMessage()
             .then(
                 function (doc) {
+                    console.log("fdocc "+doc);
                     res.json(doc);
                 },
                 function (err) {

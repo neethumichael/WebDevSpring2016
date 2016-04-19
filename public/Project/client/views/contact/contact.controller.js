@@ -11,10 +11,27 @@
         var vm = this;
 
         vm.addMessage = addMessage;
-        function init() {
+        vm.viewAllMessage = viewAllMessage;
+        vm.deleteContact = deleteContact;
 
+        vm.sortType     = 'model.user.username';
+        vm.sortReverse  = true;
+        function init() {
+                   //if($location.url == '/adminContact') {
+                       //console.log("location correct");
+                      viewAllMessage();
+                   //}
         }
         init();
+
+        function deleteContact(message) {
+            console.log("called delete");
+                ProjectUserService.deleteContact(message._id)
+                    .then(function(response) {
+                        console.log("deleet cont");
+                        vm.contacts = viewAllMessage();
+                    });
+        }
 
         function addMessage(message) {
             vm.message = null;
@@ -35,6 +52,12 @@
         }
 
         function viewAllMessage() {
+            ProjectUserService
+                .findAllMessage()
+                .then(function(response){
+                    vm.contacts = response.data;
+                });
+            return vm.contacts;
 
         }
     }
