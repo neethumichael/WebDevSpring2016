@@ -148,7 +148,6 @@ var remCommits = [];
         function searchRepository(Repository) {
             return $http.get(REP_URL + Repository.id + "/commits").success(getSelectedRepCommitDetails)
                 .error(function() {
-                    console.log("inside error");
                     noCommits = true;
 
                 });
@@ -269,7 +268,6 @@ var remCommits = [];
                         });
                 })
                 .error(function(err) {
-                    console.log("inside error");
                     noCommits = true;
                     project.status = "Not Started";
                     ProjectUserService.getCurrentUser()
@@ -368,6 +366,8 @@ $rootScope.commits = commits;
             function selectProject(index) {
             $rootScope.profile = true;
             var project = {
+                _id: vm.projects[index]._id,
+                userId: vm.projects[index].userId,
                 title: vm.projects[index].title,
                 description: vm.projects[index].description,
                 status: vm.projects[index].status,
@@ -389,8 +389,11 @@ $rootScope.commits = commits;
         }
 
         function updateProject(project) {
+            console.log("project is "+project._id);
             ProjectService.updateProject(project)
                 .then(function (response){
+                    $rootScope.currentProject = null;
+                    $location.url('/renderProjects');
                 });
         }
     }

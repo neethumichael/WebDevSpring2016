@@ -6,6 +6,10 @@
         <li class="active"><a href="#/renderProjects">View All Projects</a></li>
     </ul>
         <br>
+        <div ng-if="!model.projects.length">
+            <div  class="alert alert-danger" role="alert">No projects to display</div>
+            </div>
+        <div ng-if="model.projects.length">
     <table class="table table-responsive table-bordered table-striped">
         <thead>
         <th>Project Title</th>
@@ -40,6 +44,7 @@
         </tbody>
     </table>
         </div>
+    </div>
 </div>
            <!-- <td>
                 <button ng-show="model.normalRender"ng-click = "model.updateProjectManagerVisibilty($index)" class="btn btn-danger">Edit Access</button>

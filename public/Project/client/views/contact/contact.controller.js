@@ -25,10 +25,8 @@
         init();
 
         function deleteContact(message) {
-            console.log("called delete");
                 ProjectUserService.deleteContact(message._id)
                     .then(function(response) {
-                        console.log("deleet cont");
                         vm.contacts = viewAllMessage();
                     });
         }

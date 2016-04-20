@@ -14,7 +14,7 @@ module.exports = function(app, userModel) {
     app.post("/api/projecttracker/logout", logout);
 
     //admin
-    app.post("/api/projecttracker/admin/user", create);
+    app.post("/api/projecttracker/admin/user", createUserAdmin);
     app.get("/api/projecttracker/admin/user",findAll);
     app.get("/api/projecttracker/admin/user/:userId",findById);
     app.delete("/api/projecttracker/admin/user/:userId",Delete);
@@ -26,8 +26,6 @@ module.exports = function(app, userModel) {
     passport.use(new LocalStrategy(localStrategy ));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
-
-
 
     function localStrategy(username, password, done) {
 
@@ -202,15 +200,31 @@ module.exports = function(app, userModel) {
             );
     }
 
-    function create(req, res) {
+    function createUserAdmin(req, res) {
+
         var user = req.body;
 
 
         userModel.Create(user)
             .then(
                 function (user) {
+                   res.json(user);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function create(req, res) {
+        var user = req.body;
+
+          user.roles = "admin";
+        userModel.Create(user)
+            .then(
+                function (user) {
                     if(user) {
-                        if(!isAdmin) {
+                        {
                         req.login(user, function (err) {
 
                             if (err) {

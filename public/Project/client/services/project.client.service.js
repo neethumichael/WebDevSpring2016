@@ -21,7 +21,6 @@
             resetProject: resetProject,
             findAllProjectsForUser: findAllProjectsForUser,
             searchProject: searchProject,
-            updateProjectManager: updateProjectManager,
             updateAccess: updateAccess,
             addAccess: addAccess,
             findAllAccess: findAllAccess,
@@ -48,9 +47,6 @@
             return $http.get("/api/projecttracker/project/Access/"+project._id);
         }
 
-        function updateProjectManager(project,currentProjectemail) {
-            return $http.put("/api/projecttracker/project/editAccess/"+project._id+"/"+currentProjectemail);
-        }
 
         function resetProject() {
             $rootScope.project = null;

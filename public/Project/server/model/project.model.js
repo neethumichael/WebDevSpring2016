@@ -38,27 +38,29 @@ module.exports = function (db, mongoose, accessModel, userModel) {
         var deferred = q.defer();
         var Project ={
             title: project.title,
-            commits: project.commits,
             gusername: project.gusername,
             repos: project.repos,
             userId: project.userId,
             description: project.description,
             status: project.status,
-            accessEmail: project.accessEmail,
             endDate: project.endDate,
             startDate: project.startDate,
             grade: project.grade,
             gradeTotal: project.gradeTotal,
             gradeComments: project.gradeComments
         };
+        console.log("there");
+        console.log("Id "+Id);
         ProjectModel
             .update (
                 {_id: Id},
                 {$set: Project},
                 function (err, doc) {
                     if (!err) {
+                        console.log("updated");
                         deferred.resolve(doc);
                     } else {
+                        console.log("error"+err);
                         deferred.reject(err);
                     }
                 }

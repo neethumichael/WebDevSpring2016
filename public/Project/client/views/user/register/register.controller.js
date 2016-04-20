@@ -61,7 +61,7 @@
                         .then(function(response){
                             var currentUser = response.data;
                             ProjectUserService.setCurrentUser(currentUser);
-                            $rootScope.currentUser = currentUser;
+                            console.log("here");
                             $location.url('/dashboard');
                         });
                 }

@@ -8,18 +8,14 @@ module.exports = function(mongoose) {
     var ProjectSchema = mongoose.Schema({
         userId: String,
         title: String,
-        //commits: Object,
         gusername: String,
         repos: Object,
-        repId: String,
-        repName: String,
         description: String,
         status: String,
         endDate: Date,
         startDate: Date,
-        accessEmail: [String],
-        grade: Number,
-        gradeTotal: Number,
+        grade: String,
+        gradeTotal: String,
         gradeComments: String
     }, {collection: 'projectData'});
     return ProjectSchema;

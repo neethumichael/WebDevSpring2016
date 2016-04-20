@@ -130,10 +130,9 @@ module.exports = function(app, projectModel, accessModel) {
 
     function Update(req, res) {
         var project = req.body;
-        projectModel.findProjectByTitle(project.title)
-            .then(
-                function (projectOld) {
-                    projectModel.Update(projectOld._id,project)
+        console.log("here");
+
+                    projectModel.Update(project._id,project)
                         .then(
                             function (project) {
                                 res.json(project);
@@ -142,10 +141,7 @@ module.exports = function(app, projectModel, accessModel) {
                                 res.status(400).send(err);
                             }
                         );
-                },
-                function (err) {
-                    res.status(400).send(err);
-                });
+
     }
 
     function findAllProjectsForUser(req, res) {
