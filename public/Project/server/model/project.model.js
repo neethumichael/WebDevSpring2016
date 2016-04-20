@@ -36,7 +36,6 @@ module.exports = function (db, mongoose, accessModel, userModel) {
 
     function Update(Id, project) {
         var deferred = q.defer();
-        console.log("ghh "+project.accessEmail);
         var Project ={
             title: project.title,
             commits: project.commits,
@@ -58,7 +57,6 @@ module.exports = function (db, mongoose, accessModel, userModel) {
                 {$set: Project},
                 function (err, doc) {
                     if (!err) {
-                        console.log("doc "+doc.accessEmail);
                         deferred.resolve(doc);
                     } else {
                         deferred.reject(err);
@@ -99,7 +97,6 @@ module.exports = function (db, mongoose, accessModel, userModel) {
             startDate: project.startDate,
             endDate: project.endDate
         };
-console.log("djndsjskd "+userId);
         var deferred = q.defer();
         ProjectModel.create(newProject, function (err,doc) {
             if(err) {
@@ -140,9 +137,6 @@ console.log("djndsjskd "+userId);
         }
        // for(var u in roles) {
             if(roles == "Admin" || roles == "admin") {
-                console.log("Fd"+searchString.title);
-                console.log("Fd"+searchString.status);
-                console.log("Fd"+searchString.keywords);
                 ProjectModel
                     .find(
                         {
@@ -155,12 +149,8 @@ console.log("djndsjskd "+userId);
                             var temp_doc =[];
                             temp_doc = doc;
                             if (!err) {
-                               // console.log("doc.userId "+doc.userId);
-
                                 deferred.resolve(doc);
-                                //console.log("dshjsd " + doc);
                             } else {
-                                console.log("error " + err);
                                 deferred.reject(err);
                             }
                         }
@@ -172,10 +162,8 @@ console.log("djndsjskd "+userId);
                     .then(
                         function (projects) {
                             var id =[];
-                            console.log("proejcts "+projects);
                             for(var u in projects) {
                                 id[u] = projects[u].projectId;
-                                console.log("adding id "+id[u]);
                             }
 
                             ProjectModel
@@ -193,7 +181,6 @@ console.log("djndsjskd "+userId);
 
 
                                         } else {
-                                            console.log("error " + err);
                                             deferred.reject(err);
                                         }
                                     }
@@ -224,7 +211,6 @@ console.log("djndsjskd "+userId);
 
                                 //console.log("dshjsd " + doc.title);
                             } else {
-                                console.log("error " + err);
                                 deferred.reject(err);
                             }
                         }

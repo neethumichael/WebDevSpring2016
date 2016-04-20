@@ -33,7 +33,6 @@
 
 
         function updateAccess(access) {
-            console.log("inside serve"+access.userId);
             return $http.put("/api/projecttracker/project/Access/",access);
         }
 

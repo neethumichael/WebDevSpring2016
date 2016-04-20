@@ -19,7 +19,8 @@
                 || $location.url() == '/projectCommits'
                 || $location.url() == '/userGitProfile'
                 || $location.url() == '/admin'
-                || $location.url() == '/adminContact')
+                || $location.url() == '/adminContact'
+            || ($location.url() == '/contact' && $rootScope.currentUser))
 
                 $rootScope.showSideBar = true;
             else

@@ -136,7 +136,6 @@
 
         $http.get('/api/projecttracker/loggedin').success(function(user) {
             $rootScope.errorMessage = null;
-            console.log("no issue"+user.username);
             // User is Authenticated
             if (user !== '0') {
                 $rootScope.currentUser = user;
@@ -144,7 +143,6 @@
             }
             // User is Not Authenticated
             else {
-                console.log("issue");
                 $rootScope.errorMessage = 'You need to log in.';
                 deferred.reject();
                 $location.url('/login');

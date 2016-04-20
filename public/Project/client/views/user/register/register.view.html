@@ -14,7 +14,7 @@
                             Username</label>
                             <div class="col-sm-9 input-group">
                                 <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                            <input ng-model="model.user.username" type="text" class="form-control left-align" id="inputUsername" placeholder="Username" required>
+                            <input ng-model="model.user.username" type="text" class="form-control" id="inputUsername" placeholder="Username" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -22,7 +22,7 @@
                             Password</label>
                         <div class="col-sm-9 input-group">
                             <span class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></span>
-                            <input ng-model="model.user.password" type="password" class="form-control left-align" id="inputPassword3" placeholder="Password" required>
+                            <input ng-model="model.user.password" type="password" class="form-control" id="inputPassword3" placeholder="Password" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -30,7 +30,7 @@
                             Verify Password</label>
                         <div class="col-sm-9 input-group">
                             <span class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></span>
-                            <input ng-model="model.user.password2" type="password" class="form-control left-align" id="inputPassword2" placeholder="Password" required>
+                            <input ng-model="model.user.password2" type="password" class="form-control" id="inputPassword2" placeholder="Password" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -38,7 +38,7 @@
                             Firstname</label>
                         <div class="col-sm-9 input-group">
                             <span class="input-group-addon"><i class="fa fa-eye" aria-hidden="true"></i></span>
-                            <input type="text" ng-model="model.user.firstName" class="form-control left-align" id="inputFirstname" placeholder="Firstname" required>
+                            <input type="text" ng-model="model.user.firstName" class="form-control" id="inputFirstname" placeholder="Firstname" required>
                         </div>
                     </div>
 
@@ -47,7 +47,7 @@
                             Lastname</label>
                         <div class="col-sm-9 input-group">
                             <span class="input-group-addon"><i class="fa fa-eye" aria-hidden="true"></i></span>
-                            <input type="text" ng-model="model.user.lastName" class="form-control left-align" id="inputLastname" placeholder="Lastname" required>
+                            <input type="text" ng-model="model.user.lastName" class="form-control" id="inputLastname" placeholder="Lastname" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -55,7 +55,7 @@
                             Email</label>
                         <div class="col-sm-9 input-group">
                             <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                            <input type="email" ng-model="model.user.email" class="form-control left-align" id="inputEmail3" placeholder="Email" required>
+                            <input type="email" ng-model="model.user.email" class="form-control" id="inputEmail3" placeholder="Email" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -63,7 +63,7 @@
                             Role</label>
                         <div class="col-sm-9 input-group">
                             <span class="input-group-addon"><i class="fa fa-cubes" aria-hidden="true"></i></span>
-                    <select ng-model="model.user.roles" class="form-control left-align" id="role">
+                    <select ng-model="model.user.roles" class="form-control" id="role">
                         <option class="form-control" value="Student">Student</option>
                         <option class="form-control" value="Faculty">Faculty</option>
                     </select>
@@ -71,7 +71,7 @@
             </div>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-9">
-                            <input type="checkbox"  ng-model = "model.terms" name="tandc" value="yes">
+                            <input type="checkbox"  ng-model = "model.terms" name="tandc" value="yes" required>
                                 I agree to Terms & Conditions</input>
                         </div>
                     </div>

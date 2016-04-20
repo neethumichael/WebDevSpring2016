@@ -30,8 +30,7 @@ module.exports = function(app, userModel) {
 
 
     function localStrategy(username, password, done) {
-        console.log("username "+username);
-        console.log("password"+password);
+
         userModel.findUserByUsername(username)
             .then(
                 function (user) {
@@ -83,7 +82,6 @@ module.exports = function(app, userModel) {
 
     function deleteContact(req, res) {
         var messageId = req.params.messageId;
-        console.log("message id"+messageId)
         userModel.deleteContact(messageId )
             .then(function (doc) {
                     res.json(doc);
@@ -110,7 +108,6 @@ module.exports = function(app, userModel) {
         userModel.viewAllMessage()
             .then(
                 function (doc) {
-                    console.log("fdocc "+doc);
                     res.json(doc);
                 },
                 function (err) {
@@ -212,7 +209,6 @@ module.exports = function(app, userModel) {
         userModel.Create(user)
             .then(
                 function (user) {
-                    console.log("user created "+user.username);
                     if(user) {
                         if(!isAdmin) {
                         req.login(user, function (err) {
@@ -228,7 +224,6 @@ module.exports = function(app, userModel) {
                     }}
                 },
                 function (err) {
-                    console.log("eror user created ");
                     res.status(400).send(err);
                 }
             );
@@ -252,7 +247,6 @@ module.exports = function(app, userModel) {
 
 
     function loggedin(req, res) {
-        console.log("here inside loggedin");
         res.send(req.isAuthenticated() ? req.user : '0');
     }
 

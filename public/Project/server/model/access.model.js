@@ -42,9 +42,6 @@ module.exports = function (db, mongoose, ProjectModel) {
     function Update(access) {
         var deferred = q.defer();
          var Id = access._id;
-        console.log("id "+Id);
-        console.log("userId "+access.userId);
-        console.log("projectId "+access.projectId);
         var Access ={
             userId : access.userId,
             projectId: access.projectId
@@ -55,7 +52,6 @@ module.exports = function (db, mongoose, ProjectModel) {
                 {$set: Access},
                 function (err, doc) {
                     if (!err) {
-                        console.log("doc "+doc);
                     } else {
                         deferred.reject(err);
                     }
@@ -69,12 +65,10 @@ module.exports = function (db, mongoose, ProjectModel) {
     }
     function FindByProjectId(projectId) {
         var deferred = q.defer ();
-        console.log("inside model findproject "+(typeof projectId));
         AccessModel.find (
             {projectId: {$in: projectId}},
             function (err, access) {
                 if (!err) {
-                    console.log("in model ");
                     deferred.resolve (access);
                 } else {
                     deferred.reject (err);
@@ -113,7 +107,6 @@ module.exports = function (db, mongoose, ProjectModel) {
             if(err) {
                 deferred.reject(err);
             } else {
-                console.log("jhsdj "+doc.projectId);
                 deferred.resolve(doc);
             }
         });

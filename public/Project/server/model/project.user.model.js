@@ -25,13 +25,11 @@ module.exports = function (db, mongoose) {
 
     function deleteContact(messageId) {
         var deferred = q.defer ();
-        console.log("message id"+messageId);
         ContactModel
             .remove (
                 {_id: messageId},
                 function (err, stats) {
                     if (!err) {
-                        console.log("stats "+stats);
                         deferred.resolve(stats);
                     } else {
                         deferred.reject(err);
@@ -54,7 +52,6 @@ module.exports = function (db, mongoose) {
     }
 
     function viewAllMessage() {
-        console.log("inside find all");
         var deferred = q.defer ();
         ContactModel.find (
             function (err, messages) {
@@ -104,7 +101,6 @@ module.exports = function (db, mongoose) {
     }
 
     function FindAll() {
-        console.log("inside find all");
         var deferred = q.defer ();
         UserModel.find (
             function (err, users) {

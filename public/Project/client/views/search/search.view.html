@@ -55,12 +55,12 @@
                     <thead>
                     <tr>
                         <th>
-                            <button class = "btn btn-success" ng-click="model.sortType = 'title'; model.sortReverse = !model.sortReverse" ng-show="!model.sortReverse">
-                                <span  class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
-                                </button>
-                            <button class = "btn btn-success" ng-click="model.sortType = 'title'; model.sortReverse = !model.sortReverse" ng-show="model.sortReverse">
-                            <span  class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
-                            </button>
+                            <span ng-click="model.sortType = 'title'; model.sortReverse = !model.sortReverse" ng-show="!model.sortReverse"
+                                class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+
+                            <span ng-click="model.sortType = 'title'; model.sortReverse = !model.sortReverse" ng-show="model.sortReverse"
+                            class="glyphicon glyphicon-triangle-top" aria-hidden="true">
+                            </span>
                             Project Title
                         </th>
                         <th> Project User</th>
@@ -68,9 +68,9 @@
                         <th>Project Commits</th>
                         <th>Github Owner</th>
                         <th>
-                            <button class = "btn btn-success" ng-show="!model.sortReverse" ng-click="model.sortType = 'grade'; model.sortReverse = !model.sortReverse"><span   class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></button>
-                            <button class = "btn btn-success" ng-show="model.sortReverse" ng-click="model.sortType = 'grade'; model.sortReverse = !model.sortReverse"><span   class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></button>
-                            Project Grade
+                            <span  ng-show="!model.sortReverse" ng-click="model.sortType = 'grade'; model.sortReverse = !model.sortReverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                            <span  ng-show="model.sortReverse" ng-click="model.sortType = 'grade'; model.sortReverse = !model.sortReverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+                            Grade
                         </th>
                     </tr>
                     </thead>

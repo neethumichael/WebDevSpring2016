@@ -50,7 +50,6 @@
         }
 
         function findAllUsersAdmin() {
-            console.log("inside create user for project");
             return $http.get("/api/projecttracker/admin/user");
         }
 
@@ -80,7 +79,6 @@
         }
 
         function createUser(user) {
-            console.log("fdndjcnjdcsdcjdsjcnsjns");
             return $http.post("/api/projecttracker/register",user);
         }
 

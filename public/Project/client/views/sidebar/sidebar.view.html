@@ -6,7 +6,7 @@
         <li  ng-class="{'active': model.$location.url () === '/profile'}"><a href="#/profile">Profile</a></li>
         <li  ng-class="{'active': model.$location.url() === '/search'}"><a href="#/search">Search</a></li>
         <li ng-show="currentUser.roles.indexOf('Team Member') >= 0 ||
-        currentUser.roles.indexOf('Student') >= 0" ng-class="{'active': model.$location.url() === '/project'}"><a href="#/project">Projects</a></li>
+        currentUser.roles.indexOf('Student') >= 0" ng-class="{'active': model.$location.url() === '/project'}"><a href="#/project">Manage Projects</a></li>
         <li ng-show="currentUser.roles.indexOf('admin') >= 0"
             ng-class="{'active': model.$location.url() === '/admin'}">
             <a href="#/admin">   Manage Users  </a></li>

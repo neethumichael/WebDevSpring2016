@@ -58,12 +58,9 @@ module.exports = function(app, projectModel, accessModel) {
 
     function findAllAccess(req,res) {
         var projectId = req.params.projectId;
-        console.log("projectId find all "+projectId);
         accessModel.FindByProjectId(projectId)
             .then(
                 function (access) {
-                    console.log("cdjs");
-                    console.log("service accesses "+access);
                     res.json(access);
                 },
                 function (err) {
@@ -103,16 +100,10 @@ module.exports = function(app, projectModel, accessModel) {
         var roles = req.params.roles;
         var email = req.params.email;
 
-       /* var searchString =  {
-            title: title,
-            status: status,
-            keywords: keywords
-        }*/
-       console.log("searchString "+searchString.status);
+
         projectModel.searchProject(searchString, userId, roles, email)
             .then(
                 function (projects) {
-                    console.log("result "+projects);
 
 
                     res.json(projects);

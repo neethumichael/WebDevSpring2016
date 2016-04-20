@@ -16,7 +16,7 @@
                     <li ng-show="currentUser.roles.indexOf('admin') >= 0"
                         ng-class="{'active': model$location.url() == '/admin'}">
                         <a href="#/admin">   Admin  </a></li>
-                    <li><a href="https://docs.google.com/document/d/1s-pW1upRP72_3fBu0s4DUlvko4SJmRr_ijLNLC4Jmqc/">Documentation</a></li>
+                    <li ng-hide="currentUser"><a href="https://docs.google.com/document/d/1s-pW1upRP72_3fBu0s4DUlvko4SJmRr_ijLNLC4Jmqc/">Documentation</a></li>
                     <li ng-hide="currentUser.roles.indexOf('admin') >= 0" ng-class="{'active': model.$location.url() == '/contact'}"><a href="#/contact" >Contact</a></li>
 
                     </ul>
