@@ -219,7 +219,6 @@ module.exports = function(app, userModel) {
     function create(req, res) {
         var user = req.body;
 
-          user.roles = "admin";
         userModel.Create(user)
             .then(
                 function (user) {
