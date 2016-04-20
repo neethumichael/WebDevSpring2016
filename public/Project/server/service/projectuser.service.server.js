@@ -1,13 +1,18 @@
-
+var passport = require('passport');
+var bcrypt = require("bcrypt-nodejs");
+var LocalStrategy = require('passport-local');
 module.exports = function(app, userModel) {
 
-    app.post("/api/projecttracker/user", create);
+    var auth = authorized;
+    app.post("/api/projecttracker/register", create);
+    app.get("/api/projecttracker/login",passport.authenticate('local'),login);
     app.get("/api/projecttracker/user",forAllUsers);
     app.get("/api/projecttracker/user/:id", findById);
-    app.put("/api/projecttracker/user/:id", Update);
-    app.delete("/api/projecttracker/user/:id", Delete);
+    app.put("/api/projecttracker/user/:id", auth,  Update);
+    app.delete("/api/projecttracker/user/:id",auth, Delete);
     app.get("/api/projecttracker/loggedin", loggedin);
     app.post("/api/projecttracker/logout", logout);
+
     //admin
     app.post("/api/projecttracker/admin/user", create);
     app.get("/api/projecttracker/admin/user",findAll);
@@ -18,9 +23,67 @@ module.exports = function(app, userModel) {
     app.get("/api/projecttracker/contact",findAllMessage);
     app.delete("/api/projecttracker/contact/:messageId",deleteContact);
 
+    passport.use(new LocalStrategy(localStrategy ));
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
+
+
+
+    function localStrategy(username, password, done) {
+        console.log("username "+username);
+        console.log("password"+password);
+        userModel.findUserByUsername(username)
+            .then(
+                function (user) {
+                    if (user  && bcrypt.compareSync(password, user.password)) {
+                        return done(null,user);
+                    } else {
+                        return done(null,false);
+                    }
+                }
+            ),
+            function (err) {
+                if (err) {
+                    return done(err);
+                }
+            };
+    }
+
+    function serializeUser(user, done) {
+        done(null, user);
+    }
+
+    function deserializeUser(user, done){
+        userModel
+            .FindById(user._id)
+            .then(
+                function(user){
+                    done(null, user);
+                },
+                function(err) {
+                    done(err, null);
+                }
+            );
+    }
+
+    function login(req,res) {
+        var user = req.user;
+        res.json(user);
+    }
+
+    function forAllUsers(req,res) {
+        if(req.query.username) {
+            return findUserByUsername(req.query.username,req,res);
+        }
+        else {
+            return findAll();
+        }
+    }
+
+
     function deleteContact(req, res) {
         var messageId = req.params.messageId;
-        console.log("message id"+messageId);
+        console.log("message id"+messageId)
         userModel.deleteContact(messageId )
             .then(function (doc) {
                     res.json(doc);
@@ -56,17 +119,7 @@ module.exports = function(app, userModel) {
             );
     }
 
-    function forAllUsers(req,res) {
-        if(req.query.username && req.query.password) {
-            return findUserByCredentials(req.query.username,req.query.password, req, res);
-        }
-        else if(req.query.username) {
-            return findUserByUsername(req.query.username,req,res);
-        }
-        else {
-            return findAll();
-        }
-    }
+
 
     function findUserByUsername(username,req,res) {
         userModel.findUserByUsername(username)
@@ -101,19 +154,30 @@ module.exports = function(app, userModel) {
                 });
     }
 
+
+
     function Update(req,res) {
-        console.log("here");
         var userId = req.params.id;
         var user = req.body;
 
-
-        userModel.Update(user)
-            .then(function (doc) {
-                    res.json(doc);
-                },
-                function (err) {
-                    res.status(400).send(err);
+        userModel.FindById(user._id)
+            .then(
+                function (oldUser) {
+                    if (oldUser && !bcrypt.compareSync(user.password, oldUser.password)) {
+                        user.password = bcrypt.hashSync(user.password);
+                    }
+                    else {
+                        user.password = oldUser.password;
+                    }
+                    userModel.Update(user)
+                        .then(function (doc) {
+                                res.json(doc);
+                            },
+                            function (err) {
+                                res.status(400).send(err);
+                            });
                 });
+
     }
 
     function findAll(req , res) {
@@ -143,17 +207,33 @@ module.exports = function(app, userModel) {
 
     function create(req, res) {
         var user = req.body;
+
+
         userModel.Create(user)
             .then(
-                function (doc) {
-                    req.session.currentUser = doc;
-                    res.json(doc);
+                function (user) {
+                    console.log("user created "+user.username);
+                    if(user) {
+                        if(!isAdmin) {
+                        req.login(user, function (err) {
+
+                            if (err) {
+                                res.status(400);
+                            } else {
+                                res.json(user);
+                            }
+                            // req.session.currentUser = doc;
+                            // res.json(doc);
+                        });
+                    }}
                 },
                 function (err) {
+                    console.log("eror user created ");
                     res.status(400).send(err);
                 }
             );
     }
+
 
     function login(req, res) {
         var credentials = req.body;
@@ -169,11 +249,31 @@ module.exports = function(app, userModel) {
             )
     }
 
+
+
     function loggedin(req, res) {
-        res.json(req.session.currentUser);
+        console.log("here inside loggedin");
+        res.send(req.isAuthenticated() ? req.user : '0');
     }
 
     function logout(req, res) {
+        req.logOut();
+        req.session.destroy();
         res.send(200);
+    }
+
+    function isAdmin(user) {
+        if(user.roles.indexOf("admin") > 0 || user.roles.indexOf("Admin") > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    function authorized (req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else {
+            next();
+        }
     }
 }

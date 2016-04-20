@@ -8,10 +8,7 @@
 
 .body {
     margin-top: 20px;
-
-
 }
-
 
 .gradeClass {
     width: 40pt;}
@@ -29,6 +26,7 @@ table {
     word-wrap: break-word;
     table-layout:fixed;
 }
+
 .jumbotron {
     margin-bottom : 0px;
     color : darkcyan;

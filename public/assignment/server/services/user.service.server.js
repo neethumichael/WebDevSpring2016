@@ -19,11 +19,11 @@ module.exports = function(app, formModel, userModel) {
     app.delete("/api/assignment/admin/user/:userId",Delete);
     app.put("/api/assignment/admin/user/:userId",Update);
 
-    passport.use(new LocalStrategy(localStrategy ));
-    passport.serializeUser(serializeUser);
-    passport.deserializeUser(deserializeUser);
+    //passport.use(new LocalStrategy(localStrategy ));
+    //passport.serializeUser(serializeUser);
+    //passport.deserializeUser(deserializeUser);
 
-    function localStrategy(username, password, done) {
+    /*function localStrategy(username, password, done) {
         userModel.findUserByUsername(username)
             .then(
                 function (user) {
@@ -56,7 +56,7 @@ module.exports = function(app, formModel, userModel) {
                     done(err, null);
                 }
             );
-    }
+    }*/
 
     function login(req,res) {
             var user = req.user;

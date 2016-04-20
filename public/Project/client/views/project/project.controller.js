@@ -31,6 +31,7 @@
         init();
 
         vm.gUsername;
+        var noCommits =false;
         var commits;
         vm.addProject = addProject;
         vm.removeProject = removeProject;
@@ -139,37 +140,22 @@ var remCommits = [];
                 .success(renderRepositories);
         }
 
-        function renderRepositories(response, status, header,config) {
-
-            $rootScope.repos = response;
-            $rootScope.header = header();
-           // console.log("herader "+header().get('link'));
+        function renderRepositories(response) {
             vm.repos = response;
-            console.log("here"+$rootScope.repos);
-           // vm.reposFound = response.length;
+            vm.reposFound = response.length;
         }
 
         function searchRepository(Repository) {
-            return $http.get(REP_URL + Repository.id + "/commits")
-                .then(getSelectedRepCommitDetails,
-                function(err) {
-                            return err;
-                });
+            return $http.get(REP_URL + Repository.id + "/commits").success(getSelectedRepCommitDetails)
+                .error(function() {
+                    console.log("inside error");
+                    noCommits = true;
 
+                });
         }
 
-        function getSelectedRepCommitDetails(data, status, header, xyz) {
+        function getSelectedRepCommitDetails(data) {
             commits = data;
-            $rootScope.commitFound = data.length;
-           // var linkHeader = header().link;
-
-
-              //  var parsed = linkHeader.split(';')
-           // console.log("fsdfsdf"+(parsed[1].substr(6,4)));
-
-                 //   $rootScope.header = parsed;
-                   // console.log("link Header "+linkHeader);
-
             return commits;
         }
 
@@ -221,7 +207,8 @@ var remCommits = [];
                                 for(var v in projects) {
                                     searchRepository(projects[v].repos).then(function (Result) {
                                         projects[v].commits = commits;
-                                        if (typeof projects[v].commits == "undefined" || projects[v].commits.length == 0)
+
+                                        if (noCommits)
                                         {
                                             projects[v].status = "Not Started";
                                         }
@@ -259,18 +246,56 @@ var remCommits = [];
 
         function addProject(project) {
             $rootScope.profile = false;
-            searchRepository(project.repos).then(function (Result) {
 
-               // project.repos = {repId: repId, repName: repName};
-                project.repId = project.repos.id;
-                project.repName = project.repos.name;
+            $http.get(REP_URL + project.repos.id + "/commits")
+                .success(function(data){
+                    for(var u in commits) {
+                        var s = commits[u].commit.message;
+                        if (s.indexOf(test)> -1) {
+                            project.status = "Completed";
+                        }
+                        break;
+                    }
+                    if(!project.status)
+                        project.status = "Started";
+                    ProjectUserService.getCurrentUser()
+                        .then ( function(response) {
+                            user = response.data;
+                            ProjectService.addProject(project,user._id)
+                                .then(function (reponse) {
+                                    vm.project = null;
+                                    $location.url('/renderProjects');
+                                });
+                        });
+                })
+                .error(function(err) {
+                    console.log("inside error");
+                    noCommits = true;
+                    project.status = "Not Started";
+                    ProjectUserService.getCurrentUser()
+                        .then ( function(response) {
+                            user = response.data;
+                            ProjectService.addProject(project,user._id)
+                                .then(function (reponse) {
+                                    vm.project = null;
+                                    $location.url('/renderProjects');
+                                });
+                        });
+
+                });
+
+       /*     searchRepository(project.repos).then(function (Result) {
+
+$rootScope.commits = commits;
                // vm.commits = commits;
+                console.log("commits "+typeof commits);
                 var count =0;
                 for (var u in commits) {
                         count++; }
                 var test= "finish";
                 vm.size = count;
-                if (!typeof commits == "undefined") {
+                console.log("count "+count);
+                if (count>0) {
                     for(var u in commits) {
                         var s = commits[u].commit.message;
                         if (s.indexOf(test)> -1) {
@@ -297,14 +322,14 @@ var remCommits = [];
             }),
                 (function (err) {
                     console.log("errorrrrr");
-                });
+                });*/
         }
 
         function removeProject(projectIndex) {
             var project = vm.projects[projectIndex];
             ProjectService.deleteProject(project._id)
                 .then(function (response) {
-                    //vm.projects = findAllProjects();
+                    vm.projects = findAllProjects();
                 });
         }
 

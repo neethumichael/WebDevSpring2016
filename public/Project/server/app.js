@@ -5,7 +5,7 @@ module.exports = function(app, db, mongoose) {
     var projectuserModel = require("./model/project.user.model.js")(db, mongoose);
 
     var accessModel = require("./model/access.model.js") (db,mongoose);
-    var projectModel = require("./model/project.model.js")(db, mongoose, accessModel);
+    var projectModel = require("./model/project.model.js")(db, mongoose, accessModel, projectuserModel);
 
 
     var ProjectUserService = require("./service/projectuser.service.server.js")(app, projectuserModel);

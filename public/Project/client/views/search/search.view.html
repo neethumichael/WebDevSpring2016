@@ -63,6 +63,7 @@
                             </button>
                             Project Title
                         </th>
+                        <th> Project User</th>
                         <th>Project Status</th>
                         <th>Project Commits</th>
                         <th>Github Owner</th>
@@ -77,6 +78,7 @@
 
                     <tr  ng-repeat="project in model.currentSearchProject| orderBy:model.sortType:model.sortReverse">
                         <td> {{project.title}} </td>
+                        <td>{{project.userId}}</td>
                         <td> {{project.status}} </td>
                         <td ng-click = "model2.gitprojectCommits(project)"><a href="#/projectCommits">Click to view commits</a></td>
                         <td ng-click = "model2.gitUserProfile(project)"><a href="#/userGitProfile">{{project.gusername}}</a></td>

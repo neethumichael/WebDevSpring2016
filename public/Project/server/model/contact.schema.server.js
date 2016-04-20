@@ -5,6 +5,7 @@ module.exports = function(mongoose) {
     var ContactSchema = mongoose.Schema({
         emailId: String,
         message: String,
+        date: {type: Date}
     }, {collection: 'projectContact'});
     return ContactSchema;
 };

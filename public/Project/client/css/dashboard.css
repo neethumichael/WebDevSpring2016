@@ -7,9 +7,7 @@ body {
     padding-top: 50px;
     padding-botton: 50px;
 }
-
-
-/*
+ /*
  * Global add-ons
  */
 
@@ -79,8 +77,7 @@ body {
     padding: 20px;
 }
 
-
-@media (min-width: 768px) {
+ @media (min-width: 768px) {
     .main {
         padding-right: 40px;
         padding-left: 40px;

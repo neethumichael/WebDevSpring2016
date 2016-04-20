@@ -113,6 +113,8 @@ module.exports = function(app, projectModel, accessModel) {
             .then(
                 function (projects) {
                     console.log("result "+projects);
+
+
                     res.json(projects);
                 },
                 function (err) {

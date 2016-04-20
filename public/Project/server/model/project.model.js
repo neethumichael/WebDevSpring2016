@@ -3,8 +3,7 @@
  */
 var q = require("q");
 var mongoose = require("mongoose");
-module.exports = function (db, mongoose, accessModel) {
-console.log("jddcmskcmsl "+typeof  accessModel);
+module.exports = function (db, mongoose, accessModel, userModel) {
     var AccessModel = accessModel.getMongooseModel();
     var ProjectSchema = require("./project.schema.js")(mongoose);
     var ProjectModel = mongoose.model('ProjectData', ProjectSchema, 'ProjectData');
@@ -100,7 +99,7 @@ console.log("jddcmskcmsl "+typeof  accessModel);
             startDate: project.startDate,
             endDate: project.endDate
         };
-
+console.log("djndsjskd "+userId);
         var deferred = q.defer();
         ProjectModel.create(newProject, function (err,doc) {
             if(err) {
@@ -153,7 +152,11 @@ console.log("jddcmskcmsl "+typeof  accessModel);
                                ]
                         },
                         function (err, doc) {
+                            var temp_doc =[];
+                            temp_doc = doc;
                             if (!err) {
+                               // console.log("doc.userId "+doc.userId);
+
                                 deferred.resolve(doc);
                                 //console.log("dshjsd " + doc);
                             } else {
@@ -164,7 +167,7 @@ console.log("jddcmskcmsl "+typeof  accessModel);
                     );
                 return deferred.promise;
             }
-            else if(roles == "Faculty" || roles == "Team Lead") {
+            else if(roles == "Faculty") {
                 accessModel.FindByUserId(email)
                     .then(
                         function (projects) {

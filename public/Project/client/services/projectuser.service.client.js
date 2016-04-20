@@ -11,6 +11,7 @@
 
         $rootScope.currentUser = null;
 
+
         var model = {
             createUser: createUser,
             findUserByUsername: findUserByUsername,
@@ -71,7 +72,7 @@
         function findUserByCredentials(credentials) {
             var userName = credentials.username;
             var passWord = credentials.password;
-            return $http.get("/api/projecttracker/user?username="+userName+"&password="+passWord);
+            return $http.get("/api/assignment/login?username=" + userName + "&password=" + passWord);
         }
 
         function findAllUsers() {
@@ -79,7 +80,8 @@
         }
 
         function createUser(user) {
-            return $http.post("/api/projecttracker/user",user);
+            console.log("fdndjcnjdcsdcjdsjcnsjns");
+            return $http.post("/api/projecttracker/register",user);
         }
 
         function deleteUserById(userId) {

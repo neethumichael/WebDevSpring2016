@@ -54,15 +54,15 @@
                     else {
                         ProjectUserService.createUser(user)
                             .then(function(response){
-                                vm.users = findAllUsers();
-                                for(var i in vm.users) {
-                                    vm.users[i].roles = vm.users[i].roles.toString();
-                                }
+
+
                                 vm.user = null;
                             }),
                             function (error) {
                                 vm.message = error;
                             };
+                        vm.users = findAllUsers();
+                        vm.user = null;
                     }
                 }),
                 function (error) {

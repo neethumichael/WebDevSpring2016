@@ -7,7 +7,7 @@
         .module("ProjectTrackerApp")
         .controller("RegisterController", RegisterController);
 
-    function RegisterController($location, $routeParams, ProjectUserService) {
+    function RegisterController($location, $routeParams, ProjectUserService, $rootScope) {
 
         var vm = this;
 
@@ -57,10 +57,13 @@
                     return;
                 }
                 else {
+                    console.log("before create user");
                     ProjectUserService.createUser(user)
                         .then(function(response){
                             var currentUser = response.data;
                             ProjectUserService.setCurrentUser(currentUser);
+                            console.log("test current user"+currentUser);
+                            $rootScope.currentUser = currentUser;
                             $location.url('/dashboard');
                         });
                 }

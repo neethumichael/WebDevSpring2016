@@ -42,6 +42,7 @@ module.exports = function (db, mongoose) {
     }
     function addMessage(message) {
         var deferred = q.defer();
+        message.date = Date.now();
         ContactModel.create(message, function (err,doc) {
             if(err) {
                 deferred.reject(err);
@@ -156,6 +157,7 @@ module.exports = function (db, mongoose) {
 
     function Create(user) {
         var deferred = q.defer();
+        user.password = bcrypt.hashSync(user.password);
         UserModel.create(user, function (err,doc) {
             if(err) {
                 deferred.reject(err);

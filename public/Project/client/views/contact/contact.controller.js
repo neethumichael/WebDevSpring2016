@@ -14,7 +14,7 @@
         vm.viewAllMessage = viewAllMessage;
         vm.deleteContact = deleteContact;
 
-        vm.sortType     = 'model.user.username';
+        vm.sortType     = 'model.contacts.emailId';
         vm.sortReverse  = true;
         function init() {
                    //if($location.url == '/adminContact') {

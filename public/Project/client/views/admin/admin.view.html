@@ -33,7 +33,11 @@
                 <input class ="form-control" type="text" ng-model = "model.user.lastName" placeholder="Last Name"/></th>
 
             <th> <div class="text-center table-header-align">Roles</div> <br> <br>
-                <input class ="form-control" type="text" ng-model = "model.user.roles" placeholder="role1 , role2"/></th>
+                <select ng-model="model.user.roles" class="form-control" id="role">
+                    <option class="form-control" value="Student">Student</option>
+                    <option class="form-control" value="Faculty">Faculty</option>
+                    <option class="form-control" value="Faculty">Admin</option>
+                </select>
             <th  class = "actionAlign nowrap"> <div class="text-center table-header-align">Actions </div><br><br>
                 <button ng-click="model.addUser(model.user)" class = "btn btn-success btn-responsive"> <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
                     <button ng-click="model.updateUser(model.user)" class = "btn btn-success btn-responsive"><i class="fa fa-check-circle" aria-hidden="true"></i> </button>

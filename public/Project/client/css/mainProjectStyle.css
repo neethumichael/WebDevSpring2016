@@ -17,12 +17,20 @@
     color: darkcyan !important;
     background-color: #fff !important;
 }
+
+.nav-sidebar > li > a:hover, .nav-sidebar > li >.active a {
+    color: #fff !important;
+    background-color: darkcyan !important;
+}
+
 .navbar-brand {
     padding-left: 30px;
 }
+
 .panel-right-align {
     margin-right: 10px;
 }
+
 .navbar-default .navbar-nav>li>a {
     padding-right: 20px;
 }
@@ -41,6 +49,7 @@
     margin-right:40px;
     margin-bottom:40px;
 }
+
 .panel {
     margin-bottom:40px;!important
 }
@@ -48,6 +57,7 @@
 .glyphicon:before {
     margin-right: 5px;
 }
+
 .input-group {
     margin-left: 15px;
     margin-right: 15px;
@@ -55,7 +65,7 @@
 
 @media (max-width: 480px) {
     .content-last {
-    margin-bottom: 40px;
+        margin-bottom: 40px;
     }
     .page-left-right-margin {
         margin-left:15px;
@@ -64,12 +74,11 @@
     .modal-dialog {
         padding-top: 30%;
     }
-
 }
+
 .left-align {
     margin-left: -10px;
 }
-
 
 .panel-default>.panel-heading {
     background-color: darkcyan
@@ -81,25 +90,21 @@
     }
 }
 
-    @media (min-width: 992px) {
-        .col-md-offset-4 {
-            margin-left: 25%;
-        }
+@media (min-width: 992px) {
+    .col-md-offset-4 {
+        margin-left: 25%;
     }
-
+}
 
 .last {
     margin-bottom: 70px;
 }
 
-
 .panel-default>.panel-heading  {
     background-color: darkcyan;
     opacity: 0.99;
     color: white;!important
-
 }
-
 
 .panelPadding { padding: 25px; }
 
@@ -124,15 +129,15 @@
 
 .mainPageSection1 {
     filter: alpha(opacity=10);
-   /*background-image: url("https://aragonresearch.com/wp-content/uploads/2014/08/research-topics.jpg");*/
+    /*background-image: url("https://aragonresearch.com/wp-content/uploads/2014/08/research-topics.jpg");*/
     background-color: transparent;
     width: 100%;
     height: 200px;
     background-size: cover;
     color: #ffffff;
 }
-hr {
 
+hr {
     margin-top: 0.5em;
     margin-bottom: 5em;
     margin-left: auto;
@@ -145,12 +150,12 @@ hr {
 .listSpace { margin-left: 3px; }
 
 .small-image {
-
     border: 10px solid darkcyan;
     margin-bottom: 25px;
     width: 80%;
     height: 80%;
 }
+
 .section2 {
     width: 100%;
     height: 300px;
@@ -187,13 +192,12 @@ hr {
 .textBackground:hover {
     background-color: darkcyan;
     color: white;
-
 }
 
 .panel-primary>.panel-heading {
     background-color: darkcyan;
-
 }
+
 .panel-primary {
     border-radius: 25px;
     background-color: whitesmoke;
@@ -228,7 +232,6 @@ hr {
 
 @media (min-width:680px) {
     .responsive-element {display: none;}
-
 }
 
 @media (min-width: 769px) and (max-width: 992px) {
@@ -237,7 +240,6 @@ hr {
         font-size:90%;
         line-height: 1.2;
     }
-
 }
 
 .access-margin-fix {
@@ -246,10 +248,11 @@ hr {
 }
 
 @media (min-width: 769px) {
-.modal-dialog {
-    padding-top: 10%;
+    .modal-dialog {
+        padding-top: 10%;
+    }
 }
-}
+
 .modal-margin {
     margin-left: 10px;
     margin-right: 10px;
@@ -267,11 +270,28 @@ hr {
 .profile-small-detail {
     font-style: italic;
 }
+
 .profile-rep-margin {
     margin-top: 20px;
 }
+
 .alterBlock {
     display: initial;
+}
+
+.pagination>.active>a, .pagination>.active>a:focus,
+.pagination>.active>a:hover, .pagination>.active>span,
+.pagination>.active>span:focus, .pagination>.active>span:hover {
+    background-color: darkcyan;
+    border-color: darkcyan;
+}
+
+.pagination>li>a, .pagination>li>span {
+    color: black;
+}
+
+a {
+    color: black;
 }
 
 .modal-left {
@@ -286,7 +306,6 @@ hr {
 .footerClass {
     background-color: darkcyan;
     bottom: 0px;
-
 }
 
 .footer {
@@ -301,7 +320,8 @@ hr {
     color: #ffffff;
     background-image: url("http://41.media.tumblr.com/02a2211f64fea1e6c117a77c769731ee/tumblr_nspmqjqBgv1ubwg5wo1_500.jpg");
 }
- .small-image:hover { border-color: #f1f1f1; }
+
+.small-image:hover { border-color: #f1f1f1; }
 
 .carousel-inner img {
     -webkit-filter: grayscale(20%);
