@@ -88,8 +88,9 @@ var remCommits = [];
                         ProjectService.updateAccess(access)
                                     .then(function (reponse) {
                                        // vm.access = null;
-                                        $scope.accesses = findAllAccess(project,$rootScope.currentUser);
+                                        findAllAccess(project,$rootScope.currentUser);
                                     });
+                        findAllAccess(project,$rootScope.currentUser);
                     }
 
                     $scope.deleteAccess = function(access) {
