@@ -16,9 +16,16 @@
     background-color: darkcyan;
 }
 
-
+.padd {
+    padding-right:5px;
+}
 .well-other {
+
     margin-right:10px;
+}
+
+.label {
+    margin-right: 4px;
 }
 
 
@@ -207,9 +214,12 @@ hr {
 
 .textBackground {
     background-color: rgba(255,255,255,0.5);
-    font-size: 16pt;
-    font-family: "Helvetica Neue";
+    font-size: 12pt;
     border-radius: 25px
+}
+
+.new-font {
+    font-size: 21px;
 }
 
 .textBackground:hover {
