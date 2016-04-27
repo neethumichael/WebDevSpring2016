@@ -18,26 +18,24 @@
                         <a href="#/admin">   Admin  </a></li>
                     <li ng-hide="currentUser"><a href="https://docs.google.com/document/d/1s-pW1upRP72_3fBu0s4DUlvko4SJmRr_ijLNLC4Jmqc/">Documentation</a></li>
                     <li ng-hide="currentUser.roles.indexOf('admin') >= 0" ng-class="{'active': model.$location.url() == '/contact'}"><a href="#/contact" >Contact</a></li>
-
-                    </ul>
-                <ul class="nav navbar-nav navbar-right">
-
-                    <li ng-show="currentUser" ng-class="{'active': model.$location.url() == '/profile'}"><a href="#/profile">Welcome {{currentUser.username}}
-                        <i class="fa fa-smile-o" aria-hidden="true"></i></a></li>
-                    <li ng-hide="currentUser" ng-class="{'active': model.$location.url() == '/login'}"><a href="#/login">Login</a></li>
-                    <li ng-show="currentUser" ng-click="model.logout()"><a href="#/home">Logout</a></li>
-                    <li ng-hide="currentUser" ng-class="{'active': model.$location.url() == '/register'}"><a href="#/register">Register</a></li>
                     <div class="responsive-element">
-                    <li   ng-show="currentUser" ng-class="{'active': model.$location.url() === '/search'}"><a href="#/search">Search</a></li>
-                    <li  ng-show="currentUser.roles.indexOf('Team Member') >= 0 ||
+                        <li   ng-show="currentUser" ng-class="{'active': model.$location.url() === '/search'}"><a href="#/search">Search</a></li>
+                        <li  ng-show="currentUser.roles.indexOf('Team Member') >= 0 ||
         currentUser.roles.indexOf('Student') >= 0" ng-class="{'active': model.$location.url() === '/project'}"><a href="#/project">Projects</a></li>
-                    <li  ng-show="currentUser.roles.indexOf('admin') >= 0"
-                        ng-class="{'active': model.$location.url() === '/admin'}">
-                        <a href="#/admin">   Manage Users  </a></li>
+
                         <li ng-show="currentUser.roles.indexOf('admin') >= 0"
                             ng-class="{'active': model.$location.url() === '/adminContact'}">
                             <a href="#/adminContact">   View Contact Messages  </a></li>
                     </div>
+                    </ul>
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li ng-show="currentUser" ng-class="{'active': model.$location.url() == '/profile'}"><a href="#/profile"><span class="glyphicon glyphicon-user"/>{{currentUser.username}}
+                      </a></li>
+                    <li ng-hide="currentUser" ng-class="{'active': model.$location.url() == '/login'}"><a href="#/login">Login</a></li>
+                    <li ng-show="currentUser" ng-click="model.logout()"><a href="#/home">Logout</a></li>
+                    <li ng-hide="currentUser" ng-class="{'active': model.$location.url() == '/register'}"><a href="#/register">Register</a></li>
+
                 </ul>
             </div>
         </div>

@@ -52,7 +52,7 @@
                         return;
                     }
                     else {
-                        ProjectUserService.createUser(user)
+                        ProjectUserService.createUserByAdmin(user)
                             .then(function(response){
 
 

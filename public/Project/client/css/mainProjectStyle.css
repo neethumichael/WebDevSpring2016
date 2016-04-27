@@ -217,6 +217,12 @@ hr {
     font-size: 12pt;
     border-radius: 25px
 }
+.fa-newspaper-o:before {
+    margin-right: 3px;}
+
+.top-margin {
+    padding-top: 35px;
+}
 
 .new-font {
     font-size: 21px;
