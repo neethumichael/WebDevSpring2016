@@ -228,6 +228,10 @@ hr {
     font-size: 21px;
 }
 
+.req-header {
+    margin-left: 38px;
+}
+
 .textBackground:hover {
     background-color: darkcyan;
     color: white;
