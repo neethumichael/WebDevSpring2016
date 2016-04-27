@@ -142,6 +142,7 @@ var remCommits = [];
         }
 
         function renderRepositories(response) {
+            $rootScope.repos = response;
             vm.repos = response;
             vm.reposFound = response.length;
         }
@@ -160,16 +161,13 @@ var remCommits = [];
         }
 
         function gitUserProfile(project) {
-            //var project = selectGitProject(index);
-            console.log("dsfsd "+project.gusername);
+            //var project = selectGitProject(index)
             getGitInfo(project.gusername).then(function (Result) {
-                console.log("vm.user "+vm.user);
                 $rootScope.gitUserProfile = vm.user;
             });
         }
 
         function gitprojectCommits(project) {
-            console.log("inside commits"+project.repos);
             //var project = selectGitProject(index);
 
             searchRepository(project.repos).then(function (Result) {
