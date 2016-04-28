@@ -49,15 +49,13 @@ module.exports = function (db, mongoose, accessModel, userModel) {
             gradeTotal: project.gradeTotal,
             gradeComments: project.gradeComments
         };
-        console.log("there");
-        console.log("Id "+Id);
+
         ProjectModel
             .update (
                 {_id: Id},
                 {$set: Project},
                 function (err, doc) {
                     if (!err) {
-                        console.log("updated");
                         deferred.resolve(doc);
                     } else {
                         console.log("error"+err);
