@@ -21,11 +21,20 @@
 
         function submitGrade(selectedProject) {
 
+
             var textUrl = 'views/search/grade.view.html';
 
             var updateGrade = $uibModal.open ({
                 templateUrl: textUrl,
-                controller: function($uibModalInstance, grade, $scope) {
+                controller: function($uibModalInstance, $scope) {
+                    $scope.project = selectedProject;
+                    if(selectedProject.grade)
+                    $scope.project.grade = selectedProject.grade;
+                    if(selectedProject.gradeTotal)
+                    $scope.project.gradeTotal = selectedProject.gradeTotal;
+                    if(selectedProject.gradeComments)
+                    $scope.project.gradeComments = selectedProject.gradeComments;
+
                     $scope.ok = function () {
                         $uibModalInstance.close(grade);
                     };
