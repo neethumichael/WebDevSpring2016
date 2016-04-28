@@ -9,9 +9,12 @@
             <div class="panel-body">
                 <div ng-show="model.message" class="alert alert-danger" role="alert">{{model.message}}</div>
                 <form class="form-horizontal" role="form">
+                    <div>
+                        <p class="req-header-register">* marked fields are required</p>
+                    </div>
                     <div class="form-group">
                         <label for="inputUsername" class="col-sm-3 control-label">
-                            Username</label>
+                            *Username</label>
                             <div class="col-sm-9 input-group">
                                 <span class="input-group-addon"><i class="fa fa-user fa-fw" aria-hidden="true"></i></span>
                             <input ng-model="model.user.username" type="text" class="form-control" id="inputUsername" placeholder="Username" required>
@@ -19,7 +22,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputPassword3" class="col-sm-3 control-label">
-                            Password</label>
+                            *Password</label>
                         <div class="col-sm-9 input-group">
                             <span class="input-group-addon"><i class="fa fa-key fa-fw" aria-hidden="true"></i></span>
                             <input ng-model="model.user.password" type="password" class="form-control" id="inputPassword3" placeholder="Password" required>
@@ -27,7 +30,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputPassword2" class="col-sm-3 control-label">
-                            Verify Password</label>
+                            *Verify Password</label>
                         <div class="col-sm-9 input-group">
                             <span class="input-group-addon"><i class="fa fa-key fa-fw" aria-hidden="true"></i></span>
                             <input ng-model="model.user.password2" type="password" class="form-control" id="inputPassword2" placeholder="Password" required>
@@ -35,7 +38,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputFirstname" class="col-sm-3 control-label">
-                            Firstname</label>
+                            *Firstname</label>
                         <div class="col-sm-9 input-group">
                             <span class="input-group-addon"><i class="fa fa-eye fa-fw" aria-hidden="true"></i></span>
                             <input type="text" ng-model="model.user.firstName" class="form-control" id="inputFirstname" placeholder="Firstname" required>
@@ -44,7 +47,7 @@
 
                     <div class="form-group">
                         <label for="inputLastname" class="col-sm-3 control-label">
-                            Lastname</label>
+                            *Lastname</label>
                         <div class="col-sm-9 input-group">
                             <span class="input-group-addon"><i class="fa fa-eye fa-fw" aria-hidden="true"></i></span>
                             <input type="text" ng-model="model.user.lastName" class="form-control" id="inputLastname" placeholder="Lastname" required>
@@ -52,7 +55,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputEmail3" class="col-sm-3 control-label">
-                            Email</label>
+                            *Email</label>
                         <div class="col-sm-9 input-group">
                             <span class="input-group-addon"><i class="fa fa-envelope fa-fw" aria-hidden="true"></i></span>
                             <input type="email" ng-model="model.user.email" class="form-control" id="inputEmail3" placeholder="Email" required>
@@ -60,10 +63,10 @@
                     </div>
                     <div class="form-group">
                         <label for="role" class="col-sm-3 control-label">
-                            Role</label>
+                            *Role</label>
                         <div class="col-sm-9 input-group">
                             <span class="input-group-addon"><i class="fa fa-cubes fa-fw" aria-hidden="true"></i></span>
-                    <select ng-model="model.user.roles" class="form-control" id="role">
+                    <select ng-model="model.user.roles" class="form-control" id="role" required>
                         <option class="form-control" value="Student">Student</option>
                         <option class="form-control" value="Faculty">Faculty</option>
                     </select>

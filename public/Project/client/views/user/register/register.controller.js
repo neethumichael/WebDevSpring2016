@@ -50,6 +50,10 @@
                 vm.message = "Passwords must match";
                 return;
             }
+            if(!user.roles) {
+                vm.message = "Select a role";
+                return;
+            }
             ProjectUserService.findUserByUsername(user.username).then(
             function(response) {
                 if (response.data !== null) {
@@ -61,7 +65,6 @@
                         .then(function(response){
                             var currentUser = response.data;
                             ProjectUserService.setCurrentUser(currentUser);
-                            console.log("here");
                             $location.url('/dashboard');
                         });
                 }
