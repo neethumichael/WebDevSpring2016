@@ -29,6 +29,9 @@
                 templateUrl: "views/admin/admin.view.html",
                 controller: "AdminController",
                 controllerAs: "model",
+                resolve: {
+                    loggedin: checkLoggedin
+                }
             })
             .when("/project", {
                 templateUrl: "views/project/project.view.html",
@@ -111,7 +114,10 @@
             .when("/adminContact", {
                 templateUrl: "views/contact/admin.contact.view.html",
                 controller: "ContactController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    loggedin: checkLoggedin
+                }
         })
             .otherwise({
                 redirectTo: "views/home/home.view.html"

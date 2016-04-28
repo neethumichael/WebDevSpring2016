@@ -133,6 +133,7 @@
                         .then(function(response) {
                             vm.users = response.data;
                             for(var i in vm.users) {
+                                if(vm.users[i].roles)
                                 vm.users[i].roles = vm.users[i].roles.toString();
                             }
                         });
