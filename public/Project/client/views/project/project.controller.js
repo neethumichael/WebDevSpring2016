@@ -174,13 +174,11 @@ var remCommits = [];
                     // project.repos = {repId: repId, repName: repName};
 
                     project.commits = commits;
-                console.log("commits "+commits);
-                console.log("commits lengtj "+commits.length);
+
                 if(commits)
                     project.commitsFound = true;
                 else
                     project.commitsFound = false;
-                    console.log("commits lengtj "+project.commitsFound );
                     $rootScope.gitProject = project;
                 },
                 function(err) {
