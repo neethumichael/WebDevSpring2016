@@ -188,10 +188,12 @@ module.exports = function(app, userModel) {
     }
 
     function findById(req, res) {
-        var userId = req.params.id;
+        var userId = req.params.userId;
+        console.log("userId "+userId);
         userModel.FindById(userId)
             .then(
                 function (doc) {
+                    console.log("doc = "+doc.username);
                     res.json(doc);
                 },
                 function (err) {

@@ -1,5 +1,5 @@
 
-module.exports = function(app, projectModel, accessModel) {
+module.exports = function(app, projectModel, accessModel, userModel) {
 
 
     app.post("/api/projecttracker/project/:userId", create);
@@ -101,16 +101,14 @@ module.exports = function(app, projectModel, accessModel) {
         var email = req.params.email;
 
 
-        projectModel.searchProject(searchString, userId, roles, email)
-            .then(
-                function (projects) {
-
-
-                    res.json(projects);
-                },
-                function (err) {
-                    res.status(400).send(err);
-                });
+                projectModel.searchProject(searchString, userId, roles, email)
+                    .then(
+                        function (projects) {
+                            res.json(projects);
+                        },
+                        function (err) {
+                            res.status(400).send(err);
+                        });
     }
 
     function Delete(req, res) {

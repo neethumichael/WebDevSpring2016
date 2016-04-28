@@ -164,6 +164,7 @@ module.exports = function (db, mongoose, accessModel, userModel) {
                     .then(
                         function (projects) {
                             var id =[];
+
                             for(var u in projects) {
                                 id[u] = projects[u].projectId;
                             }
@@ -180,8 +181,6 @@ module.exports = function (db, mongoose, accessModel, userModel) {
                                     function (err, doc) {
                                         if (!err) {
                                             deferred.resolve(doc);
-
-
                                         } else {
                                             deferred.reject(err);
                                         }

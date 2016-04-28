@@ -6,7 +6,7 @@
     angular
         .module("ProjectTrackerApp")
         .controller("SearchController", SearchController);
-    function SearchController($rootScope, ProjectService, $uibModal, $log, $location) {
+    function SearchController($rootScope, ProjectService, $uibModal, $log, $location, ProjectUserService) {
 
         var vm = this;
 
@@ -20,7 +20,6 @@
         var user = $rootScope.currentUser;
 
         function submitGrade(selectedProject) {
-
 
             var textUrl = 'views/search/grade.view.html';
 
@@ -69,17 +68,28 @@
 
         function search(data) {
             if(data) {
-                ProjectService.searchProject(data, user)
+                var projects = ProjectService.searchProject(data, user)
                     .then(function (response) {
-                        vm.currentSearchProject = response.data;
+                            var projects = response.data;
+                        for(var u in projects) {
+                            ProjectUserService.findByIdAdmin(projects[u].userId).then(
+                                function (user) {
+                                    projects[u].username = user.data.username;
+                                },
+                                function (err) {
+                                    console.log("error "+err);
+                                });
+                        }
+                        vm.currentSearchProject = projects;
+                        return projects;
+                        //console.log("ddjcndcjdncjdk "+response.data[0].username);
                     });
+
             } else {
                 vm.message = "Enter atleast one search criteria";
                 return;
             }
         }
-
-
 
         function clear() {
             vm.searchProject =null;

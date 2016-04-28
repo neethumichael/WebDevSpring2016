@@ -143,8 +143,10 @@ module.exports = function (db, mongoose) {
         var deferred = q.defer();
         UserModel.findById(userId, function(err,doc) {
             if (err) {
+                console.log("errorv"+err);
                 deferred.reject(err);
             } else {
+                console.log("doc "+doc.username);
                 deferred.resolve(doc);
             }
         });
