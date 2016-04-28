@@ -247,12 +247,10 @@ hr {
 }
 
 .panel-primary {
-    border-radius: 25px;
+    border-radius: 0px;
     background-color: whitesmoke;
 }
-.panel-heading {
-    border-radius: 25px;
-}
+
 
 .table-header-align {
     margin-bottom: -13px;
