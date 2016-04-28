@@ -212,6 +212,7 @@ var remCommits = [];
                                             projects[v].status = "Started";
                                             for(var u in projects[v].commits) {
                                                 var s = projects[v].commits[u].commit.message;
+                                                console.log("s = "+s);
                                                 if (s.indexOf("finish")> -1) {
                                                     projects[v].status = "Completed";
                                                 }

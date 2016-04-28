@@ -158,18 +158,14 @@ module.exports = function(app, userModel) {
         userModel.FindById(user._id)
             .then(
                 function (oldUser) {
-                    console.log("cjsdk "+oldUser.password);
                     if(oldUser && oldUser.password == user.password) {
                         user.password = oldUser.password;
-                        console.log("old User password "+user.password);
                     }
                     else if (oldUser && !bcrypt.compareSync(user.password, oldUser.password)) {
-                        console.log("new User password "+user.password);
                         user.password = bcrypt.hashSync(user.password);
                     }
                     else {
                         user.password = oldUser.password;
-                        console.log("old User password "+user.password);
                     }
                     userModel.Update(user)
                         .then(function (doc) {
